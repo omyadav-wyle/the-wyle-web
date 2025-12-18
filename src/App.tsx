@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HeroSection } from './components/HeroSection';
 import { CloneWithConscience } from './components/CloneWithConscience';
-import { GradientWave } from './components/GradientWave';
+import { FragmentedReality } from './components/FragmentedReality';
 import { ContactSection } from './components/ContactSection';
 import { MapSection } from './components/MapSection';
 import { Footer } from './components/Footer';
@@ -9,6 +9,7 @@ import { FloatingUISection } from './components/FloatingUISection';
 import { About } from './components/About';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
+import { ProblemSection } from './components/ProblemSection';
 
 function HomePage() {
   return (
@@ -18,8 +19,10 @@ function HomePage() {
 
       {/* ADDITIONAL SECTIONS */}
       <FloatingUISection />
+      <ProblemSection/>
       <CloneWithConscience />
-      <GradientWave />
+      <FragmentedReality />
+      {/* <GradientWave /> */}
       <ContactSection />
       <MapSection />
       <Footer />

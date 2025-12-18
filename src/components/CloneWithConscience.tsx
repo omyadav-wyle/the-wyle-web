@@ -1,9 +1,94 @@
-import { motion } from 'motion/react';
-import orbitImage from 'figma:asset/0f054b0bf7024d7a9a89c18133c81d3ff12f4ecc.png';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef, useEffect, useState } from 'react';
+import ecosystemCircle from '../assets/ecosystem-circle.svg';
+import { Wallet, Activity, CheckCircle2, Clock, Package, Car } from 'lucide-react';
 
 export function CloneWithConscience() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerDimensions, setContainerDimensions] = useState({ width: 1400, height: 900 });
+  
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start']
+  });
+
+  // Update container dimensions on resize
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setContainerDimensions({ width: rect.width, height: rect.height });
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  // Parallax and opacity transforms
+  const orbitalScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.9]);
+  const orbitalOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0.8]);
+
+  // Left side cards (stacked vertically)
+  const leftCards = [
+    { 
+      title: 'Money', 
+      subtitle: 'Total saved!', 
+      icon: Wallet,
+      color: '#10b981',
+      value: '$1.2k',
+      position: 'top'
+    },
+    { 
+      title: 'Health', 
+      subtitle: 'Wellness tracked', 
+      icon: Activity,
+      color: '#ec4899',
+      value: '98%',
+      position: 'middle'
+    },
+    { 
+      title: 'Tasks', 
+      subtitle: 'Completed today', 
+      icon: CheckCircle2,
+      color: '#22c55e',
+      value: '12',
+      position: 'bottom'
+    },
+  ];
+
+  // Right side cards (stacked vertically)
+  const rightCards = [
+    { 
+      title: 'Rides', 
+      subtitle: 'Miles traveled', 
+      icon: Car,
+      color: '#8b5cf6',
+      value: '45mi',
+      position: 'top'
+    },
+    { 
+      title: 'Deliveries', 
+      subtitle: 'On the way', 
+      icon: Package,
+      color: '#f59e0b',
+      value: '3',
+      position: 'middle'
+    },
+    { 
+      title: 'Time', 
+      subtitle: 'Total time saved!', 
+      icon: Clock,
+      color: '#3b82f6',
+      value: '2.5h',
+      position: 'bottom'
+    },
+  ];
+
   return (
-    <section className="relative px-16" style={{ background: '#000000', paddingTop: '4rem', paddingBottom: '8rem' }}>
+    <section ref={sectionRef} className="relative px-16" style={{ background: '#000000', paddingTop: '4rem', paddingBottom: '4rem' }}>
       {/* Heading */}
       <motion.h2
         className="text-center mb-6"
@@ -16,7 +101,7 @@ export function CloneWithConscience() {
         }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6 }}
       >
         Clone with <span style={{ color: '#C7A2FF' }}>Conscience</span>
@@ -30,26 +115,137 @@ export function CloneWithConscience() {
           color: '#C5C6C7',
           fontFamily: 'Inter, system-ui, sans-serif',
           lineHeight: '1.6',
-          marginBottom: '-150px',
+          marginBottom: '2rem',
         }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         It's not the food delivery, rides or groceries app. But it's something that quickly connects all of these things in the background.
       </motion.p>
 
       {/* Central Orbital System and Cards Container */}
-      <div className="relative" style={{ height: '1000px' }}>
-        <div className="absolute left-1/2 -translate-x-1/2" style={{ top: '0' }}>
+      <div ref={containerRef} className="relative" style={{ height: '900px', maxWidth: '1400px', margin: '0 auto' }}>
+        <div className="relative flex items-center justify-center" style={{ height: '100%' }}>
+          {/* Left Side Cards */}
+          <div className="absolute left-0 flex flex-col gap-8" style={{ top: '50%', transform: 'translateY(-50%)', zIndex: 20 }}>
+            {leftCards.map((item, i) => {
+              const IconComponent = item.icon;
+              return (
+                <motion.div
+                  key={`left-card-${i}`}
+                  className="rounded-2xl cursor-pointer group"
+                  style={{
+                    width: '200px',
+                    background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
+                    border: `1px solid rgba(199, 162, 255, 0.15)`,
+                    padding: '24px',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                  }}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 0.8 + i * 0.15,
+                    type: 'spring',
+                    stiffness: 100
+                  }}
+                  whileHover={{
+                    scale: 1.03,
+                    borderColor: `rgba(199, 162, 255, 0.4)`,
+                    boxShadow: `0 12px 40px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
+                    transition: {
+                      duration: 0.2,
+                      ease: 'easeOut',
+                    }
+                  }}
+                >
+                  {/* Icon with colored background */}
+                  <motion.div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    style={{
+                      background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`,
+                      border: `1px solid ${item.color}30`,
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: [0, -5, 5, 0],
+                    }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <IconComponent size={24} color={item.color} />
+                  </motion.div>
+
+                  {/* Value display */}
+                  <div
+                    style={{
+                      fontSize: '36px',
+                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontWeight: 700,
+                      color: '#FFFFFF',
+                      marginBottom: '8px',
+                      letterSpacing: '-0.5px',
+                    }}
+                  >
+                    {item.value}
+                  </div>
+
+                  {/* Title */}
+                  <h3 
+                    style={{
+                      fontSize: '16px',
+                      color: '#FFFFFF',
+                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontWeight: 600,
+                      marginBottom: '4px',
+                      letterSpacing: '0.2px',
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                  
+                  {/* Subtitle */}
+                  <p 
+                    style={{
+                      fontSize: '12px',
+                      color: '#8B92A8',
+                      fontFamily: 'Inter, system-ui, sans-serif',
+                      lineHeight: '1.4',
+                      margin: 0,
+                    }}
+                  >
+                    {item.subtitle}
+                  </p>
+
+                  {/* Hover glow effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at center, ${item.color}10 0%, transparent 70%)`,
+                      opacity: 0,
+                    }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+
           {/* Central Orbital System */}
+          <div className="relative" style={{ width: '600px', height: '600px', flexShrink: 0 }}>
           <motion.div
-            className="relative"
-            style={{ width: '1000px', height: '1000px' }}
+              className="relative w-full h-full"
+              style={{
+                scale: orbitalScale,
+                opacity: orbitalOpacity
+              }}
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
+              viewport={{ once: true, margin: '-200px' }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {/* Outer glow */}
@@ -62,27 +258,35 @@ export function CloneWithConscience() {
               }}
             />
             
-            {/* Orbital System Image */}
+              {/* Ecosystem Circle SVG */}
             <img
-              src={orbitImage}
-              alt="Orbital system"
+                src={ecosystemCircle}
+                alt="Ecosystem circle"
               className="absolute inset-0 w-full h-full object-contain"
               style={{
-                filter: 'brightness(1.3) contrast(1.1)',
+                  filter: 'brightness(1.2) contrast(1.1)',
               }}
             />
             
             {/* Additional center glow */}
-            <div
+              <motion.div
               className="absolute inset-0"
               style={{
                 background: 'radial-gradient(circle at center, rgba(199, 162, 255, 0.2) 0%, transparent 30%)',
                 filter: 'blur(15px)',
               }}
+                animate={{
+                  opacity: [0.5, 0.8, 0.5],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
             />
 
             {/* Particles around the circle */}
-            {[...Array(120)].map((_, i) => {
+              {[...Array(80)].map((_, i) => {
               const angle = (i * 360) / 120;
               const distance = 145 + Math.random() * 15; // Random distance between 145-160
               const randomOffsetX = (Math.random() - 0.5) * 20; // Random horizontal scatter
@@ -128,7 +332,7 @@ export function CloneWithConscience() {
             })}
             
             {/* Medium particles */}
-            {[...Array(150)].map((_, i) => {
+              {[...Array(100)].map((_, i) => {
               const angle = (i * 360) / 150;
               const distance = 140 + Math.random() * 18;
               const randomOffsetX = (Math.random() - 0.5) * 22;
@@ -176,7 +380,7 @@ export function CloneWithConscience() {
             })}
             
             {/* Small particles */}
-            {[...Array(180)].map((_, i) => {
+              {[...Array(120)].map((_, i) => {
               const angle = (i * 360) / 180;
               const distance = 148 + Math.random() * 20;
               const randomOffsetX = (Math.random() - 0.5) * 25;
@@ -223,57 +427,89 @@ export function CloneWithConscience() {
               );
             })}
 
-            {/* Notification Boxes at Branch Tips */}
-            {[
-              // Top row
-              { angle: 125, title: 'Tasks', subtitle: 'Completed today', distance: 460, offsetX: -190, offsetY: -270 },
-              { angle: 55, title: 'Time', subtitle: 'Total time saved!', distance: 460, offsetX: 20, offsetY: -270 },
-              
-              // Middle row
-              { angle: 175, title: 'Health', subtitle: 'Wellness tracked', distance: 460, offsetX: 30, offsetY: -70 },
-              { angle: 5, title: 'Deliveries', subtitle: 'On the way', distance: 460, offsetX: -145, offsetY: -70 },
-              
-              // Bottom row
-              { angle: 200, title: 'Money', subtitle: 'Total saved!', distance: 460, offsetY: -10 },
-              { angle: 330, title: 'Rides', subtitle: 'Miles traveled', distance: 460, offsetX: -110, offsetY: 55 },
-            ].map((item, i) => {
-              const radian = (item.angle * Math.PI) / 180;
-              const x = Math.cos(radian) * item.distance;
-              const y = Math.sin(radian) * item.distance;
-              
+            </motion.div>
+          </div>
+
+          {/* Right Side Cards */}
+          <div className="absolute right-0 flex flex-col gap-8" style={{ top: '50%', transform: 'translateY(-50%)', zIndex: 20 }}>
+            {rightCards.map((item, i) => {
+              const IconComponent = item.icon;
               return (
                 <motion.div
-                  key={`branch-box-${i}`}
-                  className="absolute rounded-xl"
+                  key={`right-card-${i}`}
+                  className="rounded-2xl cursor-pointer group"
                   style={{
-                    left: `calc(50% + ${x + (item.offsetX || 0)}px)`,
-                    top: `calc(50% + ${y + (item.offsetY || 0)}px)`,
-                    transform: 'translate(-50%, -50%)',
-                    width: item.title === 'Tasks' || item.title === 'Time' ? '145px' : item.title === 'Health' ? '140px' : '120px',
-                    background: 'rgba(25, 28, 38, 0.98)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    padding: '16px 18px',
-                    backdropFilter: 'blur(12px)',
-                    boxShadow: '0 8px 24px rgba(0, 0, 0, 0.4)',
-                    zIndex: 9999,
+                    width: '200px',
+                    background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
+                    border: `1px solid rgba(199, 162, 255, 0.15)`,
+                    padding: '24px',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                   }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.8 + i * 0.1 }}
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-100px' }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: 0.8 + i * 0.15,
+                    type: 'spring',
+                    stiffness: 100
+                  }}
+                  whileHover={{
+                    scale: 1.03,
+                    borderColor: `rgba(199, 162, 255, 0.4)`,
+                    boxShadow: `0 12px 40px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
+                    transition: {
+                      duration: 0.2,
+                      ease: 'easeOut',
+                    }
+                  }}
                 >
+                  {/* Icon with colored background */}
+                  <motion.div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    style={{
+                      background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`,
+                      border: `1px solid ${item.color}30`,
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: [0, -5, 5, 0],
+                    }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  >
+                    <IconComponent size={24} color={item.color} />
+                  </motion.div>
+
+                  {/* Value display */}
+                  <div
+                    style={{
+                      fontSize: '36px',
+                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontWeight: 700,
+                      color: '#FFFFFF',
+                      marginBottom: '8px',
+                      letterSpacing: '-0.5px',
+                    }}
+                  >
+                    {item.value}
+                  </div>
+
+                  {/* Title */}
                   <h3 
                     style={{
-                      fontSize: '15px',
+                      fontSize: '16px',
                       color: '#FFFFFF',
                       fontFamily: 'Inter, system-ui, sans-serif',
                       fontWeight: 600,
-                      marginBottom: '6px',
-                      letterSpacing: '0.1px',
+                      marginBottom: '4px',
+                      letterSpacing: '0.2px',
                     }}
                   >
                     {item.title}
                   </h3>
+                  
+                  {/* Subtitle */}
                   <p 
                     style={{
                       fontSize: '12px',
@@ -285,10 +521,103 @@ export function CloneWithConscience() {
                   >
                     {item.subtitle}
                   </p>
+
+                  {/* Hover glow effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={{
+                      background: `radial-gradient(circle at center, ${item.color}10 0%, transparent 70%)`,
+                      opacity: 0,
+                    }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                  />
                 </motion.div>
               );
             })}
-          </motion.div>
+          </div>
+
+          {/* Wave Connection Lines */}
+          <svg
+            className="absolute pointer-events-none"
+            style={{ 
+              zIndex: 1, 
+              width: '100%', 
+              height: '100%',
+              top: 0,
+              left: 0,
+            }}
+            viewBox={`0 0 ${containerDimensions.width} ${containerDimensions.height}`}
+            preserveAspectRatio="none"
+          >
+            {/* Left side wave connections */}
+            {leftCards.map((_, i) => {
+              // Center of the container (orbital system is always centered)
+              const centerX = containerDimensions.width / 2;
+              const centerY = containerDimensions.height / 2;
+              
+              // Card positions - left side cards
+              const cardWidth = 200;
+              const cardGap = 32;
+              const cardHeight = 200; // Approximate card height
+              const cardX = cardWidth / 2; // Center of card from left edge
+              const cardY = centerY + (i - 1) * (cardHeight + cardGap); // Vertical spacing from center
+              
+              const midX = (centerX + cardX) / 2;
+              const waveAmplitude = 40;
+              
+              // Create smooth wave path using quadratic bezier
+              const wavePath = `M ${centerX} ${centerY} Q ${midX - waveAmplitude} ${centerY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${(centerY + cardY) / 2} T ${cardX} ${cardY}`;
+              
+              return (
+                <g key={`left-wave-${i}`}>
+                  <motion.path
+                    d={wavePath}
+                    fill="none"
+                    stroke={`rgba(199, 162, 255, 0.25)`}
+                    strokeWidth="2"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 1, delay: 1 + i * 0.15, ease: 'easeOut' }}
+                  />
+                </g>
+              );
+            })}
+            
+            {/* Right side wave connections */}
+            {rightCards.map((_, i) => {
+              // Center of the container
+              const centerX = containerDimensions.width / 2;
+              const centerY = containerDimensions.height / 2;
+              
+              // Card positions - right side cards
+              const cardWidth = 200;
+              const cardGap = 32;
+              const cardHeight = 200;
+              const cardX = containerDimensions.width - (cardWidth / 2); // Center of card from right edge
+              const cardY = centerY + (i - 1) * (cardHeight + cardGap);
+              
+              const midX = (centerX + cardX) / 2;
+              const waveAmplitude = 40;
+              
+              // Create smooth wave path
+              const wavePath = `M ${centerX} ${centerY} Q ${midX + waveAmplitude} ${centerY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${(centerY + cardY) / 2} T ${cardX} ${cardY}`;
+              
+              return (
+                <g key={`right-wave-${i}`}>
+                  <motion.path
+                    d={wavePath}
+                    fill="none"
+                    stroke={`rgba(199, 162, 255, 0.25)`}
+                    strokeWidth="2"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 1, delay: 1 + i * 0.15, ease: 'easeOut' }}
+                  />
+                </g>
+              );
+            })}
+          </svg>
         </div>
       </div>
     </section>
