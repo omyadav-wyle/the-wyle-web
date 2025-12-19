@@ -7,6 +7,7 @@ import imgImagePhotoroom34 from 'figma:asset/49fcb8454b67f191bf46472aabbffdb807b
 import imgImagePhotoroom35 from 'figma:asset/277c230f7e5017bbbad9cf38dfe00ac4f1e03c1d.png';
 import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import { Footer } from './Footer';
+import { Navigation } from './Navigation';
 
 export function Services() {
   return (
@@ -93,44 +94,7 @@ export function Services() {
       </div>
 
       {/* Navigation */}
-      <nav className="relative z-50 flex items-center justify-between px-16 pt-8 bg-black">
-        {/* Logo */}
-        <Link to="/">
-          <div className="text-white text-3xl tracking-tight" style={{ fontFamily: 'Varela Round, system-ui, sans-serif' }}>
-            <img src={logoImage} alt="wyle" className="h-14" style={{ marginLeft: '-8px' }} />
-          </div>
-        </Link>
-
-        {/* Center Navigation */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-8 px-10 py-4 rounded-full"
-             style={{
-               background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-               backdropFilter: 'blur(30px)',
-               border: '1px solid rgba(255,255,255,0.15)',
-               boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-             }}>
-          <Link to="/" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Home</Link>
-          <Link to="/services" className="text-white text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Services</Link>
-          <Link to="/about" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>About</Link>
-          <Link to="/contact" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Contact</Link>
-        </div>
-
-        {/* Right - Contact us button */}
-        <a 
-          href="#contact"
-          className="px-6 py-3 rounded-full text-sm transition-opacity hover:opacity-80"
-          style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-            backdropFilter: 'blur(30px)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            color: '#FFFFFF',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            letterSpacing: '1.5px',
-          }}
-        >
-          Contact us
-        </a>
-      </nav>
+    <Navigation/>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-40 px-16 overflow-hidden">

@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HeroSection } from './components/HeroSection';
 import { CloneWithConscience } from './components/CloneWithConscience';
-import { FragmentedReality } from './components/FragmentedReality';
+import { GradientWave } from './components/GradientWave';
 import { ContactSection } from './components/ContactSection';
 import { MapSection } from './components/MapSection';
 import { Footer } from './components/Footer';
@@ -9,21 +9,49 @@ import { FloatingUISection } from './components/FloatingUISection';
 import { About } from './components/About';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
+import { useEffect } from 'react';
 import { ProblemSection } from './components/ProblemSection';
+import { OtherApps } from '../src/components/OtherApps';
+  
+  function HomePage() {
+  const location = useLocation();
 
-function HomePage() {
+  useEffect(() => {
+   if (location.state?.scrollToContact) {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
+
   return (
     <div className="relative w-full" style={{ background: '#000000' }}>
-      {/* HERO SECTION */}
+      {/* HERO SECTION
       <HeroSection />
 
-      {/* ADDITIONAL SECTIONS */}
+      {/* ADDITIONAL SECTIONS *
       <FloatingUISection />
-      <ProblemSection/>
       <CloneWithConscience />
-      <FragmentedReality />
-      {/* <GradientWave /> */}
-      <ContactSection />
+      <GradientWave />
+      <div id="contact">
+        <ContactSection />
+      </div>
+      <MapSection />
+      <Footer />
+    </div> */}
+    {/* <div className="relative w-full" style={{ background: '#000000' }}> */}
+      <HeroSection />
+      <FloatingUISection />
+      <CloneWithConscience />
+     
+      <GradientWave />
+       <OtherApps />
+      {/* <ProblemSection/> */}
+      <div id="contact">
+        <ContactSection />
+      </div>
+
       <MapSection />
       <Footer />
     </div>

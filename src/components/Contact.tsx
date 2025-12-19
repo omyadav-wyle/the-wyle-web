@@ -6,6 +6,7 @@ import { Footer } from './Footer';
 import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
+import { Navigation } from './Navigation';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -122,46 +123,7 @@ export function Contact() {
       />
 
       {/* Navigation */}
-      <nav className="relative z-50 flex items-center px-16 pt-8">
-        {/* Logo */}
-        <Link to="/">
-          <div className="text-white text-3xl tracking-tight" style={{ fontFamily: 'Varela Round, system-ui, sans-serif' }}>
-            <img src={logoImage} alt="wyle" className="h-14" style={{ marginLeft: '-8px' }} />
-          </div>
-        </Link>
-
-        {/* Center Navigation */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-8 px-10 py-4 rounded-full"
-             style={{
-               background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-               backdropFilter: 'blur(30px)',
-               border: '1px solid rgba(255,255,255,0.15)',
-               boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-             }}>
-          <Link to="/" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Home</Link>
-          <Link to="/services" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Services</Link>
-          <Link to="/about" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>About</Link>
-          <Link to="/contact" className="text-white text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Contact</Link>
-        </div>
-
-        {/* Right - Contact us button */}
-        <Link 
-          to="/contact"
-          className="ml-auto px-6 py-3 rounded-full text-sm transition-opacity hover:opacity-80 flex items-center gap-2"
-          style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-            backdropFilter: 'blur(30px)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            color: '#FFFFFF',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            letterSpacing: '1.5px',
-          }}
-        >
-          Contact us
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </nav>
-
+      <Navigation/>
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 px-16">
         {/* Purple arc - left side */}
