@@ -10,8 +10,8 @@ import { About } from './components/About';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
 import { useEffect } from 'react';
-
-
+import { ProblemSection } from './components/ProblemSection';
+import { OtherApps } from '../src/components/OtherApps';
   
   function HomePage() {
   const location = useLocation();
@@ -44,8 +44,10 @@ import { useEffect } from 'react';
       <HeroSection />
       <FloatingUISection />
       <CloneWithConscience />
+     
       <GradientWave />
-
+       <OtherApps />
+      {/* <ProblemSection/> */}
       <div id="contact">
         <ContactSection />
       </div>
