@@ -7,12 +7,14 @@ export function CloneWithConscience() {
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerDimensions, setContainerDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
+  const [measured, setMeasured] = useState(false);
 
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         setContainerDimensions({ width: rect.width, height: rect.height });
+        setMeasured(true);
       } else {
         setContainerDimensions({ width: window.innerWidth, height: window.innerHeight });
       }
@@ -151,9 +153,9 @@ export function CloneWithConscience() {
             {leftCards.map((item, i) => {
               const IconComponent = item.icon;
               // responsive final offset so cards move from center to a side position
-              const baseFinalX = containerDimensions.width
+              const baseFinalX = measured && containerDimensions.width
                 ? -Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
-                : -380;
+                : 0;
               const finalX = baseFinalX; // final X offset to the left of center (pushed farther)
               const finalY = (i - 1) * 260; // increased vertical spacing from center to avoid overlap
 
@@ -162,86 +164,59 @@ export function CloneWithConscience() {
               const yRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalY]);
               const scaleRaw = useTransform(scrollYProgress, [0, 0.5], [0.95, 1]);
               // smooth the motion with springs for a natural easing both scrolling down and up
-              const x = useSpring(xRaw, { stiffness: 130, damping: 20 });
-              const y = useSpring(yRaw, { stiffness: 130, damping: 20 });
-              const scale = useSpring(scaleRaw, { stiffness: 120, damping: 20 });
+              const x = useSpring(xRaw, { stiffness: 80, damping: 30, mass: 1 });
+              const y = useSpring(yRaw, { stiffness: 80, damping: 30, mass: 1 });
+              const scale = useSpring(scaleRaw, { stiffness: 90, damping: 26, mass: 1 });
               const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
               return (
-                <motion.div
-                  key={`left-card-${i}`}
-                  className="rounded-2xl cursor-pointer group"
+                <div
+                  key={`left-card-wrap-${i}`}
                   style={{
-                    x,
-                    y,
-                    opacity,
-                    scale,
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
                     width: '200px',
-                    position: 'absolute',     // absolute positioning relative to the full container
-                    top: '50%',               // start in middle vertically
-                    left: '50%',              // start in middle horizontally
-                    translateX: '-50%',       // center card on its origin
-                    translateY: '-50%',
-                    background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
-                    border: `1px solid rgba(199, 162, 255, 0.15)`,
-                    padding: '24px',
-                    backdropFilter: 'blur(20px)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                  }}
-                  transition={{
-                    // small stagger only for hover interactions; scroll-driven motion is spring-smoothed above
-                    duration: 0.35,
-                    delay: i * 0.03,
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                    borderColor: `rgba(199, 162, 255, 0.4)`,
-                    boxShadow: `0 16px 50px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
-                    transition: { duration: 0.2, ease: 'easeOut' }
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    pointerEvents: 'auto',
                   }}
                 >
-                  {/* Icon */}
                   <motion.div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    className="rounded-2xl cursor-pointer group"
                     style={{
-                      background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`,
-                      border: `1px solid ${item.color}30`,
+                      x,
+                      y,
+                      opacity,
+                      scale,
+                      width: '100%',
+                      background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
+                      border: `1px solid rgba(199, 162, 255, 0.15)`,
+                      padding: '24px',
+                      backdropFilter: 'blur(20px)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                     }}
-                    whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    transition={{ duration: 0.35, delay: i * 0.03 }}
+                    whileHover={{
+                      scale: 1.05,
+                      borderColor: `rgba(199, 162, 255, 0.4)`,
+                      boxShadow: `0 16px 50px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
+                      transition: { duration: 0.2, ease: 'easeOut' },
+                    }}
                   >
-                    <IconComponent size={24} color={item.color} />
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`, border: `1px solid ${item.color}30` }}>
+                      <IconComponent size={24} color={item.color} />
+                    </div>
+
+                    <div style={{ fontSize: '36px', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
+
+                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+
+                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
                   </motion.div>
-
-                  {/* Value */}
-                  <div style={{
-                    fontSize: '36px',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    fontWeight: 700,
-                    color: '#FFFFFF',
-                    marginBottom: '8px',
-                    letterSpacing: '-0.5px',
-                  }}>{item.value}</div>
-
-                  {/* Title */}
-                  <h3 style={{
-                    fontSize: '16px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    fontWeight: 600,
-                    marginBottom: '4px',
-                    letterSpacing: '0.2px',
-                  }}>{item.title}</h3>
-
-                  {/* Subtitle */}
-                  <p style={{
-                    fontSize: '12px',
-                    color: '#8B92A8',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    lineHeight: '1.4',
-                    margin: 0,
-                  }}>{item.subtitle}</p>
-                </motion.div>
+                </div>
               );
             })}
 
@@ -447,9 +422,9 @@ export function CloneWithConscience() {
             {rightCards.map((item, i) => {
               const IconComponent = item.icon;
 
-              const baseFinalX = containerDimensions.width
+              const baseFinalX = measured && containerDimensions.width
                 ? Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
-                : 380;
+                : 0;
               const finalX = baseFinalX; // final X offset to the right of center (pushed farther)
               // const finalY = (i - 1) * 200;
               const finalY = (i - 1) * 260;
@@ -457,60 +432,47 @@ export function CloneWithConscience() {
               const xRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalX]);
               const yRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalY]);
               const scaleRaw = useTransform(scrollYProgress, [0, 0.5], [0.95, 1]);
-              const x = useSpring(xRaw, { stiffness: 130, damping: 20 });
-              const y = useSpring(yRaw, { stiffness: 130, damping: 20 });
-              const scale = useSpring(scaleRaw, { stiffness: 120, damping: 20 });
+              const x = useSpring(xRaw, { stiffness: 80, damping: 30, mass: 1 });
+              const y = useSpring(yRaw, { stiffness: 80, damping: 30, mass: 1 });
+              const scale = useSpring(scaleRaw, { stiffness: 90, damping: 26, mass: 1 });
               const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
               return (
-                <motion.div
-                  key={`right-card-${i}`}
-                  className="rounded-2xl cursor-pointer group"
-                  style={{
-                    x,
-                    y,
-                    opacity,
-                    scale,
-                    width: '200px',
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    translateX: '-50%',
-                    translateY: '-50%',
-                    background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
-                    border: `1px solid rgba(199, 162, 255, 0.15)`,
-                    padding: '24px',
-                    backdropFilter: 'blur(20px)',
-                    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                  }}
-                  transition={{ duration: 0.35, delay: i * 0.03 }}
-                  whileHover={{
-                    scale: 1.03,
-                    borderColor: `rgba(199, 162, 255, 0.4)`,
-                    boxShadow: `0 12px 40px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
-                    transition: { duration: 0.2, ease: 'easeOut' },
-                  }}
-                >
+                <div key={`right-card-wrap-${i}`} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <motion.div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    className="rounded-2xl cursor-pointer group"
                     style={{
-                      background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`,
-                      border: `1px solid ${item.color}30`,
+                      x,
+                      y,
+                      opacity,
+                      scale,
+                      width: '100%',
+                      background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
+                      border: `1px solid rgba(199, 162, 255, 0.15)`,
+                      padding: '24px',
+                      backdropFilter: 'blur(20px)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                     }}
-                    whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-                    transition={{ duration: 0.2, ease: 'easeOut' }}
+                    transition={{ duration: 0.35, delay: i * 0.03 }}
+                    whileHover={{
+                      scale: 1.03,
+                      borderColor: `rgba(199, 162, 255, 0.4)`,
+                      boxShadow: `0 12px 40px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
+                      transition: { duration: 0.2, ease: 'easeOut' },
+                    }}
                   >
-                    <IconComponent size={24} color={item.color} />
+                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`, border: `1px solid ${item.color}30` }}>
+                      <IconComponent size={24} color={item.color} />
+                    </div>
+
+                    <div style={{ fontSize: '36px', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
+
+                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+
+                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+
                   </motion.div>
-
-                  <div style={{ fontSize: '36px', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
-
-                  <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
-
-                  <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
-
-                  <motion.div className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: `radial-gradient(circle at center, ${item.color}10 0%, transparent 70%)`, opacity: 0 }} whileHover={{ opacity: 1 }} transition={{ duration: 0.2, ease: 'easeOut' }} />
-                </motion.div>
+                </div>
               );
             })}
           </div>
