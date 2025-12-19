@@ -67,20 +67,20 @@ export function ContactSection() {
       `}</style>
       
       <div className="max-w-2xl mx-auto text-center">
-        {/* Heading */}
-        <motion.h2
+      {/* Heading */}
+      <motion.h2
           className="mb-6"
-          style={{
-            fontSize: '48px',
-            fontFamily: 'Inter, system-ui, sans-serif',
+        style={{
+          fontSize: '48px',
+          fontFamily: 'Inter, system-ui, sans-serif',
             fontWeight: 700,
             letterSpacing: '1px',
-            color: '#FFFFFF',
+          color: '#FFFFFF',
             marginBottom: '1.5rem',
             lineHeight: '1.2',
-          }}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
         >
@@ -164,21 +164,21 @@ export function ContactSection() {
           </button>
         </motion.form>
 
-        {/* Status Message */}
-        {statusMessage && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
+            {/* Status Message */}
+            {statusMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
             className="mb-8 max-w-xl mx-auto"
-            style={{
-              color: statusType === 'success' ? '#22c55e' : '#ef4444',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontSize: '14px',
-            }}
-          >
-            {statusMessage}
-          </motion.div>
-        )}
+                style={{
+                  color: statusType === 'success' ? '#22c55e' : '#ef4444',
+                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontSize: '14px',
+                }}
+              >
+                {statusMessage}
+              </motion.div>
+            )}
       </div>
     </section>
   );

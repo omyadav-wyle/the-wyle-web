@@ -55,7 +55,7 @@ export function CloneWithConscience() {
   const leftCards = [
     {
       title: 'Money',
-      subtitle: 'Total saved!',
+      subtitle: 'Awareness',
       icon: Wallet,
       color: '#10b981',
       value: '$1.2k',
@@ -63,7 +63,7 @@ export function CloneWithConscience() {
     },
     {
       title: 'Health',
-      subtitle: 'Wellness tracked',
+      subtitle: 'Balance',
       icon: Activity,
       color: '#ec4899',
       value: '98%',
@@ -71,7 +71,7 @@ export function CloneWithConscience() {
     },
     {
       title: 'Tasks',
-      subtitle: 'Completed today',
+      subtitle: 'Momentum',
       icon: CheckCircle2,
       color: '#22c55e',
       value: '12',
@@ -82,16 +82,16 @@ export function CloneWithConscience() {
   // Right side cards (stacked vertically)
   const rightCards = [
     {
-      title: 'Rides',
-      subtitle: 'Miles traveled',
+      title: 'Travel',
+      subtitle: 'Movement',
       icon: Car,
       color: '#8b5cf6',
       value: '45mi',
       position: 'top'
     },
     {
-      title: 'Deliveries',
-      subtitle: 'On the way',
+      title: 'Orders',
+      subtitle: 'Completion',
       icon: Package,
       color: '#f59e0b',
       value: '3',
@@ -99,7 +99,7 @@ export function CloneWithConscience() {
     },
     {
       title: 'Time',
-      subtitle: 'Total time saved!',
+      subtitle: 'Space',
       icon: Clock,
       color: '#3b82f6',
       value: '2.5h',
@@ -129,6 +129,24 @@ export function CloneWithConscience() {
 
       {/* Subtext */}
       <motion.p
+        className="text-center max-w-2xl mx-auto mb-2"
+        style={{
+          fontSize: '15px',
+          color: '#C5C6C7',
+          fontFamily: 'Inter, system-ui, sans-serif',
+          lineHeight: '1.45',
+          marginBottom: '0.5rem',
+        }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        Built to move with your life, not over it.
+      </motion.p>
+
+      {/* Description */}
+      <motion.p
         className="text-center max-w-2xl mx-auto"
         style={{
           fontSize: '15px',
@@ -140,9 +158,9 @@ export function CloneWithConscience() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: '-100px' }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
       >
-        It's not the food delivery, rides or groceries app. But it's something that quickly connects all of these things in the background.
+        Designed to support you. Not replace you.
       </motion.p>
 
       {/* Central Orbital System and Cards Container */}

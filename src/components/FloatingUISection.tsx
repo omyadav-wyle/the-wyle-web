@@ -1,8 +1,6 @@
-import { Calendar, Gift, ShoppingCart, Car, MapPin, Clock } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
-import dubaiMarinaImage from 'figma:asset/fe4c2f760420bc1329b7068d017d9c72a6ddb980.png';
 
 export function FloatingUISection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -73,8 +71,44 @@ export function FloatingUISection() {
         }}
       />
 
+      {/* Heading and Subtext */}
+      <div className="relative z-10 text-center mb-16" style={{ paddingTop: '80px' }}>
+        <motion.h2
+          className="mb-4"
+          style={{
+            fontSize: '48px',
+            fontFamily: 'Inter, system-ui, sans-serif',
+            fontWeight: 700,
+            letterSpacing: '1px',
+            color: '#FFFFFF',
+            lineHeight: '1.2',
+          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+        >
+          More happens than you notice.
+        </motion.h2>
+        <motion.p
+          style={{
+            fontSize: '18px',
+            fontFamily: 'Inter, system-ui, sans-serif',
+            fontWeight: 400,
+            color: '#999999',
+            lineHeight: '1.6',
+          }}
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          A day is made of moments like these.
+        </motion.p>
+      </div>
+
       {/* Central Phone Container */}
-      <div className="relative z-10 flex items-center justify-center" style={{ minHeight: '700px', marginTop: '80px' }}>
+      <div className="relative z-10 flex items-center justify-center" style={{ minHeight: '700px', marginTop: '0' }}>
 
         {/* CENTER - Phone */}
         <div
@@ -140,74 +174,8 @@ export function FloatingUISection() {
 
             {/* Screen content - Animated elements */}
             <div className="w-full h-full p-4 flex flex-col gap-3" style={{ paddingTop: '50px', overflow: 'visible' }}>
-              {/* Top row of 4 icon cards - Animated */}
-              <div className="flex gap-2 justify-between">
-                {/* Calendar Icon */}
-                <motion.div
-                  className="rounded-xl flex items-center justify-center"
-                  style={{
-                    background: '#2A2B30',
-                    width: '62px',
-                    height: '62px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    x: calendarX,
-                    y: calendarY,
-                    opacity: calendarOpacity,
-                  }}
-                >
-                  <Calendar size={22} style={{ color: '#FFFFFF' }} />
-                </motion.div>
 
-                {/* Car Icon */}
-                <motion.div
-                  className="rounded-xl flex items-center justify-center"
-                  style={{
-                    background: '#2A2B30',
-                    width: '62px',
-                    height: '62px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    x: carX,
-                    y: carY,
-                    opacity: carOpacity,
-                  }}
-                >
-                  <Car size={22} style={{ color: '#FFFFFF' }} />
-                </motion.div>
-
-                {/* Gift Icon */}
-                <motion.div
-                  className="rounded-xl flex items-center justify-center"
-                  style={{
-                    background: '#2A2B30',
-                    width: '62px',
-                    height: '62px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    x: giftX,
-                    y: giftY,
-                    opacity: giftOpacity,
-                  }}
-                >
-                  <Gift size={22} style={{ color: '#FFFFFF' }} />
-                </motion.div>
-
-                {/* Shopping Cart Icon */}
-                <motion.div
-                  className="rounded-xl flex items-center justify-center"
-                  style={{
-                    background: '#2A2B30',
-                    width: '62px',
-                    height: '62px',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                    x: cartX,
-                    y: cartY,
-                    opacity: cartOpacity,
-                  }}
-                >
-                  <ShoppingCart size={22} style={{ color: '#FFFFFF' }} />
-                </motion.div>
-              </div>
-
-              {/* Food ordering card */}
+              {/* Food awareness card */}
               <motion.div
                 className="rounded-2xl p-4"
                 style={{
@@ -226,11 +194,10 @@ export function FloatingUISection() {
                     fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
-                  You haven't eaten in a while
+                  You haven't eaten.
                 </h3>
                 
                 <p 
-                  className="mb-3"
                   style={{
                     fontSize: '12px',
                     color: '#999999',
@@ -238,22 +205,8 @@ export function FloatingUISection() {
                     lineHeight: '1.4',
                   }}
                 >
-                  Let's order your favorite Chinese dish
+                  It's later than usual.
                 </p>
-                
-                <button
-                  className="w-full px-4 py-2.5 rounded-xl"
-                  style={{
-                    background: '#FFFFFF',
-                    fontSize: '13px',
-                    color: '#000000',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Let's order you food
-                </button>
               </motion.div>
 
               {/* Birthday card */}
@@ -285,7 +238,7 @@ export function FloatingUISection() {
                     fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
-                  Happy Birthday, Let's get you a cake
+                  Today matters to someone.
                 </p>
               </motion.div>
 
@@ -300,12 +253,6 @@ export function FloatingUISection() {
                   opacity: marinaOpacity,
                 }}
               >
-                <MapPin 
-                  className="absolute top-4 right-4" 
-                  size={18} 
-                  style={{ color: '#FFFFFF', opacity: 0.6 }}
-                />
-                
                 <h3 
                   className="mb-1.5"
                   style={{
@@ -314,11 +261,10 @@ export function FloatingUISection() {
                     fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
-                  Dubai Marina
+                  Tomorrow starts early.
                 </h3>
                 
                 <p 
-                  className="mb-3"
                   style={{
                     fontSize: '12px',
                     color: '#999999',
@@ -326,32 +272,11 @@ export function FloatingUISection() {
                     lineHeight: '1.3',
                   }}
                 >
-                  Early meeting tomorrow?<br />Let's get you there
+                  Mornings don't wait here.
                 </p>
-                
-                <img
-                  src={dubaiMarinaImage}
-                  alt="Dubai Marina"
-                  className="w-full object-cover rounded-xl mb-3"
-                  style={{ height: '100px' }}
-                />
-                
-                <button
-                  className="w-full px-4 py-2.5 rounded-xl"
-                  style={{
-                    background: '#FFFFFF',
-                    fontSize: '12px',
-                    color: '#000000',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    border: 'none',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Est. 15–20 min
-                </button>
               </motion.div>
 
-              {/* Notification - stays in phone */}
+              {/* Reset notification - stays in phone */}
               <motion.div
                 className="rounded-2xl"
                 style={{
@@ -374,20 +299,18 @@ export function FloatingUISection() {
                   <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.2 }} />
                 </div>
 
-                {/* Header with icon */}
-                <div className="flex items-start gap-2 mb-1.5">
-                  <span style={{ fontSize: '20px', lineHeight: 1 }}>🥗</span>
-                  <h3 
-                    style={{
-                      fontSize: '15px',
-                      color: '#AAAAAA',
-                      fontFamily: 'Inter, system-ui, sans-serif',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Ready for a Reset?
-                  </h3>
-                </div>
+                <h3 
+                  className="mb-1.5"
+                  style={{
+                    fontSize: '15px',
+                    color: '#AAAAAA',
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontWeight: 500,
+                    paddingLeft: '20px',
+                  }}
+                >
+                  Late night.
+                </h3>
                 
                 <p 
                   style={{
@@ -395,16 +318,15 @@ export function FloatingUISection() {
                     color: '#FFFFFF',
                     fontFamily: 'Inter, system-ui, sans-serif',
                     lineHeight: '1.5',
-                    paddingLeft: '28px',
+                    paddingLeft: '20px',
                     margin: 0,
                   }}
                 >
-                  We noticed a late-night treat yesterday!<br />
-                  Time for a fresh, healthy meal today.
+                  Today feels slower because of it.
                 </p>
               </motion.div>
 
-              {/* Second Notification - stays in phone */}
+              {/* Milk notification - stays in phone */}
               <motion.div
                 className="rounded-2xl"
                 style={{
@@ -427,20 +349,18 @@ export function FloatingUISection() {
                   <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.2 }} />
                 </div>
 
-                {/* Header with icon */}
-                <div className="flex items-start gap-2 mb-1">
-                  <span style={{ fontSize: '18px', lineHeight: 1 }}>🥛</span>
-                  <h3 
-                    style={{
-                      fontSize: '14px',
-                      color: '#AAAAAA',
-                      fontFamily: 'Inter, system-ui, sans-serif',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Out of Milk?
-                  </h3>
-                </div>
+                <h3 
+                  className="mb-1"
+                  style={{
+                    fontSize: '14px',
+                    color: '#AAAAAA',
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontWeight: 500,
+                    paddingLeft: '20px',
+                  }}
+                >
+                  Running low?
+                </h3>
                 
                 <p 
                   style={{
@@ -448,11 +368,11 @@ export function FloatingUISection() {
                     color: '#FFFFFF',
                     fontFamily: 'Inter, system-ui, sans-serif',
                     lineHeight: '1.4',
-                    paddingLeft: '26px',
+                    paddingLeft: '20px',
                     margin: 0,
                   }}
                 >
-                  Coming right up! Fresh organic milk arriving in 20 min.
+                  You only notice at the wrong moment.
                 </p>
               </motion.div>
             </div>

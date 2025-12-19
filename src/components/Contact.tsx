@@ -11,21 +11,16 @@ import { Navigation } from './Navigation';
 export function Contact() {
   const [formData, setFormData] = useState({
     businessName: '',
-    industry: '',
-    country: '',
-    city: '',
-    employees: '',
-    outlets: '',
-    fullName: '',
+    contactName: '',
+    contactTitle: '',
     email: '',
     phone: '',
-    department: '',
-    message: '',
+    city: '',
   });
 
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
-  const [statusType, setStatusType] = useState(''); // 'success', 'error'
+  const [statusType, setStatusType] = useState(''); // 'successerror'
 
   // Handle input changes
   const handleChange = (e: any) => {
@@ -45,16 +40,11 @@ export function Contact() {
     // Validation
     if (
       !formData.businessName.trim() ||
-      !formData.industry.trim() ||
-      !formData.country.trim() ||
-      !formData.city.trim() ||
-      !formData.employees.trim() ||
-      !formData.outlets.trim() ||
-      !formData.fullName.trim() ||
+      !formData.contactName.trim() ||
+      !formData.contactTitle.trim() ||
       !formData.email.trim() ||
       !formData.phone.trim() ||
-      !formData.department.trim() ||
-      !formData.message.trim()
+      !formData.city.trim()
     ) {
       setStatusMessage('Please fill in all fields');
       setStatusType('error');
@@ -92,16 +82,11 @@ export function Contact() {
       // Reset form
       setFormData({
         businessName: '',
-        industry: '',
-        country: '',
-        city: '',
-        employees: '',
-        outlets: '',
-        fullName: '',
+        contactName: '',
+        contactTitle: '',
         email: '',
         phone: '',
-        department: '',
-        message: '',
+        city: '',
       });
     } catch (error: any) {
       console.error('Error submitting form:', error);
@@ -191,7 +176,7 @@ export function Contact() {
               marginBottom: '24px',
             }}
           >
-            Grow You Business<br />with WYLE
+            Let's start with intent.
           </h1>
 
           <p
@@ -204,7 +189,8 @@ export function Contact() {
               maxWidth: '600px',
             }}
           >
-            Partner with WYLE and move forward together with shared purpose and ambition.
+            We're selective about who we work with, and thoughtful about how we do it.<br />
+            If you believe good systems should feel effortless, this is a good place to begin.
           </p>
         </div>
       </section>
@@ -241,7 +227,7 @@ export function Contact() {
 
         <div className="max-w-6xl mx-auto relative z-10">
           <form className="space-y-12" onSubmit={handleSubmit}>
-            {/* Two Column Grid - Row 1 */}
+            {/* Two Column Grid */}
             <div className="grid grid-cols-2 gap-x-16 gap-y-12">
               {/* Business Name */}
               <div>
@@ -277,10 +263,10 @@ export function Contact() {
                 />
               </div>
 
-              {/* Industry */}
+              {/* Contact Person Name */}
               <div>
                 <label 
-                  htmlFor="industry"
+                  htmlFor="contactName"
                   style={{
                     display: 'block',
                     fontSize: '14px',
@@ -290,13 +276,13 @@ export function Contact() {
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Industry <span style={{ color: '#FF0000' }}>*</span>
+                  Contact Person Name <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="industry"
-                  name="industry"
-                  value={formData.industry}
+                  id="contactName"
+                  name="contactName"
+                  value={formData.contactName}
                   onChange={handleChange}
                   className="w-full pb-2"
                   style={{
@@ -311,10 +297,10 @@ export function Contact() {
                 />
               </div>
 
-              {/* Country */}
+              {/* Contact Person Title */}
               <div>
                 <label 
-                  htmlFor="country"
+                  htmlFor="contactTitle"
                   style={{
                     display: 'block',
                     fontSize: '14px',
@@ -324,149 +310,13 @@ export function Contact() {
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Country <span style={{ color: '#FF0000' }}>*</span>
+                  Contact Person Title <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="country"
-                  name="country"
-                  value={formData.country}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* City */}
-              <div>
-                <label 
-                  htmlFor="city"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  City <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* Number Of Employees */}
-              <div>
-                <label 
-                  htmlFor="employees"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Number Of Employees <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="employees"
-                  name="employees"
-                  value={formData.employees}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* Number Of Outlets */}
-              <div>
-                <label 
-                  htmlFor="outlets"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Number Of Outlets <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="outlets"
-                  name="outlets"
-                  value={formData.outlets}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* Full Name */}
-              <div>
-                <label 
-                  htmlFor="fullName"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Full Name <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
+                  id="contactTitle"
+                  name="contactTitle"
+                  value={formData.contactTitle}
                   onChange={handleChange}
                   className="w-full pb-2"
                   style={{
@@ -528,7 +378,7 @@ export function Contact() {
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Phone Number <span style={{ color: '#FF0000' }}>*</span>
+                  Phone No <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="tel"
@@ -549,10 +399,10 @@ export function Contact() {
                 />
               </div>
 
-              {/* Which department */}
+              {/* City */}
               <div>
                 <label 
-                  htmlFor="department"
+                  htmlFor="city"
                   style={{
                     display: 'block',
                     fontSize: '14px',
@@ -562,13 +412,13 @@ export function Contact() {
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Department <span style={{ color: '#FF0000' }}>*</span>
+                  City <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="department"
-                  name="department"
-                  value={formData.department}
+                  id="city"
+                  name="city"
+                  value={formData.city}
                   onChange={handleChange}
                   className="w-full pb-2"
                   style={{
@@ -582,40 +432,6 @@ export function Contact() {
                   placeholder="Your answer"
                 />
               </div>
-            </div>
-
-            {/* Message - Full Width */}
-            <div>
-              <label 
-                htmlFor="message"
-                style={{
-                  display: 'block',
-                  fontSize: '14px',
-                  color: '#FFFFFF',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
-                  marginBottom: '12px',
-                  letterSpacing: '0.3px',
-                }}
-              >
-                Message <span style={{ color: '#FF0000' }}>*</span>
-              </label>
-              <input
-                type="text"
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full pb-2"
-                style={{
-                  background: 'transparent',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#999999',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
-                  fontSize: '14px',
-                  outline: 'none',
-                }}
-                placeholder="Your answer"
-              />
             </div>
 
             {/* Status Message */}
@@ -657,7 +473,7 @@ export function Contact() {
                   letterSpacing: '1.5px',
                 }}
               >
-                {loading ? 'Submitting...' : 'Submit Request'}
+                {loading ? 'Submitting...' : 'Begin'}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
             </div>

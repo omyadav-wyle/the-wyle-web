@@ -314,7 +314,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          It's not a collection of apps. It's a calm, intelligently connected experience.
+          Everyday moments, finally moving together.
         </motion.p>
       </div>
 

@@ -45,7 +45,7 @@ import { OtherApps } from '../src/components/OtherApps';
       <FloatingUISection />
       <CloneWithConscience />
      
-      <GradientWave />
+      {/* <GradientWave /> */}
        <OtherApps />
       {/* <ProblemSection/> */}
       <div id="contact">
