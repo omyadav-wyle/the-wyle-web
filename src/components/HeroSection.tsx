@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { useEffect, useRef } from 'react';
 import marbleTexture from 'figma:asset/2d00f865631069f9d70237e84f9f12413b9b737c.png';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
@@ -6,6 +7,45 @@ import heroVideo from '../assets/hero.mp4';
 import { Navigation } from './Navigation';
 
 export function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Ensure video plays on mobile devices
+    const playPromise = video.play();
+    
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Video is playing
+        })
+        .catch((error) => {
+          // Auto-play was prevented, try again on user interaction
+          const playOnInteraction = () => {
+            video.play().catch(() => {});
+            document.removeEventListener('touchstart', playOnInteraction);
+            document.removeEventListener('click', playOnInteraction);
+          };
+          document.addEventListener('touchstart', playOnInteraction, { once: true });
+          document.addEventListener('click', playOnInteraction, { once: true });
+        });
+    }
+
+    // Ensure video continues playing when it pauses
+    const handlePause = () => {
+      if (video.paused) {
+        video.play().catch(() => {});
+      }
+    };
+
+    video.addEventListener('pause', handlePause);
+
+    return () => {
+      video.removeEventListener('pause', handlePause);
+    };
+  }, []);
   return (
     <div className="relative w-full h-screen overflow-hidden" style={{ background: '#000000' }}>
       {/* Grain texture overlay */}
@@ -27,13 +67,21 @@ export function HeroSection() {
 
       {/* Hero Video - Behind Text */}
       <video 
+        ref={videoRef}
         src={heroVideo}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
+        disablePictureInPicture
+        disableRemotePlayback
         className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
-        style={{ mixBlendMode: 'screen', opacity: 0.8 }}
+        style={{ 
+          mixBlendMode: 'screen', 
+          opacity: 0.8,
+          WebkitPlaysinline: 'true',
+        }}
       />
 
       {/* Hero Content */}
@@ -278,7 +326,7 @@ export function HeroSection() {
       />
 
       {/* Purple flow - left side */}
-      <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+      <div className="absolute pointer-events-none" style={{ left: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
         <motion.img 
           src={imgPurpleFlow} 
           alt="purple flow" 
@@ -288,7 +336,7 @@ export function HeroSection() {
             filter: 'blur(3px)',
           }}
           animate={{
-            opacity: [0.2, 0.9, 0.4, 0.2],
+            opacity: [0.1, 0.4, 0.2, 0.1],
           }}
           transition={{
             duration: 6,
@@ -300,7 +348,7 @@ export function HeroSection() {
       </div>
 
       {/* Purple flow - right side */}
-      <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+      <div className="absolute pointer-events-none" style={{ right: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
         <motion.img 
           src={imgPurpleFlow} 
           alt="purple flow" 
@@ -310,7 +358,7 @@ export function HeroSection() {
             filter: 'blur(3px)',
           }}
           animate={{
-            opacity: [0.2, 0.3, 0.9, 0.4, 0.2],
+            opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
           }}
           transition={{
             duration: 6,
