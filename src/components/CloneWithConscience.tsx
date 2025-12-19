@@ -199,12 +199,7 @@ export function CloneWithConscience() {
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
-                    whileHover={{
-                      scale: 1.05,
-                      borderColor: `rgba(199, 162, 255, 0.4)`,
-                      boxShadow: `0 16px 50px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
-                      transition: { duration: 0.2, ease: 'easeOut' },
-                    }}
+                  
                   >
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`, border: `1px solid ${item.color}30` }}>
                       <IconComponent size={24} color={item.color} />
@@ -454,12 +449,7 @@ export function CloneWithConscience() {
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
-                    whileHover={{
-                      scale: 1.03,
-                      borderColor: `rgba(199, 162, 255, 0.4)`,
-                      boxShadow: `0 12px 40px rgba(199, 162, 255, 0.2), 0 0 20px ${item.color}40`,
-                      transition: { duration: 0.2, ease: 'easeOut' },
-                    }}
+                    
                   >
                     <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`, border: `1px solid ${item.color}30` }}>
                       <IconComponent size={24} color={item.color} />
