@@ -1,10 +1,9 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
-import handImage from 'figma:asset/22ed4d14276b411b9dce2af250a2a23095a047e2.png';
-import waveImage from 'figma:asset/1aac5d74c3a8da7e05fea7551c55919bdf99ce39.png';
+import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
+import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
+import Lottie from 'lottie-react';
+import backgroundLinesWave from '../assets/background lines wave.json';
 import { Footer } from './Footer';
-import React from 'react';
 import { Navigation } from './Navigation';
 
 export function About() {
@@ -158,9 +157,76 @@ export function About() {
       {/* Top Navigation */}
       <Navigation/>
 
+      {/* Teal arc - behind navbar */}
+      <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>
+        {/* Heavily blurred base layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur base" 
+          className="h-[105vh]"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Medium blur layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur medium" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Soft blur overlay */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur soft" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+      </div>
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-16 text-center">
+        {/* Background Lines Wave Animation - Full Hero Section - Horizontal Flow */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            zIndex: 0,
+            opacity: 0.5,
+            filter: 'hue-rotate(160deg) saturate(1.5) brightness(0.9) contrast(1.2)',
+            mixBlendMode: 'screen',
+            left: '50%',
+            top: 0,
+            bottom: 0,
+            width: '100vw',
+            height: '100%',
+            transform: 'translateX(-50%)',
+          }}
+        >
+          <Lottie
+            animationData={backgroundLinesWave}
+            loop={true}
+            autoplay={true}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
+          />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto px-16 text-center">
           <motion.h1
             className="mb-4"
             style={{
@@ -193,64 +259,6 @@ export function About() {
             We started by paying attention.
           </motion.p>
 
-          {/* Horizontal flowing purple energy wave removed */}
-          
-          <div className="relative mt-24 h-64 overflow-visible">
-            {/* Energy Wave Image - Animated reveal - flows horizontally, positioned higher */}
-            <motion.div 
-              className="absolute pointer-events-none z-30"
-              style={{
-                top: '10%',
-                left: '15%',
-                width: '100%',
-                height: '360px',
-                transform: 'translateY(-50%)',
-              }}
-              initial={{ clipPath: 'inset(0 0% 0 100%)' }}
-              animate={{
-                clipPath: ['inset(0 0% 0 100%)', 'inset(0 0% 0 0%)', 'inset(0 0% 0 0%)'],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                times: [0, 0.15, 1],
-                ease: [0.4, 0, 0.2, 1],
-              }}
-            >
-              <img
-                src={waveImage}
-                alt="energy wave"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  mixBlendMode: 'screen',
-                }}
-              />
-            </motion.div>
-
-            {/* Hand - Static - positioned further to the left */}
-            <div
-              className="absolute pointer-events-none z-20"
-              style={{
-                top: '50%',
-                left: '-15%',
-                width: '650px',
-                transform: 'translateY(-50%)',
-              }}
-            >
-              <img 
-                src={handImage}
-                alt="hand"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  mixBlendMode: 'screen',
-                }}
-              />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -344,8 +352,53 @@ export function About() {
       </section>
 
       {/* What We're Here To Do Section */}
-      <section className="relative py-32">
-        <div className="max-w-4xl mx-auto px-16 text-center">
+      <section className="relative py-32 overflow-hidden">
+        {/* Teal flow - left side */}
+        <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
+            }}
+          />
+        </div>
+
+        {/* Teal flow - right side */}
+        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
+            }}
+          />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-16 text-center relative z-10">
           {/* Curved arc above */}
           <svg 
             className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-12"
@@ -428,8 +481,53 @@ export function About() {
       </section>
 
       {/* The Stewards Section */}
-      <section className="relative py-24 pb-32">
-        <div className="max-w-7xl mx-auto px-16">
+      <section className="relative py-24 pb-32 overflow-hidden">
+        {/* Teal flow - left side */}
+        <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
+            }}
+          />
+        </div>
+
+        {/* Teal flow - right side */}
+        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
+            }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-16 relative z-10">
           <motion.div
             className="text-center mb-6"
             initial={{ opacity: 0, y: 20 }}
@@ -443,8 +541,7 @@ export function About() {
                 fontSize: '48px',
                 color: '#FFFFFF',
                 fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
-                fontWeight: 600,
+                fontWeight: 500,
                 letterSpacing: '0.5px',
               }}
             >
@@ -476,6 +573,7 @@ export function About() {
                   flex: '1',
                   minWidth: '250px',
                   maxWidth: '300px',
+                  cursor: member.linkedin ? 'pointer' : 'default',
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -490,7 +588,6 @@ export function About() {
                     window.open(member.linkedin, '_blank');
                   }
                 }}
-                style={{ cursor: member.linkedin ? 'pointer' : 'default' }}
               >
                 {/* Image container with glow */}
                 <div className="relative mb-4 mx-auto" style={{ width: '140px', height: '140px' }}>

@@ -102,57 +102,89 @@ export function UserContact() {
 
       {/* Navigation */}
       <Navigation/>
+
+      {/* Teal arc - behind navbar */}
+      <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>
+        {/* Heavily blurred base layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur base" 
+          className="h-[105vh]"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Medium blur layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur medium" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Soft blur overlay */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur soft" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+      </div>
+
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 px-16">
-        {/* Teal arc - left side */}
-        <div className="absolute pointer-events-none" style={{ left: '-40px', top: '50%', zIndex: 1, transform: 'translateY(-50%) scaleX(-1)' }}>
-          {/* Heavily blurred base layer */}
-          <img 
-            src={arcImage} 
-            alt="teal arc blur base" 
-            className="h-[50vh]"
-            style={{
-              mixBlendMode: 'screen',
-              filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
-              opacity: 0.5,
-            }}
-          />
-          
-          {/* Medium blur layer */}
-          <img 
-            src={arcImage} 
-            alt="teal arc blur medium" 
-            className="h-[50vh] absolute top-0 right-0"
-            style={{
-              mixBlendMode: 'screen',
-              filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
-              opacity: 0.6,
-            }}
-          />
-          
-          {/* Soft blur overlay */}
-          <img 
-            src={arcImage} 
-            alt="teal arc blur soft" 
-            className="h-[50vh] absolute top-0 right-0"
-            style={{
-              mixBlendMode: 'screen',
-              opacity: 0.5,
-              filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
-            }}
-          />
-        </div>
-
-        {/* Teal flow - right side */}
-        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
-          <img 
+        {/* Teal flow - left side */}
+        <div className="absolute pointer-events-none" style={{ left: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+          <motion.img 
             src={imgPurpleFlow} 
             alt="teal flow" 
             className="h-[100vh]"
             style={{
               mixBlendMode: 'screen',
-              opacity: 0.6,
               filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
+            }}
+          />
+        </div>
+
+        {/* Teal flow - right side */}
+        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
             }}
           />
         </div>
@@ -192,28 +224,45 @@ export function UserContact() {
       <section className="relative py-12 px-16 pb-32">
         {/* Teal flow - right side of form */}
         <div className="absolute pointer-events-none" style={{ right: '-500px', top: '40%', zIndex: 1, transform: 'translateY(-50%) rotate(15deg)' }}>
-          <img 
+          <motion.img 
             src={imgPurpleFlow} 
             alt="teal flow form" 
             className="h-[60vh]"
             style={{
               mixBlendMode: 'screen',
-              opacity: 0.4,
               filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.3, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
             }}
           />
         </div>
 
         {/* Teal flow - left side near message */}
         <div className="absolute pointer-events-none" style={{ left: '-500px', bottom: '0%', zIndex: 1, transform: 'rotate(-15deg)' }}>
-          <img 
+          <motion.img 
             src={imgPurpleFlow} 
             alt="teal flow form left" 
             className="h-[60vh]"
             style={{
               mixBlendMode: 'screen',
-              opacity: 0.4,
               filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.3, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
             }}
           />
         </div>
