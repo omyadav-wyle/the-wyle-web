@@ -56,7 +56,7 @@ export function ProblemSection() {
             transition={{ duration: 0.6 }}
           >
             Why Most Apps Are{' '}
-            <span style={{ color: '#C7A2FF' }}>Stuck in the Past</span>
+            <span style={{ color: '#1B998B' }}>Stuck in the Past</span>
           </motion.h2>
 
           <div className="space-y-6 mb-8">
@@ -86,7 +86,7 @@ export function ProblemSection() {
                     ease: 'easeInOut'
                   }}
                 >
-                  <point.icon size={24} color="#C084FC" />
+                  <point.icon size={24} color="#1B998B" />
                 </motion.div>
                 <div>
                   <motion.h3
@@ -161,9 +161,9 @@ export function ProblemSection() {
             }}
             whileInView={{
               boxShadow: [
-                '0 0 40px rgba(192, 132, 252, 0.1)',
-                '0 0 60px rgba(192, 132, 252, 0.2)',
-                '0 0 40px rgba(192, 132, 252, 0.1)',
+                '0 0 40px rgba(27, 153, 139, 0.1)',
+                '0 0 60px rgba(27, 153, 139, 0.2)',
+                '0 0 40px rgba(27, 153, 139, 0.1)',
               ],
             }}
             viewport={{ once: true }}
@@ -187,7 +187,7 @@ export function ProblemSection() {
                   >
                     <motion.div
                       className="h-3 rounded mb-2"
-                      style={{ background: 'rgba(192, 132, 252, 0.3)' }}
+                      style={{ background: 'rgba(27, 153, 139, 0.3)' }}
                       initial={{ width: 0 }}
                       whileInView={{ width: i === 1 ? '60%' : '70%' }}
                       viewport={{ once: true }}
@@ -195,7 +195,7 @@ export function ProblemSection() {
                     />
                     <motion.div
                       className="h-2 rounded"
-                      style={{ background: 'rgba(192, 132, 252, 0.2)' }}
+                      style={{ background: 'rgba(27, 153, 139, 0.2)' }}
                       initial={{ width: 0 }}
                       whileInView={{ width: i === 1 ? '40%' : '50%' }}
                       viewport={{ once: true }}
@@ -228,7 +228,7 @@ export function ProblemSection() {
                     <motion.div
                       className="h-8 rounded mb-2"
                       style={{ 
-                        background: 'rgba(192, 132, 252, 0.2)',
+                        background: 'rgba(27, 153, 139, 0.2)',
                         transformOrigin: 'bottom'
                       }}
                       initial={{ scaleY: 0 }}
@@ -254,13 +254,13 @@ export function ProblemSection() {
             <motion.div
               className="absolute inset-0 rounded-2xl pointer-events-none"
               style={{
-                boxShadow: 'inset 0 0 60px rgba(192, 132, 252, 0.1)',
+                boxShadow: 'inset 0 0 60px rgba(27, 153, 139, 0.1)',
               }}
               animate={{
                 boxShadow: [
-                  'inset 0 0 60px rgba(192, 132, 252, 0.1)',
-                  'inset 0 0 80px rgba(192, 132, 252, 0.15)',
-                  'inset 0 0 60px rgba(192, 132, 252, 0.1)',
+                  'inset 0 0 60px rgba(27, 153, 139, 0.1)',
+                  'inset 0 0 80px rgba(27, 153, 139, 0.15)',
+                  'inset 0 0 60px rgba(27, 153, 139, 0.1)',
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}

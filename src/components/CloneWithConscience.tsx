@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import ecosystemCircle from '../assets/ecosystem-circle.svg';
-import { Wallet, Activity, CheckCircle2, Clock, Package, Car } from 'lucide-react';
 
 export function CloneWithConscience() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,25 +55,16 @@ export function CloneWithConscience() {
     {
       title: 'Money',
       subtitle: 'Awareness',
-      icon: Wallet,
-      color: '#10b981',
-      value: '$1.2k',
       position: 'top'
     },
     {
       title: 'Health',
       subtitle: 'Balance',
-      icon: Activity,
-      color: '#ec4899',
-      value: '98%',
       position: 'middle'
     },
     {
       title: 'Tasks',
       subtitle: 'Momentum',
-      icon: CheckCircle2,
-      color: '#22c55e',
-      value: '12',
       position: 'bottom'
     },
   ];
@@ -84,25 +74,16 @@ export function CloneWithConscience() {
     {
       title: 'Travel',
       subtitle: 'Movement',
-      icon: Car,
-      color: '#8b5cf6',
-      value: '45mi',
       position: 'top'
     },
     {
       title: 'Orders',
       subtitle: 'Completion',
-      icon: Package,
-      color: '#f59e0b',
-      value: '3',
       position: 'middle'
     },
     {
       title: 'Time',
       subtitle: 'Space',
-      icon: Clock,
-      color: '#3b82f6',
-      value: '2.5h',
       position: 'bottom'
     },
   ];
@@ -125,7 +106,7 @@ export function CloneWithConscience() {
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.6 }}
       >
-        Clone with <span style={{ color: '#C7A2FF' }}>Conscience</span>
+        Clone with <span style={{ color: '#1B998B' }}>Conscience</span>
       </motion.h2>
 
       {/* Subtext */}
@@ -172,7 +153,6 @@ export function CloneWithConscience() {
           {/* Left Side Cards: start centered on the circle and animate outward on scroll */}
           <div className="absolute inset-0" style={{ zIndex: 20 }}>
             {leftCards.map((item, i) => {
-              const IconComponent = item.icon;
               // responsive final offset so cards move from center to a side position
               const baseFinalX = measured && containerDimensions.width
                 ? -Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
@@ -213,24 +193,18 @@ export function CloneWithConscience() {
                       opacity,
                       scale,
                       width: '100%',
-                      background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
-                      border: `1px solid rgba(199, 162, 255, 0.15)`,
+                      background: 'rgba(0, 47, 58, 0.25)',
+                      border: `1px solid rgba(27, 153, 139, 0.2)`,
                       padding: '24px',
                       backdropFilter: 'blur(20px)',
-                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                   
                   >
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`, border: `1px solid ${item.color}30` }}>
-                      <IconComponent size={24} color={item.color} />
-                    </div>
-
-                    <div style={{ fontSize: '36px', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
-
                     <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: '12px', color: '#C5C6C7', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
                   </motion.div>
                 </div>
               );
@@ -255,7 +229,7 @@ export function CloneWithConscience() {
               <div
                 className="absolute inset-0"
                 style={{
-                  background: 'radial-gradient(circle, rgba(168, 139, 255, 0.25) 0%, rgba(110, 216, 255, 0.12) 30%, transparent 50%)',
+                  background: 'radial-gradient(circle, rgba(27, 153, 139, 0.25) 0%, rgba(0, 47, 58, 0.12) 30%, transparent 50%)',
                   filter: 'blur(35px)',
                   transform: 'scale(1.05)',
                 }}
@@ -275,7 +249,7 @@ export function CloneWithConscience() {
               <motion.div
                 className="absolute inset-0"
                 style={{
-                  background: 'radial-gradient(circle at center, rgba(199, 162, 255, 0.2) 0%, transparent 30%)',
+                  background: 'radial-gradient(circle at center, rgba(27, 153, 139, 0.2) 0%, transparent 30%)',
                   filter: 'blur(15px)',
                 }}
                 animate={{
@@ -303,8 +277,8 @@ export function CloneWithConscience() {
                     key={`particle-${i}`}
                     className="absolute w-1 h-1 rounded-full"
                     style={{
-                      background: '#6ED8FF',
-                      boxShadow: '0 0 4px #6ED8FF',
+                      background: '#1B998B',
+                      boxShadow: '0 0 4px #1B998B',
                       left: '50%',
                       top: '50%',
                     }}
@@ -436,13 +410,10 @@ export function CloneWithConscience() {
           {/* Right Side Cards: mirror of left side, start centered and animate outward to the right */}
           <div className="absolute inset-0" style={{ zIndex: 20 }}>
             {rightCards.map((item, i) => {
-              const IconComponent = item.icon;
-
               const baseFinalX = measured && containerDimensions.width
                 ? Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
                 : 0;
               const finalX = baseFinalX; // final X offset to the right of center (pushed farther)
-              // const finalY = (i - 1) * 200;
               const finalY = (i - 1) * 260;
 
               const xRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalX]);
@@ -463,24 +434,18 @@ export function CloneWithConscience() {
                       opacity,
                       scale,
                       width: '100%',
-                      background: 'linear-gradient(135deg, rgba(25, 28, 38, 0.95) 0%, rgba(15, 18, 28, 0.98) 100%)',
-                      border: `1px solid rgba(199, 162, 255, 0.15)`,
+                      background: 'rgba(0, 47, 58, 0.25)',
+                      border: `1px solid rgba(27, 153, 139, 0.2)`,
                       padding: '24px',
                       backdropFilter: 'blur(20px)',
-                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                     
                   >
-                    <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `linear-gradient(135deg, ${item.color}20, ${item.color}10)`, border: `1px solid ${item.color}30` }}>
-                      <IconComponent size={24} color={item.color} />
-                    </div>
-
-                    <div style={{ fontSize: '36px', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
-
                     <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: '12px', color: '#C5C6C7', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
 
                   </motion.div>
                 </div>
@@ -525,7 +490,7 @@ export function CloneWithConscience() {
                   <motion.path
                     d={wavePath}
                     fill="none"
-                    stroke={`rgba(199, 162, 255, 0.25)`}
+                    stroke={`rgba(27, 153, 139, 0.25)`}
                     strokeWidth="2"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
@@ -559,7 +524,7 @@ export function CloneWithConscience() {
                   <motion.path
                     d={wavePath}
                     fill="none"
-                    stroke={`rgba(199, 162, 255, 0.25)`}
+                    stroke={`rgba(27, 153, 139, 0.25)`}
                     strokeWidth="2"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}

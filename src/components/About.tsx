@@ -41,7 +41,7 @@ export function About() {
               className="absolute inset-0"
               style={{
                 borderRadius: '50% 40% 50% 40%',
-                border: '2px solid rgba(139, 92, 246, 0.6)',
+                border: '2px solid rgba(27, 153, 139, 0.6)',
               }}
               animate={{
                 scale: [1, 1.2, 1],
@@ -72,8 +72,8 @@ export function About() {
                 key={i}
                 className="absolute w-3 h-3 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, rgba(199, 162, 255, 0.9), rgba(139, 92, 246, 0.6))',
-                  boxShadow: '0 0 10px rgba(199, 162, 255, 0.6)',
+                  background: 'radial-gradient(circle, rgba(27, 153, 139, 0.9), rgba(0, 47, 58, 0.6))',
+                  boxShadow: '0 0 10px rgba(27, 153, 139, 0.6)',
                   left: '50%',
                   top: '50%',
                   transform: `translate(-50%, -50%) translate(${Math.cos(angle) * radius}px, ${Math.sin(angle) * radius}px)`,
@@ -94,8 +94,8 @@ export function About() {
           <div 
             className="w-4 h-4 rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(199, 162, 255, 1), rgba(139, 92, 246, 0.8))',
-              boxShadow: '0 0 15px rgba(199, 162, 255, 0.8)',
+              background: 'radial-gradient(circle, rgba(27, 153, 139, 1), rgba(0, 47, 58, 0.8))',
+              boxShadow: '0 0 15px rgba(27, 153, 139, 0.8)',
             }}
           />
         </div>
@@ -113,7 +113,7 @@ export function About() {
               style={{
                 width: `${40 + i * 20}px`,
                 height: `${40 + i * 20}px`,
-                border: '2px solid rgba(139, 92, 246, 0.5)',
+                border: '2px solid rgba(27, 153, 139, 0.5)',
                 borderRadius: '50%',
                 transform: `rotate(${i * 45}deg)`,
               }}
@@ -130,8 +130,8 @@ export function About() {
           <div 
             className="w-4 h-4 rounded-full relative z-10"
             style={{
-              background: 'radial-gradient(circle, rgba(199, 162, 255, 1), rgba(139, 92, 246, 0.8))',
-              boxShadow: '0 0 20px rgba(199, 162, 255, 0.8)',
+              background: 'radial-gradient(circle, rgba(27, 153, 139, 1), rgba(0, 47, 58, 0.8))',
+              boxShadow: '0 0 20px rgba(27, 153, 139, 0.8)',
             }}
           />
         </div>
@@ -277,25 +277,25 @@ export function About() {
           {/* Cards - Horizontal Layout */}
           <div className="flex flex-col md:flex-row gap-8 mt-16 justify-center items-stretch" style={{ maxWidth: '1200px', margin: '4rem auto 0' }}>
             {philosophyCards.map((card, index) => (
-              <motion.div
-                key={index}
+                  <motion.div
+                    key={index}
                 className="flex-1"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-                whileHover={{ 
+                    whileHover={{
                   scale: 1.03,
                   y: -8,
                   transition: { duration: 0.3 }
-                }}
-              >
-                <div
+                    }}
+                  >
+                    <div
                   className="p-8 h-full flex flex-col"
-                  style={{
+                      style={{
                     minHeight: '320px',
                     background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
-                    backdropFilter: 'blur(40px)',
+                        backdropFilter: 'blur(40px)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
                     borderRadius: '28px',
                     boxShadow: '0 12px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
@@ -304,40 +304,40 @@ export function About() {
                 >
                   {/* Icon - Centered at top */}
                   <div className="flex items-center justify-center mb-6" style={{ minHeight: '100px' }}>
-                    {card.icon}
-                  </div>
+                        {card.icon}
+                      </div>
 
                   {/* Text - Below icon */}
                   <div className="flex-1 flex flex-col justify-center text-center">
-                    <h3 
+                        <h3 
                       className="mb-4"
-                      style={{
+                          style={{
                         fontSize: '24px',
-                        color: '#FFFFFF',
+                            color: '#FFFFFF',
                         fontFamily: 'Fredoka, system-ui, sans-serif',
                         fontWeight: 500,
-                        lineHeight: '1.3',
+                            lineHeight: '1.3',
                         letterSpacing: '0.3px',
-                      }}
-                    >
-                      {card.title}
-                    </h3>
+                          }}
+                        >
+                          {card.title}
+                        </h3>
 
-                    <p 
-                      style={{
+                        <p 
+                          style={{
                         fontSize: '16px',
                         color: '#B0B0B0',
                         fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                        fontWeight: 400,
                         lineHeight: '1.7',
                         letterSpacing: '0.2px',
-                      }}
-                    >
-                      {card.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+                          }}
+                        >
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
             ))}
           </div>
         </div>
@@ -355,9 +355,9 @@ export function About() {
           >
             <defs>
               <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0" />
-                <stop offset="50%" stopColor="#C7A2FF" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
+                <stop offset="0%" stopColor="#002F3A" stopOpacity="0" />
+                <stop offset="50%" stopColor="#1B998B" stopOpacity="0.8" />
+                <stop offset="100%" stopColor="#002F3A" stopOpacity="0" />
               </linearGradient>
             </defs>
             <motion.path
@@ -393,7 +393,7 @@ export function About() {
             className="mb-8"
             style={{
               fontSize: '28px',
-              color: '#C7A2FF',
+              color: '#1B998B',
               fontFamily: 'Fredoka, system-ui, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
@@ -497,7 +497,7 @@ export function About() {
                   <div 
                     className="absolute inset-0 rounded-2xl"
                     style={{
-                      background: 'radial-gradient(circle, rgba(199, 162, 255, 0.3) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(27, 153, 139, 0.3) 0%, transparent 70%)',
                       filter: 'blur(15px)',
                     }}
                   />
@@ -513,8 +513,7 @@ export function About() {
                     fontSize: '16px',
                     color: '#FFFFFF',
                     fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
-                    fontWeight: 600,
+                    fontWeight: 500,
                     marginBottom: '4px',
                   }}
                 >

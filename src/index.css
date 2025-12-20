@@ -1364,6 +1364,14 @@
   --sidebar-accent-foreground: oklch(.205 0 0);
   --sidebar-border: oklch(.922 0 0);
   --sidebar-ring: oklch(.708 0 0);
+  
+  /* WYLE Brand Colors */
+  --color-white: #FEFFEE;
+  --color-black: #000000;
+  --color-jet-black: #002F3A;
+  --color-verdigris: #1B998B;
+  --color-chartreuse: #D5FF3F;
+  --color-peach: #FFB5A7;
 }
 
 .dark {

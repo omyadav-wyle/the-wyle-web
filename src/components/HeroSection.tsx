@@ -66,23 +66,53 @@ export function HeroSection() {
       <Navigation />
 
       {/* Hero Video - Behind Text */}
-      <video 
-        ref={videoRef}
-        src={heroVideo}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        disablePictureInPicture
-        disableRemotePlayback
-        className="absolute inset-0 z-0 w-full h-full object-cover pointer-events-none"
-        style={{ 
-          mixBlendMode: 'screen', 
-          opacity: 0.8,
-          WebkitPlaysinline: 'true',
-        }}
-      />
+      <div className="absolute inset-0 z-0 w-full h-full pointer-events-none" style={{ overflow: 'hidden' }}>
+        <video 
+          ref={videoRef}
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ 
+            mixBlendMode: 'screen', 
+            opacity: 0.85,
+            WebkitPlaysinline: 'true',
+            filter: 'hue-rotate(160deg) saturate(1.8) brightness(0.85) contrast(1.3)',
+          }}
+        />
+        {/* Dark Teal overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.5) 0%, rgba(0, 47, 58, 0.3) 50%, rgba(0, 47, 58, 0.5) 100%)',
+            mixBlendMode: 'multiply',
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Bright Turquoise highlight overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.4) 0%, transparent 70%)',
+            mixBlendMode: 'screen',
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Additional teal gradient for depth */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.2) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.3) 100%)',
+            mixBlendMode: 'color',
+            pointerEvents: 'none',
+          }}
+        />
+      </div>
 
       {/* Hero Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full -mt-20">
@@ -126,7 +156,7 @@ export function HeroSection() {
 
         {/* Main Headline - Contained Marble Effect */}
         <div className="relative mb-6" style={{ isolation: 'isolate' }}>
-          {/* Base marble text layer with image */}
+          {/* Base marble text layer with image - Teal filtered */}
           <motion.h1
             className="text-8xl text-center relative z-10"
             style={{
@@ -140,6 +170,7 @@ export function HeroSection() {
               fontWeight: 500,
               letterSpacing: '2px',
               willChange: 'opacity',
+              filter: 'hue-rotate(160deg) saturate(0.8) brightness(1.1)',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -147,25 +178,6 @@ export function HeroSection() {
           >
             Life in a Flow
           </motion.h1>
-
-          {/* Frosted glass overlay on the letters */}
-          <h1
-            className="absolute inset-0 text-8xl text-center pointer-events-none"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.25) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 500,
-              letterSpacing: '2px',
-              mixBlendMode: 'screen',
-              zIndex: 11,
-              willChange: 'opacity',
-            }}
-          >
-            Life in a Flow
-          </h1>
 
           {/* Slow shimmer overlay - stays inside text */}
           <motion.h1
@@ -249,7 +261,7 @@ export function HeroSection() {
                 fontFamily: 'Fredoka, system-ui, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
-                filter: 'brightness(1.15)',
+                filter: 'brightness(1.15) hue-rotate(160deg) saturate(0.8)',
               }}
             >
               Life in a Flow
@@ -301,7 +313,7 @@ export function HeroSection() {
                 fontFamily: 'Fredoka, system-ui, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
-                filter: 'brightness(1.2) saturate(1.01)',
+                filter: 'brightness(1.2) saturate(1.01) hue-rotate(160deg) saturate(0.8)',
               }}
             >
               Life in a Flow
@@ -327,22 +339,22 @@ export function HeroSection() {
         </motion.p>
       </div>
 
-      {/* Global bloom effect */}
+      {/* Global bloom effect - Teal */}
       <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-40"
            style={{
-             background: 'radial-gradient(ellipse at 50% 45%, rgba(3,182,42,0.15) 0%, transparent 60%)',
+             background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.15) 0%, transparent 60%)',
            }}
       />
 
-      {/* Purple flow - left side */}
+      {/* Teal flow - left side */}
       <div className="absolute pointer-events-none" style={{ left: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
         <motion.img 
           src={imgPurpleFlow} 
-          alt="purple flow" 
+          alt="teal flow" 
           className="h-[100vh]"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(3px)',
+            filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
           }}
           animate={{
             opacity: [0.1, 0.4, 0.2, 0.1],
@@ -356,15 +368,15 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Purple flow - right side */}
+      {/* Teal flow - right side */}
       <div className="absolute pointer-events-none" style={{ right: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
         <motion.img 
           src={imgPurpleFlow} 
-          alt="purple flow" 
+          alt="teal flow" 
           className="h-[100vh]"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(3px)',
+            filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
           }}
           animate={{
             opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
@@ -379,16 +391,16 @@ export function HeroSection() {
         />
       </div>
 
-      {/* Purple arc - behind navbar */}
+      {/* Teal arc - behind navbar */}
       <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>
         {/* Heavily blurred base layer */}
         <img 
           src={arcImage} 
-          alt="purple arc blur base" 
+          alt="teal arc blur base" 
           className="h-[105vh]"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(50px) brightness(1.6)',
+            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
             opacity: 0.5,
           }}
         />
@@ -396,11 +408,11 @@ export function HeroSection() {
         {/* Medium blur layer */}
         <img 
           src={arcImage} 
-          alt="purple arc blur medium" 
+          alt="teal arc blur medium" 
           className="h-[105vh] absolute top-0 left-0"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(30px) brightness(1.4)',
+            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
             opacity: 0.5,
           }}
         />
@@ -408,11 +420,11 @@ export function HeroSection() {
         {/* Soft blur overlay */}
         <img 
           src={arcImage} 
-          alt="purple arc blur soft" 
+          alt="teal arc blur soft" 
           className="h-[105vh] absolute top-0 left-0"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(15px) brightness(1.2)',
+            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
             opacity: 0.5,
           }}
         />

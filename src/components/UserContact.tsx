@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
 import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import { Footer } from './Footer';
@@ -6,14 +8,12 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Navigation } from './Navigation';
 
-export function Contact() {
+export function UserContact() {
   const [formData, setFormData] = useState({
-    businessName: '',
-    contactName: '',
-    contactTitle: '',
-    email: '',
+    name: '',
     phone: '',
-    city: '',
+    email: '',
+    message: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -37,12 +37,9 @@ export function Contact() {
 
     // Validation
     if (
-      !formData.businessName.trim() ||
-      !formData.contactName.trim() ||
-      !formData.contactTitle.trim() ||
+      !formData.name.trim() ||
       !formData.email.trim() ||
-      !formData.phone.trim() ||
-      !formData.city.trim()
+      !formData.phone.trim()
     ) {
       setStatusMessage('Please fill in all required fields');
       setStatusType('error');
@@ -65,7 +62,7 @@ export function Contact() {
 
       // Send data as URL-encoded form data to avoid CORS issues
       const formDataToSend = new URLSearchParams();
-      formDataToSend.append('data', JSON.stringify(formData));
+      formDataToSend.append('data', JSON.stringify({ ...formData, userType: 'user' }));
 
       // Use no-cors mode to bypass CORS restrictions
       await fetch(SCRIPT_URL, {
@@ -79,12 +76,10 @@ export function Contact() {
       setStatusType('success');
       // Reset form
       setFormData({
-        businessName: '',
-        contactName: '',
-        contactTitle: '',
-        email: '',
+        name: '',
         phone: '',
-        city: '',
+        email: '',
+        message: '',
       });
     } catch (error: any) {
       console.error('Error submitting form:', error);
@@ -174,7 +169,7 @@ export function Contact() {
               marginBottom: '24px',
             }}
           >
-            Let's start with intent.
+            Get early access and share feedback.
           </h1>
 
           <p
@@ -188,8 +183,7 @@ export function Contact() {
               maxWidth: '600px',
             }}
           >
-            We're selective about who we work with, and thoughtful about how we do it.<br />
-            If you believe good systems should feel effortless, this is a good place to begin.
+            Help us build something that truly matters. Join us in creating a more connected, effortless digital experience.
           </p>
         </div>
       </section>
@@ -228,10 +222,10 @@ export function Contact() {
           <form className="space-y-12" onSubmit={handleSubmit}>
             {/* Two Column Grid */}
             <div className="grid grid-cols-2 gap-x-16 gap-y-12">
-              {/* Business Name */}
+              {/* Name */}
               <div>
                 <label 
-                  htmlFor="businessName"
+                  htmlFor="name"
                   style={{
                     display: 'block',
                     fontSize: '14px',
@@ -242,95 +236,13 @@ export function Contact() {
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Business Name <span style={{ color: '#FF0000' }}>*</span>
+                  Name <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="businessName"
-                  name="businessName"
-                  value={formData.businessName}
-                  onChange={handleChange}
-                  className="w-full pb-2 transition-all"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
-                  }}
-                />
-              </div>
-
-              {/* Contact Person Name */}
-              <div>
-                <label 
-                  htmlFor="contactName"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontWeight: 400,
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Contact Person Name <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="contactName"
-                  name="contactName"
-                  value={formData.contactName}
-                  onChange={handleChange}
-                  className="w-full pb-2 transition-all"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
-                  }}
-                />
-              </div>
-
-              {/* Contact Person Title */}
-              <div>
-                <label 
-                  htmlFor="contactTitle"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontWeight: 400,
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Contact Person Title <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="contactTitle"
-                  name="contactTitle"
-                  value={formData.contactTitle}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   className="w-full pb-2 transition-all"
                   style={{
@@ -406,7 +318,7 @@ export function Contact() {
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Phone No <span style={{ color: '#FF0000' }}>*</span>
+                  Phone Number <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="tel"
@@ -433,46 +345,47 @@ export function Contact() {
                 />
               </div>
 
-              {/* City */}
-              <div>
-                <label 
-                  htmlFor="city"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontWeight: 400,
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  City <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="w-full pb-2 transition-all"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                  onFocus={(e) => {
-                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
-                  }}
-                  onBlur={(e) => {
-                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
-                  }}
-                />
-              </div>
+            </div>
+
+            {/* Message/Comments - Full Width */}
+            <div>
+              <label 
+                htmlFor="message"
+                style={{
+                  display: 'block',
+                  fontSize: '14px',
+                  color: '#FFFFFF',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontWeight: 400,
+                  marginBottom: '12px',
+                  letterSpacing: '0.3px',
+                }}
+              >
+                Comments/Message <span style={{ color: '#999999', fontSize: '12px' }}>(Optional)</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                className="w-full pb-2 transition-all resize-none"
+                style={{
+                  background: 'transparent',
+                  borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#FFFFFF',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontSize: '14px',
+                  outline: 'none',
+                }}
+                placeholder="Your answer"
+                onFocus={(e) => {
+                  e.currentTarget.style.borderBottomColor = '#FFB5A7';
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
+                }}
+              />
             </div>
 
             {/* Status Message */}
@@ -532,7 +445,7 @@ export function Contact() {
                   }
                 }}
               >
-                {loading ? 'Submitting...' : 'Begin'}
+                {loading ? 'Submitting...' : 'Submit'}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
             </div>
@@ -545,3 +458,4 @@ export function Contact() {
     </div>
   );
 }
+

@@ -20,8 +20,8 @@ export function FragmentedReality() {
       const ox = (col - 1.5) * spacing; // -120, -40, 40, 120
       const oy = (row - 1) * spacing; // -80, 0, 80
 
-      // Color pattern: Left column (Red), Second column (Blue), Third column (Yellow), Right column (Green)
-      const colors = ['#ef4444', '#3b82f6', '#f59e0b', '#22c55e'];
+      // Color pattern: Left column (Teal), Second column (Jet Black), Third column (Yellow), Right column (Peach)
+      const colors = ['#1B998B', '#002F3A', '#D5FF3F', '#FFB5A7'];
       const color = colors[col];
 
       return {
@@ -77,14 +77,20 @@ export function FragmentedReality() {
         >
           {/* Background Glow Effects */}
           <motion.div
-            className="absolute inset-0 bg-red-500/20"
-            style={{ zIndex: 1 }}
+            className="absolute inset-0"
+            style={{ 
+              zIndex: 1,
+              background: 'radial-gradient(circle at 50% 50%, rgba(27, 153, 139, 0.15) 0%, transparent 70%)',
+            }}
             animate={{ opacity: mode === 'chaos' ? 1 : 0 }}
             transition={{ duration: 1, ease: 'easeInOut' }}
           />
           <motion.div
-            className="absolute inset-0 bg-cyan-500/20"
-            style={{ zIndex: 1 }}
+            className="absolute inset-0"
+            style={{ 
+              zIndex: 1,
+              background: 'radial-gradient(circle at 50% 50%, rgba(0, 47, 58, 0.2) 0%, rgba(27, 153, 139, 0.1) 50%, transparent 70%)',
+            }}
             animate={{ opacity: mode === 'order' ? 1 : 0 }}
             transition={{ duration: 1, ease: 'easeInOut' }}
           />
@@ -187,14 +193,15 @@ export function FragmentedReality() {
                 {mode === 'chaos' && (
                   <motion.div 
                     layoutId="activePill"
-                    className="absolute inset-0 bg-red-500 rounded-full"
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: '#1B998B',
+                      boxShadow: '0 0 30px rgba(27, 153, 139, 0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
+                    }}
                     transition={{ 
                       type: "spring", 
                       bounce: 0.2, 
                       duration: 0.6 
-                    }}
-                    style={{
-                      boxShadow: '0 0 30px rgba(239, 68, 68, 0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
                     }}
                   />
                 )}
@@ -226,14 +233,15 @@ export function FragmentedReality() {
                 {mode === 'order' && (
                   <motion.div 
                     layoutId="activePill"
-                    className="absolute inset-0 bg-cyan-500 rounded-full"
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: '#002F3A',
+                      boxShadow: '0 0 30px rgba(0, 47, 58, 0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
+                    }}
                     transition={{ 
                       type: "spring", 
                       bounce: 0.2, 
                       duration: 0.6 
-                    }}
-                    style={{
-                      boxShadow: '0 0 30px rgba(0, 212, 255, 0.6), inset 0 1px 0 rgba(255,255,255,0.2)',
                     }}
                   />
                 )}

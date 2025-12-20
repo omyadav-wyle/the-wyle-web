@@ -42,39 +42,40 @@ export function Navigation() {
           About
         </Link>
 
-        {/* Contact - check if on contact page or home page */}
-        {(currentPath === '/contact' || currentPath === '/Contact') ? (
-          <Link 
-            to="/contact" 
-            className="text-white text-sm transition-opacity hover:opacity-80"
-            style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
-          >
-            Contact
-          </Link>
-        ) : (
-          <button
-            onClick={() => navigate('/', { state: { scrollToContact: true } })}
-            className="text-gray-400 text-sm hover:opacity-80 bg-transparent border-none"
-            style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
-          >
-            Contact
-          </button>
-        )}
+        {/* Contact - navigate to UserContact form */}
+        <Link 
+          to="/user-contact" 
+          className={`text-sm transition-opacity hover:opacity-80 ${currentPath === '/user-contact' ? 'text-white' : 'text-gray-400'}`}
+          style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
+        >
+          Contact
+        </Link>
 
       </div>
 
-      Partner Button goes to another page
       <Link
-        to="/Contact"
-        className="px-6 py-3 rounded-full text-sm transition-opacity hover:opacity-80"
+        to="/contact"
+        className="px-6 py-3 rounded-full text-sm transition-all"
         style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-          backdropFilter: 'blur(30px)',
-          border: '1px solid rgba(255,255,255,0.15)',
-          color: '#FFFFFF',
+          background: '#D5FF3F',
+          border: '1px solid #D5FF3F',
+          color: '#000000',
           fontFamily: 'Fredoka, system-ui, sans-serif',
-          fontWeight: 400,
+          fontWeight: 500,
           letterSpacing: '1.5px',
+          boxShadow: '0 0 20px rgba(213, 255, 63, 0.3)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = '#E5FF5F';
+          e.currentTarget.style.borderColor = '#E5FF5F';
+          e.currentTarget.style.boxShadow = '0 0 30px rgba(213, 255, 63, 0.5)';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = '#D5FF3F';
+          e.currentTarget.style.borderColor = '#D5FF3F';
+          e.currentTarget.style.boxShadow = '0 0 20px rgba(213, 255, 63, 0.3)';
+          e.currentTarget.style.transform = 'translateY(0)';
         }}
       >
         Partner with us

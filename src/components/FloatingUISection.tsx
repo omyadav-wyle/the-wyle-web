@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
+import Lottie from 'lottie-react';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
+import backgroundAnimationData from '../assets/Background looping animation.json';
 
 export function FloatingUISection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -63,11 +65,34 @@ export function FloatingUISection() {
         paddingBottom: '1rem',
       }}
     >
-      {/* Soft purple gradient edges */}
+      {/* Lottie Background Animation with Teal Theme */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at 0% 50%, rgba(166, 140, 255, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 100% 50%, rgba(107, 216, 255, 0.06) 0%, transparent 50%)',
+          zIndex: 1,
+          opacity: 0.4,
+          filter: 'hue-rotate(160deg) saturate(1.2) brightness(0.8) contrast(1.1)',
+          mixBlendMode: 'screen',
+        }}
+      >
+        <Lottie
+          animationData={backgroundAnimationData}
+          loop={true}
+          autoplay={true}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </div>
+
+      {/* Soft teal gradient edges overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 2,
+          background: 'radial-gradient(ellipse at 0% 50%, rgba(27, 153, 139, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 100% 50%, rgba(0, 47, 58, 0.06) 0%, transparent 50%)',
         }}
       />
 
@@ -108,7 +133,7 @@ export function FloatingUISection() {
       </div>
 
       {/* Central Phone Container */}
-      <div className="relative z-10 flex items-center justify-center" style={{ minHeight: '700px', marginTop: '0' }}>
+      <div className="relative z-20 flex items-center justify-center" style={{ minHeight: '700px', marginTop: '0' }}>
 
         {/* CENTER - Phone */}
         <div
@@ -124,7 +149,7 @@ export function FloatingUISection() {
             style={{
               background: 'linear-gradient(135deg, #1A1A1A 0%, #0F0F0F 100%)',
               border: '12px solid #000000',
-              boxShadow: '0 32px 64px rgba(0,0,0,0.6), 0 0 40px rgba(166,140,255,0.15)',
+              boxShadow: '0 32px 64px rgba(0,0,0,0.6), 0 0 40px rgba(27, 153, 139, 0.15)',
               overflow: 'visible',
             }}
           >
@@ -292,11 +317,11 @@ export function FloatingUISection() {
                   padding: '14px 16px',
                 }}
               >
-                {/* Purple decorative dots on left */}
+                {/* Teal decorative dots on left */}
                 <div className="absolute left-4 top-5 flex flex-col gap-1">
-                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.6 }} />
-                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.4 }} />
-                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.2 }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#1B998B', opacity: 0.6 }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#1B998B', opacity: 0.4 }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#1B998B', opacity: 0.2 }} />
                 </div>
 
                 <h3 
@@ -342,11 +367,11 @@ export function FloatingUISection() {
                   padding: '12px 16px',
                 }}
               >
-                {/* Purple decorative dots on left */}
+                {/* Teal decorative dots on left */}
                 <div className="absolute left-4 top-4 flex flex-col gap-1">
-                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.6 }} />
-                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.4 }} />
-                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#A68CFF', opacity: 0.2 }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#1B998B', opacity: 0.6 }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#1B998B', opacity: 0.4 }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', background: '#1B998B', opacity: 0.2 }} />
                 </div>
 
                 <h3 
@@ -391,25 +416,25 @@ export function FloatingUISection() {
 
       </div>
 
-      {/* Motion blur ambiance */}
+      {/* Motion blur ambiance - Enhanced Teal */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(166,140,255,0.03) 0%, transparent 60%)',
+          background: 'radial-gradient(circle at 50% 50%, rgba(27, 153, 139, 0.05) 0%, rgba(0, 47, 58, 0.03) 40%, transparent 60%)',
           filter: 'blur(60px)',
         }}
       />
 
-      {/* Purple arc - left side, smaller */}
-      <div className="absolute left-0 top-1/2 pointer-events-none" style={{ zIndex: 8, transform: 'translateY(-50%) scaleX(-1)' }}>
+      {/* Teal arc - left side, smaller */}
+      <div className="absolute left-0 top-1/2 pointer-events-none" style={{ zIndex: 4, transform: 'translateY(-50%) scaleX(-1)' }}>
         {/* Heavily blurred base layer */}
         <img 
           src={arcImage} 
-          alt="purple arc blur base" 
+          alt="teal arc blur base" 
           className="h-[45vh]"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(50px) brightness(1.6)',
+            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
             opacity: 0.5,
           }}
         />
@@ -417,11 +442,11 @@ export function FloatingUISection() {
         {/* Medium blur layer */}
         <img 
           src={arcImage} 
-          alt="purple arc blur medium" 
+          alt="teal arc blur medium" 
           className="h-[45vh] absolute top-0 right-0"
           style={{
             mixBlendMode: 'screen',
-            filter: 'blur(30px) brightness(1.4)',
+            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
             opacity: 0.6,
           }}
         />
@@ -429,12 +454,12 @@ export function FloatingUISection() {
         {/* Soft blur overlay */}
         <img 
           src={arcImage} 
-          alt="purple arc blur soft" 
+          alt="teal arc blur soft" 
           className="h-[45vh] absolute top-0 right-0"
           style={{
             mixBlendMode: 'screen',
             opacity: 0.5,
-            filter: 'blur(15px) brightness(1.2)',
+            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
           }}
         />
       </div>
