@@ -9,17 +9,21 @@ export function Footer() {
       <div className="max-w-7xl mx-auto">
         {/* Top Section */}
         <div className="flex items-start justify-between mb-12">
+          
           {/* Left - Logo, Email, and Navigation Links */}
-          <div className="flex-shrink-0 flex flex-col">
+          {/* FIXED: Added 'items-start' to force left alignment of children */}
+          <div className="flex-shrink-0 flex flex-col items-start">
             <img 
               src={logoImage} 
               alt="wyle" 
-              className="mb-4" 
+              className="h-14"
               style={{ 
                 width: 'auto',
-                height: '56px',
                 objectFit: 'contain',
-                display: 'block'
+                display: 'block',
+                marginBottom: '8px',
+                // Removed explicit margins as items-start handles this
+                marginLeft: '-15px',
               }} 
             />
             <a
@@ -28,13 +32,15 @@ export function Footer() {
               style={{
                 fontSize: '13px',
                 fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
+                display: 'block',
               }}
             >
               info@wyle.ai
             </a>
+            
             {/* Navigation Links */}
             <div className="flex gap-6 items-center">
               <Link
@@ -43,7 +49,7 @@ export function Footer() {
                 style={{
                   fontSize: '13px',
                   fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                  fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
                 }}
@@ -57,7 +63,7 @@ export function Footer() {
                 style={{
                   fontSize: '13px',
                   fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                  fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
                 }}
@@ -71,7 +77,7 @@ export function Footer() {
                 style={{
                   fontSize: '13px',
                   fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                  fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
                 }}
@@ -88,7 +94,7 @@ export function Footer() {
                 href="https://twitter.com/wyle"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all"
+                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
                 style={{
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
@@ -100,7 +106,7 @@ export function Footer() {
                 href="https://facebook.com/wyle"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all"
+                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
                 style={{
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
@@ -112,7 +118,7 @@ export function Footer() {
                 href="https://instagram.com/wyle"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all"
+                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
                 style={{
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
@@ -124,7 +130,7 @@ export function Footer() {
                 href="https://linkedin.com/company/wyle"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all"
+                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
                 style={{
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
@@ -160,7 +166,7 @@ export function Footer() {
               style={{
                 fontSize: '12px',
                 fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}
@@ -173,7 +179,7 @@ export function Footer() {
               style={{
                 fontSize: '12px',
                 fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}
@@ -186,7 +192,7 @@ export function Footer() {
               style={{
                 fontSize: '12px',
                 fontFamily: 'Fredoka, system-ui, sans-serif',
-              fontWeight: 400,
+                fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}
