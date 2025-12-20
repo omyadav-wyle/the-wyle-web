@@ -1,5 +1,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
+import Lottie from 'lottie-react';
+import waveLoopAnimation from '../assets/Wave Loop.json';
 
 export function FragmentedReality() {
   const [mode, setMode] = useState<'chaos' | 'order'>('chaos');
@@ -34,10 +36,38 @@ export function FragmentedReality() {
   }, []);
 
   return (
-    <section className="relative px-16" style={{ background: '#000000', paddingTop: '4rem', paddingBottom: '0' }}>
+    <section className="relative px-16" style={{ background: '#000000', paddingTop: '4rem', paddingBottom: '0', overflow: 'hidden' }}>
+      {/* Wave Loop Background Animation with Teal Theme - Full Width */}
+      <div 
+        className="absolute pointer-events-none"
+        style={{
+          zIndex: 0,
+          opacity: 0.3,
+          filter: 'hue-rotate(160deg) saturate(1.2) brightness(0.7) contrast(1.1)',
+          mixBlendMode: 'screen',
+          left: '50%',
+          top: 0,
+          bottom: 0,
+          width: '100vw',
+          height: '100%',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        <Lottie
+          animationData={waveLoopAnimation}
+          loop={true}
+          autoplay={true}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </div>
+
       {/* Section Header */}
       <h2 
-        className="text-center mb-6"
+        className="relative z-10 text-center mb-6"
         style={{
           fontSize: '48px',
           fontFamily: 'Fredoka, system-ui, sans-serif',
@@ -51,7 +81,7 @@ export function FragmentedReality() {
         The Fragmented Reality
       </h2>
       <p 
-        className="text-center max-w-2xl mx-auto"
+        className="relative z-10 text-center max-w-2xl mx-auto"
         style={{
           fontSize: '16px',
           color: '#C5C6C7',
@@ -64,14 +94,13 @@ export function FragmentedReality() {
         See how WYLE organizes your digital entropy.
       </p>
       
-      <div className="max-w-4xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto">
 
         {/* Central Showcase Panel */}
         <div 
           className="relative h-[500px] w-full rounded-3xl overflow-hidden flex items-center justify-center transition-colors duration-700"
           style={{
-            background: 'rgba(255, 255, 255, 0.02)',
-            backdropFilter: 'blur(20px)',
+            background: 'transparent',
             boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
           }}
         >
