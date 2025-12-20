@@ -1,9 +1,11 @@
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
 
 export function Navigation() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
 
   return (
@@ -25,25 +27,39 @@ export function Navigation() {
           boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
         }}
       >
-        <Link to="/" className="text-white text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Home</Link>
-        <Link to="/services" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Services</Link>
-        <Link to="/about" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>About</Link>
-
-        {/* Contact now scrolls to HomePage contact section */}
-        {/* <button
-          onClick={scrollToContact}
-          className="text-gray-400 text-sm transition-opacity hover:opacity-80 bg-transparent border-none"
-          style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}
+        <Link 
+          to="/" 
+          className={`text-sm transition-opacity hover:opacity-80 ${currentPath === '/' ? 'text-white' : 'text-gray-400'}`}
+          style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
         >
-          Contact
-        </button> */}
+          Home
+        </Link>
+        <Link 
+          to="/about" 
+          className={`text-sm transition-opacity hover:opacity-80 ${currentPath === '/about' ? 'text-white' : 'text-gray-400'}`}
+          style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
+        >
+          About
+        </Link>
 
-<button
-  onClick={() => navigate('/', { state: { scrollToContact: true } })}
-  className="text-gray-400 text-sm hover:opacity-80 bg-transparent border-none"
->
-  Contact
-</button>
+        {/* Contact - check if on contact page or home page */}
+        {(currentPath === '/contact' || currentPath === '/Contact') ? (
+          <Link 
+            to="/contact" 
+            className="text-white text-sm transition-opacity hover:opacity-80"
+            style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
+          >
+            Contact
+          </Link>
+        ) : (
+          <button
+            onClick={() => navigate('/', { state: { scrollToContact: true } })}
+            className="text-gray-400 text-sm hover:opacity-80 bg-transparent border-none"
+            style={{ fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, letterSpacing: '2px' }}
+          >
+            Contact
+          </button>
+        )}
 
       </div>
 
@@ -56,7 +72,8 @@ export function Navigation() {
           backdropFilter: 'blur(30px)',
           border: '1px solid rgba(255,255,255,0.15)',
           color: '#FFFFFF',
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 400,
           letterSpacing: '1.5px',
         }}
       >

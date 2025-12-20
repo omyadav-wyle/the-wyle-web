@@ -44,8 +44,8 @@ export function ProblemSection() {
           <motion.h2
             style={{
               fontSize: '48px',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 700,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               color: '#FFFFFF',
               marginBottom: '24px',
               lineHeight: '1.2',
@@ -92,7 +92,8 @@ export function ProblemSection() {
                   <motion.h3
                     style={{
                       fontSize: '20px',
-                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                       fontWeight: 600,
                       color: '#FFFFFF',
                       marginBottom: '8px',
@@ -107,7 +108,8 @@ export function ProblemSection() {
                   <motion.p
                     style={{
                       fontSize: '16px',
-                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                       color: '#C5C6C7',
                       lineHeight: '1.6',
                     }}
@@ -126,7 +128,8 @@ export function ProblemSection() {
           <motion.p
             style={{
               fontSize: '18px',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
               color: '#C5C6C7',
               lineHeight: '1.8',
             }}

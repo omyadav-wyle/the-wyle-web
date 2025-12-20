@@ -77,8 +77,8 @@ export function FloatingUISection() {
           className="mb-4"
           style={{
             fontSize: '48px',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            fontWeight: 700,
+            fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontWeight: 500,
             letterSpacing: '1px',
             color: '#FFFFFF',
             lineHeight: '1.2',
@@ -141,8 +141,8 @@ export function FloatingUISection() {
                 style={{
                   fontSize: '15px',
                   color: '#FFFFFF',
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  fontWeight: 600,
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontWeight: 500,
                 }}
               >
                 9:41
@@ -304,7 +304,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: '15px',
                     color: '#AAAAAA',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 500,
                     paddingLeft: '20px',
                   }}
@@ -354,7 +354,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: '14px',
                     color: '#AAAAAA',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 500,
                     paddingLeft: '20px',
                   }}

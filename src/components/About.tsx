@@ -166,8 +166,8 @@ export function About() {
             style={{
               fontSize: '64px',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               letterSpacing: '1px',
               lineHeight: '1.2',
             }}
@@ -182,7 +182,8 @@ export function About() {
             style={{
               fontSize: '18px',
               color: '#A0A0A0',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
               letterSpacing: '0.5px',
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -261,8 +262,8 @@ export function About() {
             style={{
               fontSize: '42px',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               letterSpacing: '0.5px',
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -313,8 +314,8 @@ export function About() {
                       style={{
                         fontSize: '24px',
                         color: '#FFFFFF',
-                        fontFamily: 'Inter, system-ui, sans-serif',
-                        fontWeight: 700,
+                        fontFamily: 'Fredoka, system-ui, sans-serif',
+                        fontWeight: 500,
                         lineHeight: '1.3',
                         letterSpacing: '0.3px',
                       }}
@@ -326,7 +327,8 @@ export function About() {
                       style={{
                         fontSize: '16px',
                         color: '#B0B0B0',
-                        fontFamily: 'Inter, system-ui, sans-serif',
+                        fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                         lineHeight: '1.7',
                         letterSpacing: '0.2px',
                       }}
@@ -375,8 +377,8 @@ export function About() {
             style={{
               fontSize: '48px',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               letterSpacing: '0.5px',
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -392,7 +394,7 @@ export function About() {
             style={{
               fontSize: '28px',
               color: '#C7A2FF',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
             }}
@@ -408,7 +410,8 @@ export function About() {
             style={{
               fontSize: '18px',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
               lineHeight: '1.9',
               textAlign: 'center',
               maxWidth: '900px',
@@ -439,7 +442,8 @@ export function About() {
               style={{
                 fontSize: '48px',
                 color: '#FFFFFF',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                 fontWeight: 600,
                 letterSpacing: '0.5px',
               }}
@@ -450,7 +454,8 @@ export function About() {
               style={{
                 fontSize: '16px',
                 color: '#A0A0A0',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                 letterSpacing: '0.5px',
               }}
             >
@@ -507,7 +512,8 @@ export function About() {
                   style={{
                     fontSize: '16px',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                     fontWeight: 600,
                     marginBottom: '4px',
                   }}
@@ -519,7 +525,8 @@ export function About() {
                   style={{
                     fontSize: '13px',
                     color: '#808080',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                   }}
                 >
                   {member.role}

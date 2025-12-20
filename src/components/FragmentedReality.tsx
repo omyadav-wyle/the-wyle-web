@@ -40,8 +40,8 @@ export function FragmentedReality() {
         className="text-center mb-6"
         style={{
           fontSize: '48px',
-          fontFamily: 'Inter, system-ui, sans-serif',
-          fontWeight: 700,
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
           marginTop: '0px',
@@ -55,7 +55,8 @@ export function FragmentedReality() {
         style={{
           fontSize: '16px',
           color: '#C5C6C7',
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 400,
           lineHeight: '1.6',
           marginBottom: '2rem',
         }}

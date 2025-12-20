@@ -72,9 +72,9 @@ export function ContactSection() {
           className="mb-6"
         style={{
           fontSize: '48px',
-          fontFamily: 'Inter, system-ui, sans-serif',
-            fontWeight: 700,
-            letterSpacing: '1px',
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 500,
+          letterSpacing: '1px',
           color: '#FFFFFF',
             marginBottom: '1.5rem',
             lineHeight: '1.2',
@@ -93,7 +93,8 @@ export function ContactSection() {
           style={{
             fontSize: '16px',
             color: '#C5C6C7',
-            fontFamily: 'Inter, system-ui, sans-serif',
+            fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontWeight: 400,
             lineHeight: '1.6',
             marginBottom: '3rem',
           }}
@@ -125,7 +126,8 @@ export function ContactSection() {
               background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid rgba(199, 162, 255, 0.2)',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontWeight: 400,
               fontSize: '16px',
             }}
             required
@@ -138,7 +140,8 @@ export function ContactSection() {
               background: 'rgba(199, 162, 255, 0.15)',
               border: '1px solid rgba(199, 162, 255, 0.3)',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontWeight: 400,
               fontSize: '16px',
               fontWeight: 600,
               cursor: loading ? 'not-allowed' : 'pointer',
@@ -172,7 +175,8 @@ export function ContactSection() {
             className="mb-8 max-w-xl mx-auto"
                 style={{
                   color: statusType === 'success' ? '#22c55e' : '#ef4444',
-                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontWeight: 400,
                   fontSize: '14px',
                 }}
               >

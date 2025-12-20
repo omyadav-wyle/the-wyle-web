@@ -44,8 +44,8 @@ export function OtherApps() {
           <motion.h2
             style={{
               fontSize: '48px',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 700,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               color: '#FEFFFE',
               marginBottom: '24px',
               lineHeight: '1.2',
@@ -92,7 +92,8 @@ export function OtherApps() {
                   <motion.h3
                     style={{
                       fontSize: '20px',
-                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                       fontWeight: 600,
                       color: '#FEFFFE',
                       marginBottom: '8px',
@@ -107,7 +108,8 @@ export function OtherApps() {
                   <motion.p
                     style={{
                       fontSize: '16px',
-                      fontFamily: 'Inter, system-ui, sans-serif',
+                      fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                       color: 'rgba(254, 255, 254, 0.7)',
                       lineHeight: '1.6',
                     }}
@@ -126,7 +128,8 @@ export function OtherApps() {
           <motion.p
             style={{
               fontSize: '18px',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
               color: 'rgba(254, 255, 254, 0.7)',
               lineHeight: '1.8',
             }}
@@ -213,8 +216,8 @@ export function OtherApps() {
                     <span
                       style={{
                         fontSize: '11px',
-                        fontFamily: 'Inter, system-ui, sans-serif',
-                        fontWeight: 700,
+                        fontFamily: 'Fredoka, system-ui, sans-serif',
+                        fontWeight: 500,
                         color: '#000000',
                         textTransform: 'uppercase',
                         letterSpacing: '0.5px',
@@ -230,8 +233,8 @@ export function OtherApps() {
                       <span
                         style={{
                           fontSize: '12px',
-                          fontFamily: 'Inter, system-ui, sans-serif',
-                          fontWeight: 600,
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
+                          fontWeight: 500,
                           color: '#FEFFFE',
                           letterSpacing: '0.2px',
                         }}
@@ -241,7 +244,8 @@ export function OtherApps() {
                       <span
                         style={{
                           fontSize: '10px',
-                          fontFamily: 'Inter, system-ui, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                           color: 'rgba(254, 255, 254, 0.4)',
                         }}
                       >
@@ -251,7 +255,8 @@ export function OtherApps() {
                     <p
                       style={{
                         fontSize: '11px',
-                        fontFamily: 'Inter, system-ui, sans-serif',
+                        fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                         color: 'rgba(254, 255, 254, 0.7)',
                         lineHeight: '1.4',
                         margin: 0,
@@ -322,7 +327,8 @@ export function OtherApps() {
                       <span
                         style={{
                           fontSize: '16px',
-                          fontFamily: 'Inter, system-ui, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                           fontWeight: 700,
                           color: '#FEFFFE',
                           letterSpacing: '-1px',
@@ -335,8 +341,8 @@ export function OtherApps() {
                       <div
                         style={{
                           fontSize: '14px',
-                          fontFamily: 'Inter, system-ui, sans-serif',
-                          fontWeight: 600,
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
+                          fontWeight: 500,
                           color: '#FEFFFE',
                           marginBottom: '2px',
                           letterSpacing: '-0.2px',
@@ -347,7 +353,8 @@ export function OtherApps() {
                       <div
                         style={{
                           fontSize: '10px',
-                          fontFamily: 'Inter, system-ui, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                           color: 'rgba(254, 255, 254, 0.5)',
                         }}
                       >
@@ -379,7 +386,8 @@ export function OtherApps() {
                 <p
                   style={{
                     fontSize: '12px',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                     color: 'rgba(254, 255, 254, 0.8)',
                     lineHeight: '1.5',
                     margin: 0,

@@ -12,6 +12,7 @@ import { Contact } from './components/Contact';
 import { useEffect } from 'react';
 import { ProblemSection } from './components/ProblemSection';
 import { OtherApps } from '../src/components/OtherApps';
+import { FragmentedReality } from './components/FragmentedReality';
   
   function HomePage() {
   const location = useLocation();
@@ -48,6 +49,7 @@ import { OtherApps } from '../src/components/OtherApps';
       {/* <GradientWave /> */}
        <OtherApps />
       {/* <ProblemSection/> */}
+      <FragmentedReality />
       <div id="contact">
         <ContactSection />
       </div>

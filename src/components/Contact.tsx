@@ -184,6 +184,7 @@ export function Contact() {
               fontSize: '16px',
               color: '#CCCCCC',
               fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
               letterSpacing: '0.3px',
               lineHeight: '1.6',
               maxWidth: '600px',
@@ -238,6 +239,7 @@ export function Contact() {
                     fontSize: '14px',
                     color: '#FFFFFF',
                     fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
@@ -272,6 +274,7 @@ export function Contact() {
                     fontSize: '14px',
                     color: '#FFFFFF',
                     fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
@@ -340,6 +343,7 @@ export function Contact() {
                     fontSize: '14px',
                     color: '#FFFFFF',
                     fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
@@ -408,6 +412,7 @@ export function Contact() {
                     fontSize: '14px',
                     color: '#FFFFFF',
                     fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
@@ -469,7 +474,8 @@ export function Contact() {
                   backdropFilter: 'blur(30px)',
                   border: '1px solid rgba(255,255,255,0.15)',
                   color: '#FFFFFF',
-                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontWeight: 400,
                   letterSpacing: '1.5px',
                 }}
               >

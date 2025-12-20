@@ -125,10 +125,10 @@ export function HeroSection() {
         </svg>
 
         {/* Main Headline - Contained Marble Effect */}
-        <div className="relative mb-6">
+        <div className="relative mb-6" style={{ isolation: 'isolate' }}>
           {/* Base marble text layer with image */}
           <motion.h1
-            className="text-8xl text-center relative"
+            className="text-8xl text-center relative z-10"
             style={{
               backgroundImage: `url(${marbleTexture})`,
               backgroundSize: 'cover',
@@ -136,9 +136,10 @@ export function HeroSection() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               letterSpacing: '2px',
+              willChange: 'opacity',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,16 +150,18 @@ export function HeroSection() {
 
           {/* Frosted glass overlay on the letters */}
           <h1
-            className="absolute inset-0 text-8xl text-center"
+            className="absolute inset-0 text-8xl text-center pointer-events-none"
             style={{
               background: 'linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0.25) 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               letterSpacing: '2px',
               mixBlendMode: 'screen',
+              zIndex: 11,
+              willChange: 'opacity',
             }}
           >
             Life in a Flow
@@ -166,16 +169,18 @@ export function HeroSection() {
 
           {/* Slow shimmer overlay - stays inside text */}
           <motion.h1
-            className="absolute inset-0 text-8xl text-center"
+            className="absolute inset-0 text-8xl text-center pointer-events-none"
             style={{
               background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 25%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 75%, transparent 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 500,
               letterSpacing: '2px',
               backgroundSize: '200% 100%',
+              zIndex: 12,
+              willChange: 'background-position, opacity',
             }}
             animate={{
               backgroundPosition: ['-200% 0%', '200% 0%', '200% 0%', '200% 0%', '200% 0%'],
@@ -201,9 +206,11 @@ export function HeroSection() {
 
           {/* Lightning flash - only inside letterforms */}
           <motion.div
-            className="absolute inset-0 overflow-hidden"
+            className="absolute inset-0 overflow-hidden pointer-events-none"
             style={{
               clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+              zIndex: 13,
+              willChange: 'clip-path, opacity',
             }}
             animate={{
               clipPath: [
@@ -239,8 +246,8 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 600,
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+                fontWeight: 500,
                 letterSpacing: '2px',
                 filter: 'brightness(1.15)',
               }}
@@ -251,9 +258,11 @@ export function HeroSection() {
 
           {/* Electric ripple inside text */}
           <motion.div
-            className="absolute inset-0 overflow-hidden"
+            className="absolute inset-0 overflow-hidden pointer-events-none"
             style={{
               clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)',
+              zIndex: 14,
+              willChange: 'clip-path, opacity',
             }}
             animate={{
               clipPath: [
@@ -289,8 +298,8 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 600,
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+                fontWeight: 500,
                 letterSpacing: '2px',
                 filter: 'brightness(1.2) saturate(1.01)',
               }}
@@ -304,11 +313,11 @@ export function HeroSection() {
         <motion.p
           className="text-white max-w-xl text-center mb-20 relative z-20"
           style={{
-            fontFamily: 'Inter, system-ui, sans-serif',
+            fontFamily: 'Fredoka, system-ui, sans-serif',
             letterSpacing: '2px',
             fontSize: '18px',
             lineHeight: '1.6',
-            fontWeight: '700',              // Bold
+            fontWeight: 400,
           }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

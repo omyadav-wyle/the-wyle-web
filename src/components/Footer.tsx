@@ -27,7 +27,8 @@ export function Footer() {
               className="transition-opacity hover:opacity-80 mb-4"
               style={{
                 fontSize: '13px',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}
@@ -41,7 +42,8 @@ export function Footer() {
                 className="transition-opacity hover:opacity-80"
                 style={{
                   fontSize: '13px',
-                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
                 }}
@@ -54,7 +56,8 @@ export function Footer() {
                 className="transition-opacity hover:opacity-80"
                 style={{
                   fontSize: '13px',
-                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
                 }}
@@ -67,7 +70,8 @@ export function Footer() {
                 className="transition-opacity hover:opacity-80"
                 style={{
                   fontSize: '13px',
-                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
                 }}
@@ -140,7 +144,8 @@ export function Footer() {
           <div
             style={{
               fontSize: '12px',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
               color: '#C5C6C7',
               opacity: 0.7,
             }}
@@ -154,7 +159,8 @@ export function Footer() {
               className="transition-opacity hover:opacity-80"
               style={{
                 fontSize: '12px',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}
@@ -166,7 +172,8 @@ export function Footer() {
               className="transition-opacity hover:opacity-80"
               style={{
                 fontSize: '12px',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}
@@ -178,7 +185,8 @@ export function Footer() {
               className="transition-opacity hover:opacity-80"
               style={{
                 fontSize: '12px',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontWeight: 400,
                 color: '#C5C6C7',
                 opacity: 0.7,
               }}

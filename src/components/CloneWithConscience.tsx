@@ -114,7 +114,8 @@ export function CloneWithConscience() {
         className="text-center mb-4"
         style={{
           fontSize: '40px',
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
           marginTop: '0px',
@@ -133,7 +134,8 @@ export function CloneWithConscience() {
         style={{
           fontSize: '15px',
           color: '#C5C6C7',
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 500,
           lineHeight: '1.45',
           marginBottom: '0.5rem',
         }}
@@ -151,7 +153,8 @@ export function CloneWithConscience() {
         style={{
           fontSize: '15px',
           color: '#C5C6C7',
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontWeight: 500,
           lineHeight: '1.45',
           marginBottom: '1rem',
         }}
@@ -223,11 +226,11 @@ export function CloneWithConscience() {
                       <IconComponent size={24} color={item.color} />
                     </div>
 
-                    <div style={{ fontSize: '36px', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
+                    <div style={{ fontSize: '36px', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
 
-                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
                   </motion.div>
                 </div>
               );
@@ -473,11 +476,11 @@ export function CloneWithConscience() {
                       <IconComponent size={24} color={item.color} />
                     </div>
 
-                    <div style={{ fontSize: '36px', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 700, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
+                    <div style={{ fontSize: '36px', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, color: '#FFFFFF', marginBottom: '8px', letterSpacing: '-0.5px' }}>{item.value}</div>
 
-                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontWeight: 600, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: '12px', color: '#8B92A8', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
 
                   </motion.div>
                 </div>
