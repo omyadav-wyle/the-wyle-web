@@ -61,8 +61,10 @@ export function FloatingUISection() {
       style={{ 
         background: 'linear-gradient(to bottom, #000000 0%, #0B0B11 50%, #000000 100%)',
         overflow: 'visible',
-        paddingTop: '1rem',
-        paddingBottom: '1rem',
+        paddingTop: 'clamp(16px, 1vw, 16px)',
+        paddingBottom: 'clamp(16px, 1vw, 16px)',
+        paddingLeft: 'clamp(16px, 4vw, 64px)',
+        paddingRight: 'clamp(16px, 4vw, 64px)',
       }}
     >
       {/* Lottie Background Animation with Teal Theme */}
@@ -97,16 +99,19 @@ export function FloatingUISection() {
       />
 
       {/* Heading and Subtext */}
-      <div className="relative z-10 text-center mb-16" style={{ paddingTop: '80px' }}>
+      <div className="relative z-10 text-center mb-16" style={{ paddingTop: 'clamp(40px, 5vw, 80px)', marginBottom: 'clamp(32px, 4vw, 64px)' }}>
         <motion.h2
           className="mb-4"
           style={{
-            fontSize: '48px',
-            fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontSize: 'clamp(28px, 5vw, 48px)',
+            fontFamily: 'Poppins, sans-serif',
             fontWeight: 500,
             letterSpacing: '1px',
             color: '#FFFFFF',
             lineHeight: '1.2',
+            marginBottom: 'clamp(12px, 1.5vw, 16px)',
+            paddingLeft: 'clamp(16px, 4vw, 0px)',
+            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -117,11 +122,13 @@ export function FloatingUISection() {
         </motion.h2>
         <motion.p
           style={{
-            fontSize: '18px',
-            fontFamily: 'Inter, system-ui, sans-serif',
+            fontSize: 'clamp(14px, 1.8vw, 18px)',
+            fontFamily: 'Urbanist, sans-serif',
             fontWeight: 400,
             color: '#999999',
             lineHeight: '1.6',
+            paddingLeft: 'clamp(16px, 4vw, 0px)',
+            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -133,14 +140,14 @@ export function FloatingUISection() {
       </div>
 
       {/* Central Phone Container */}
-      <div className="relative z-20 flex items-center justify-center" style={{ minHeight: '700px', marginTop: '0' }}>
+      <div className="relative z-20 flex items-center justify-center" style={{ minHeight: 'clamp(500px, 70vh, 700px)', marginTop: '0' }}>
 
         {/* CENTER - Phone */}
         <div
           className="relative z-20"
           style={{
-            width: '340px',
-            height: '700px',
+            width: 'clamp(240px, 34vw, 340px)',
+            height: 'clamp(500px, 70vh, 700px)',
           }}
         >
           {/* Phone Frame */}
@@ -166,7 +173,7 @@ export function FloatingUISection() {
                 style={{
                   fontSize: '15px',
                   color: '#FFFFFF',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 500,
                 }}
               >
@@ -214,9 +221,9 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: '16px',
+                    fontSize: 'clamp(12px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                   }}
                 >
                   You haven't eaten.
@@ -224,9 +231,9 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: '12px',
+                    fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#999999',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                     lineHeight: '1.4',
                   }}
                 >
@@ -248,9 +255,9 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: '16px',
+                    fontSize: 'clamp(12px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                   }}
                 >
                   12:00 AM
@@ -258,9 +265,9 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: '12px',
+                    fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#999999',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                   }}
                 >
                   Today matters to someone.
@@ -281,9 +288,9 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: '16px',
+                    fontSize: 'clamp(12px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                   }}
                 >
                   Tomorrow starts early.
@@ -291,9 +298,9 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: '12px',
+                    fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#999999',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                     lineHeight: '1.3',
                   }}
                 >
@@ -327,11 +334,11 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: '15px',
+                    fontSize: 'clamp(12px, 1.5vw, 15px)',
                     color: '#AAAAAA',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
                     fontWeight: 500,
-                    paddingLeft: '20px',
+                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
                   }}
                 >
                   Late night.
@@ -339,11 +346,11 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: '12px',
+                    fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                     lineHeight: '1.5',
-                    paddingLeft: '20px',
+                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
                     margin: 0,
                   }}
                 >
@@ -377,11 +384,11 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1"
                   style={{
-                    fontSize: '14px',
+                    fontSize: 'clamp(11px, 1.4vw, 14px)',
                     color: '#AAAAAA',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
                     fontWeight: 500,
-                    paddingLeft: '20px',
+                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
                   }}
                 >
                   Running low?
@@ -389,11 +396,11 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: '11px',
+                    fontSize: 'clamp(9px, 1.1vw, 11px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
                     lineHeight: '1.4',
-                    paddingLeft: '20px',
+                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
                     margin: 0,
                   }}
                 >
@@ -406,8 +413,8 @@ export function FloatingUISection() {
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 rounded-b-3xl"
               style={{
-                width: '120px',
-                height: '28px',
+                width: 'clamp(85px, 12vw, 120px)',
+                height: 'clamp(20px, 2.8vw, 28px)',
                 background: '#000000',
               }}
             />

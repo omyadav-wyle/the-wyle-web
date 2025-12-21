@@ -76,6 +76,6 @@
     server: {
       port: 3000,
       open: true,
-      allowedHosts: ['3f4360d2fbe4.ngrok-free.app'],
+      allowedHosts: ['5de19c684af1.ngrok-free.app'],
     },
   });

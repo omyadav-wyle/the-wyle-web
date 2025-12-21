@@ -155,7 +155,7 @@ export function HeroSection() {
         </svg>
 
         {/* Main Headline - Contained Marble Effect */}
-        <div className="relative mb-6" style={{ isolation: 'isolate' }}>
+        <div className="relative mb-6" style={{ isolation: 'isolate', marginBottom: 'clamp(12px, 1.5vw, 24px)' }}>
           {/* Base marble text layer with image - Teal filtered */}
           <motion.h1
             className="text-8xl text-center relative z-10"
@@ -166,11 +166,12 @@ export function HeroSection() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Playfair Display, serif',
               fontWeight: 500,
               letterSpacing: '2px',
               willChange: 'opacity',
               filter: 'hue-rotate(160deg) saturate(0.8) brightness(1.1)',
+              fontSize: 'clamp(36px, 8vw, 96px)',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -187,12 +188,13 @@ export function HeroSection() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Playfair Display, serif',
               fontWeight: 500,
               letterSpacing: '2px',
               backgroundSize: '200% 100%',
               zIndex: 12,
               willChange: 'background-position, opacity',
+              fontSize: 'clamp(36px, 8vw, 96px)',
             }}
             animate={{
               backgroundPosition: ['-200% 0%', '200% 0%', '200% 0%', '200% 0%', '200% 0%'],
@@ -258,10 +260,11 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
+                fontFamily: 'Playfair Display, serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
                 filter: 'brightness(1.15) hue-rotate(160deg) saturate(0.8)',
+                fontSize: 'clamp(36px, 8vw, 96px)',
               }}
             >
               Life in a Flow
@@ -310,10 +313,11 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
+                fontFamily: 'Playfair Display, serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
                 filter: 'brightness(1.2) saturate(1.01) hue-rotate(160deg) saturate(0.8)',
+                fontSize: 'clamp(36px, 8vw, 96px)',
               }}
             >
               Life in a Flow
@@ -325,11 +329,15 @@ export function HeroSection() {
         <motion.p
           className="text-white max-w-xl text-center mb-20 relative z-20"
           style={{
-            fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontFamily: 'Montserrat, sans-serif',
             letterSpacing: '2px',
-            fontSize: '18px',
+            fontSize: 'clamp(14px, 1.8vw, 18px)',
             lineHeight: '1.6',
             fontWeight: 400,
+            marginBottom: 'clamp(40px, 5vw, 80px)',
+            maxWidth: 'clamp(280px, 90vw, 640px)',
+            paddingLeft: 'clamp(16px, 4vw, 0px)',
+            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

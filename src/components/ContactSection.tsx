@@ -11,20 +11,22 @@ export function ContactSection() {
   return (
     <section 
       className="relative px-16" 
-      style={{ background: '#000000', paddingTop: '4rem', paddingBottom: '4rem' }}
+      style={{ background: '#000000', paddingTop: 'clamp(32px, 4vw, 64px)', paddingBottom: 'clamp(32px, 4vw, 64px)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}
     >
       <div className="max-w-2xl mx-auto text-center">
       {/* Heading */}
       <motion.h2
           className="mb-6"
         style={{
-          fontSize: '48px',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontSize: 'clamp(28px, 5vw, 48px)',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
-            marginBottom: '1.5rem',
+            marginBottom: 'clamp(16px, 1.5vw, 24px)',
             lineHeight: '1.2',
+            paddingLeft: 'clamp(16px, 4vw, 0px)',
+            paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -38,12 +40,14 @@ export function ContactSection() {
         <motion.p
           className="mb-12 max-w-xl mx-auto"
           style={{
-            fontSize: '16px',
+            fontSize: 'clamp(14px, 1.6vw, 16px)',
             color: '#C5C6C7',
-            fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontFamily: 'Urbanist, sans-serif',
             fontWeight: 400,
             lineHeight: '1.6',
-            marginBottom: '3rem',
+            marginBottom: 'clamp(32px, 3vw, 48px)',
+            paddingLeft: 'clamp(16px, 4vw, 0px)',
+            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -68,11 +72,15 @@ export function ContactSection() {
               background: '#D5FF3F',
               border: '1px solid #D5FF3F',
               color: '#000000',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Inter, sans-serif',
               fontWeight: 500,
-              fontSize: '16px',
+              fontSize: 'clamp(14px, 1.6vw, 16px)',
               cursor: 'pointer',
               boxShadow: '0 0 20px rgba(213, 255, 63, 0.3)',
+              paddingLeft: 'clamp(24px, 2vw, 32px)',
+              paddingRight: 'clamp(24px, 2vw, 32px)',
+              paddingTop: 'clamp(12px, 1vw, 16px)',
+              paddingBottom: 'clamp(12px, 1vw, 16px)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#E5FF5F';

@@ -61,7 +61,7 @@ export function Contact() {
 
     try {
       // Use the same AppScript URL
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwK55GHroxhyvqusEAofVae9sle4UDebd37aajM15De-fnGvWN052kxslOwcomvLuSS/exec';
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw14vj9WDKp-5zKwb9pKlKAj44OAOtlI6NO9cNka0R4Qn9glUZnFN3KNSTA_tYY4T8U/exec';
 
       // Send data as URL-encoded form data to avoid CORS issues
       const formDataToSend = new URLSearchParams();
@@ -199,7 +199,7 @@ export function Contact() {
             style={{
               fontSize: '64px',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '-1px',
               lineHeight: '1.2',
@@ -213,7 +213,7 @@ export function Contact() {
             style={{
               fontSize: '16px',
               color: '#CCCCCC',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Urbanist, sans-serif',
               fontWeight: 400,
               letterSpacing: '0.3px',
               lineHeight: '1.6',
@@ -285,7 +285,7 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
@@ -304,7 +304,7 @@ export function Contact() {
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
@@ -326,7 +326,7 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
                     fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
@@ -345,7 +345,7 @@ export function Contact() {
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
@@ -367,7 +367,7 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
@@ -386,7 +386,7 @@ export function Contact() {
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
@@ -408,7 +408,7 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
@@ -427,7 +427,7 @@ export function Contact() {
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
@@ -449,7 +449,7 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
@@ -468,7 +468,7 @@ export function Contact() {
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
@@ -490,7 +490,7 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
@@ -509,7 +509,7 @@ export function Contact() {
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
@@ -540,7 +540,7 @@ export function Contact() {
                       ? '1px solid rgba(34, 197, 94, 0.3)'
                       : '1px solid rgba(239, 68, 68, 0.3)',
                   color: statusType === 'success' ? '#22c55e' : '#ef4444',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontSize: '14px',
                 }}
               >
@@ -558,7 +558,7 @@ export function Contact() {
                   background: '#D5FF3F',
                   border: '1px solid #D5FF3F',
                   color: '#000000',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Inter, sans-serif',
                   fontWeight: 500,
                   fontSize: '16px',
                   cursor: loading ? 'not-allowed' : 'pointer',

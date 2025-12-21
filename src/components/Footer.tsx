@@ -1,54 +1,38 @@
 import { Link } from 'react-router-dom';
-import { Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
+import { Twitter, Instagram, Linkedin, MapPin } from 'lucide-react';
 import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
 
 export function Footer() {
   return (
-    <footer className="relative py-16 px-16" style={{ background: '#000000', borderTop: '1px solid rgba(110, 216, 255, 0.1)' }}>
+    <footer className="relative py-16 px-16 w-full" style={{ background: '#000000', borderTop: '1px solid rgba(110, 216, 255, 0.1)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', paddingTop: 'clamp(32px, 4vw, 64px)', paddingBottom: 'clamp(32px, 4vw, 64px)', width: '100%', maxWidth: '100%' }}>
       {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full" style={{ maxWidth: '100%' }}>
         {/* Top Section */}
-        <div className="flex items-start justify-between mb-12">
+        <div className="flex items-center justify-between mb-12 flex-wrap gap-4" style={{ paddingLeft: 'clamp(16px, 4vw, 0px)', paddingRight: 'clamp(16px, 4vw, 0px)' }}>
           
-          {/* Left - Logo, Email, and Navigation Links */}
-          {/* FIXED: Added 'items-start' to force left alignment of children */}
-          <div className="flex-shrink-0 flex flex-col items-start">
+          {/* Left - Logo and Navigation Links on same line */}
+          <div className="flex-shrink-0 flex items-center gap-6 flex-wrap">
             <img 
               src={logoImage} 
               alt="wyle" 
               className="h-14"
               style={{ 
                 width: 'auto',
+                height: 'clamp(40px, 3.5vw, 56px)',
                 objectFit: 'contain',
                 display: 'block',
-                marginBottom: '8px',
-                // Removed explicit margins as items-start handles this
                 marginLeft: '-15px',
               }} 
             />
-            <a
-              href="mailto:info@wyle.ai"
-              className="transition-opacity hover:opacity-80 mb-4"
-              style={{
-                fontSize: '13px',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
-                fontWeight: 400,
-                color: '#C5C6C7',
-                opacity: 0.7,
-                display: 'block',
-              }}
-            >
-              info@wyle.ai
-            </a>
             
             {/* Navigation Links */}
-            <div className="flex gap-6 items-center">
+            <div className="flex gap-6 items-center flex-wrap">
               <Link
                 to="/"
                 className="transition-opacity hover:opacity-80"
                 style={{
-                  fontSize: '13px',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontSize: 'clamp(11px, 1.3vw, 13px)',
+                  fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
@@ -61,8 +45,8 @@ export function Footer() {
                 to="/about"
                 className="transition-opacity hover:opacity-80"
                 style={{
-                  fontSize: '13px',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontSize: 'clamp(11px, 1.3vw, 13px)',
+                  fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
@@ -75,8 +59,8 @@ export function Footer() {
                 to="/contact"
                 className="transition-opacity hover:opacity-80"
                 style={{
-                  fontSize: '13px',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontSize: 'clamp(11px, 1.3vw, 13px)',
+                  fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
@@ -88,117 +72,93 @@ export function Footer() {
           </div>
 
           {/* Right - Social Icons */}
-          <div className="flex-shrink-0 flex items-start">
-            <div className="flex gap-3">
+          <div className="flex-shrink-0 flex items-center">
+            <div className="flex gap-3 items-center">
               <a
-                href="https://twitter.com/wyle"
+                href="https://x.com/wyleuae"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
+                className="flex items-center justify-center rounded-full transition-all hover:bg-white/10"
                 style={{
+                  width: 'clamp(36px, 2.25vw, 36px)',
+                  height: 'clamp(36px, 2.25vw, 36px)',
+                  minWidth: '36px',
+                  minHeight: '36px',
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
                 }}
               >
-                <Twitter size={16} color="#6ED8FF" />
+                <Twitter size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
               <a
-                href="https://facebook.com/wyle"
+                href="https://www.instagram.com/wyle.ai"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
+                className="flex items-center justify-center rounded-full transition-all hover:bg-white/10"
                 style={{
+                  width: 'clamp(36px, 2.25vw, 36px)',
+                  height: 'clamp(36px, 2.25vw, 36px)',
+                  minWidth: '36px',
+                  minHeight: '36px',
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
                 }}
               >
-                <Facebook size={16} color="#6ED8FF" />
+                <Instagram size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
               <a
-                href="https://instagram.com/wyle"
+                href="https://www.linkedin.com/company/wyle-global-corporation/posts/?feedView=all"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
+                className="flex items-center justify-center rounded-full transition-all hover:bg-white/10"
                 style={{
+                  width: 'clamp(36px, 2.25vw, 36px)',
+                  height: 'clamp(36px, 2.25vw, 36px)',
+                  minWidth: '36px',
+                  minHeight: '36px',
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
                 }}
               >
-                <Instagram size={16} color="#6ED8FF" />
+                <Linkedin size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
               <a
-                href="https://linkedin.com/company/wyle"
+                href="https://maps.app.goo.gl/cyX8V3suKxunWiH17"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-full transition-all hover:bg-white/10"
+                className="flex items-center justify-center rounded-full transition-all hover:bg-white/10"
                 style={{
+                  width: 'clamp(36px, 2.25vw, 36px)',
+                  height: 'clamp(36px, 2.25vw, 36px)',
+                  minWidth: '36px',
+                  minHeight: '36px',
                   background: 'rgba(110, 216, 255, 0.1)',
                   border: '1px solid rgba(110, 216, 255, 0.2)',
+                  cursor: 'pointer',
                 }}
+                aria-label="Open location in Google Maps"
               >
-                <Linkedin size={16} color="#6ED8FF" />
+                <MapPin size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section - Copyright and Legal Links */}
+        {/* Bottom Section - Copyright */}
         <div
-          className="flex items-center justify-between pt-8"
-          style={{ borderTop: '1px solid rgba(110, 216, 255, 0.1)' }}
+          className="flex items-center justify-center pt-8"
+          style={{ borderTop: '1px solid rgba(110, 216, 255, 0.1)', paddingTop: 'clamp(16px, 2vw, 32px)' }}
         >
           <div
             style={{
-              fontSize: '12px',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontSize: 'clamp(10px, 1.2vw, 12px)',
+              fontFamily: 'Urbanist, sans-serif',
               fontWeight: 400,
               color: '#C5C6C7',
               opacity: 0.7,
             }}
           >
             © 2025 WYLE Global Corporation, Inc.
-          </div>
-
-          <div className="flex gap-6">
-            <Link
-              to="/privacy-policy"
-              className="transition-opacity hover:opacity-80"
-              style={{
-                fontSize: '12px',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
-                fontWeight: 400,
-                color: '#C5C6C7',
-                opacity: 0.7,
-              }}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              to="/terms"
-              className="transition-opacity hover:opacity-80"
-              style={{
-                fontSize: '12px',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
-                fontWeight: 400,
-                color: '#C5C6C7',
-                opacity: 0.7,
-              }}
-            >
-              Terms & Conditions
-            </Link>
-            <Link
-              to="/cookies"
-              className="transition-opacity hover:opacity-80"
-              style={{
-                fontSize: '12px',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
-                fontWeight: 400,
-                color: '#C5C6C7',
-                opacity: 0.7,
-              }}
-            >
-              Cookies Policy
-            </Link>
           </div>
         </div>
       </div>

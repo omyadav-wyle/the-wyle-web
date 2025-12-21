@@ -28,7 +28,7 @@ import { FragmentedReality } from './components/FragmentedReality';
   }, [location]);
 
   return (
-    <div className="relative w-full" style={{ background: '#000000' }}>
+    <div className="relative w-full" style={{ background: '#000000', overflowX: 'hidden' }}>
       {/* HERO SECTION
       <HeroSection />
 

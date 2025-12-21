@@ -140,7 +140,7 @@ export function Services() {
             style={{
               fontSize: '56px',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '-0.5px',
               lineHeight: '1.2',
@@ -154,7 +154,7 @@ export function Services() {
             style={{
               fontSize: '16px',
               color: '#999999',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               letterSpacing: '0.2px',
               lineHeight: '1.5',
             }}
@@ -183,7 +183,7 @@ export function Services() {
                 style={{
                   fontSize: '48px',
                   color: '#F2E6F5',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 500,
                   marginBottom: '8px',
                   letterSpacing: '-0.5px',
@@ -196,7 +196,7 @@ export function Services() {
                 style={{
                   fontSize: '24px',
                   color: '#8F8C91',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
                   marginBottom: '40px',
                   letterSpacing: '0px',
@@ -209,7 +209,7 @@ export function Services() {
                 style={{
                   fontSize: '18px',
                   color: '#8F8C91',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
                   lineHeight: '1.6',
                   marginBottom: '80px',
@@ -322,7 +322,7 @@ export function Services() {
                 style={{
                   fontSize: '48px',
                   color: '#F2E6F5',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 500,
                   marginBottom: '8px',
                   letterSpacing: '-0.5px',
@@ -335,7 +335,7 @@ export function Services() {
                 style={{
                   fontSize: '24px',
                   color: '#8F8C91',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
                   marginBottom: '40px',
                   letterSpacing: '0px',
@@ -348,7 +348,7 @@ export function Services() {
                 style={{
                   fontSize: '18px',
                   color: '#8F8C91',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
                   lineHeight: '1.6',
                   marginBottom: '80px',
@@ -394,7 +394,7 @@ export function Services() {
                 style={{
                   fontSize: '36px',
                   color: '#F2E6F5',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 500,
                   marginBottom: '24px',
                   letterSpacing: '-0.3px',
@@ -407,7 +407,7 @@ export function Services() {
                 style={{
                   fontSize: '22px',
                   color: '#EEE3F3',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
                   lineHeight: '1.6',
                   marginBottom: '40px',
@@ -426,7 +426,7 @@ export function Services() {
                   border: '1px solid rgba(70, 42, 127, 0.5)',
                   boxShadow: '0px 4px 40px 0px rgba(0, 0, 0, 0.25)',
                   color: '#F5D6D6',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontSize: '22px',
                   fontWeight: 500,
                   letterSpacing: '0px',

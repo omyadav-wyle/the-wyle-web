@@ -18,7 +18,7 @@ export function About() {
       name: 'Amrutha Veluthakal',
       role: 'CPO & Chief of Staff',
       image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      linkedin: 'https://www.linkedin.com/in/amrutha-veluthakal'
+      linkedin: 'https://www.linkedin.com/in/v-amrutha-/'
     },
     {
       name: 'Azmat Ali',
@@ -232,7 +232,7 @@ export function About() {
             style={{
               fontSize: '64px',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '1px',
               lineHeight: '1.2',
@@ -248,7 +248,7 @@ export function About() {
             style={{
               fontSize: '18px',
               color: '#A0A0A0',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Montserrat, sans-serif',
               fontWeight: 400,
               letterSpacing: '0.5px',
             }}
@@ -270,7 +270,7 @@ export function About() {
             style={{
               fontSize: '42px',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
             }}
@@ -322,7 +322,7 @@ export function About() {
                           style={{
                         fontSize: '24px',
                             color: '#FFFFFF',
-                        fontFamily: 'Fredoka, system-ui, sans-serif',
+                        fontFamily: 'Poppins, sans-serif',
                         fontWeight: 500,
                             lineHeight: '1.3',
                         letterSpacing: '0.3px',
@@ -335,7 +335,7 @@ export function About() {
                           style={{
                         fontSize: '16px',
                         color: '#B0B0B0',
-                        fontFamily: 'Fredoka, system-ui, sans-serif',
+                        fontFamily: 'Urbanist, sans-serif',
                         fontWeight: 400,
                         lineHeight: '1.7',
                         letterSpacing: '0.2px',
@@ -400,39 +400,89 @@ export function About() {
 
         <div className="max-w-4xl mx-auto px-16 text-center relative z-10">
           {/* Curved arc above */}
-          <svg 
-            className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-12"
-            width="400" 
-            height="100" 
-            viewBox="0 0 400 100"
+          <motion.svg 
+            className="absolute left-1/2 transform -translate-x-1/2"
+            style={{ 
+              width: '800px',
+              height: '140px',
+              marginTop: '-100px',
+              marginBottom: '40px',
+            }}
+            viewBox="0 0 800 140"
+            initial={{ opacity: 0, y: -30, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            animate={{
+              y: [0, -12, 0],
+              scale: [1, 1.02, 1],
+            }}
+            transition={{
+              opacity: { duration: 0.8, ease: "easeOut" },
+              y: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              scale: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
           >
             <defs>
               <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                 <stop offset="0%" stopColor="#002F3A" stopOpacity="0" />
-                <stop offset="50%" stopColor="#1B998B" stopOpacity="0.8" />
+                <stop offset="50%" stopColor="#1B998B" stopOpacity="0.9" />
                 <stop offset="100%" stopColor="#002F3A" stopOpacity="0" />
               </linearGradient>
             </defs>
             <motion.path
-              d="M 50 80 Q 200 20, 350 80"
+              d="M 50 120 Q 400 25, 750 120"
               stroke="url(#arcGradient)"
-              strokeWidth="2"
+              strokeWidth="3"
               fill="none"
               initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              animate={{
+                pathLength: [1, 1.03, 1],
+                opacity: [1, 0.85, 1],
+                strokeWidth: [3, 3.5, 3],
+              }}
+              transition={{
+                pathLength: {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                opacity: {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                strokeWidth: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                default: {
+                  duration: 1.5,
+                  ease: "easeOut",
+                },
+              }}
             />
-          </svg>
+          </motion.svg>
 
           <motion.h2
             className="mb-6"
             style={{
               fontSize: '48px',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
+              paddingTop: '60px',
             }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -447,7 +497,7 @@ export function About() {
             style={{
               fontSize: '28px',
               color: '#1B998B',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
             }}
@@ -463,7 +513,7 @@ export function About() {
             style={{
               fontSize: '18px',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'Urbanist, sans-serif',
               fontWeight: 400,
               lineHeight: '1.9',
               textAlign: 'center',
@@ -481,7 +531,7 @@ export function About() {
       </section>
 
       {/* The Stewards Section */}
-      <section className="relative py-24 pb-32 overflow-hidden">
+      <section className="relative py-16 pb-24 overflow-hidden">
         {/* Teal flow - left side */}
         <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
           <motion.img 
@@ -527,40 +577,45 @@ export function About() {
           />
         </div>
 
-        <div className="max-w-7xl mx-auto px-16 relative z-10">
+        <div className="max-w-7xl mx-auto px-16 relative z-10" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
           <motion.div
-            className="text-center mb-6"
+            className="text-center mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <h2 
-              className="mb-3"
+              className="mb-2"
               style={{
-                fontSize: '48px',
+                fontSize: 'clamp(28px, 5vw, 48px)',
                 color: '#FFFFFF',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
+                fontFamily: 'Poppins, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '0.5px',
+                marginBottom: 'clamp(4px, 0.5vw, 8px)',
+                paddingLeft: 'clamp(16px, 4vw, 0px)',
+                paddingRight: 'clamp(16px, 4vw, 0px)',
               }}
             >
               The Stewards
             </h2>
             <p 
               style={{
-                fontSize: '16px',
+                fontSize: 'clamp(14px, 1.6vw, 16px)',
                 color: '#A0A0A0',
-                fontFamily: 'Fredoka, system-ui, sans-serif',
+                fontFamily: 'Montserrat, sans-serif',
               fontWeight: 400,
                 letterSpacing: '0.5px',
+                paddingLeft: 'clamp(16px, 4vw, 0px)',
+                paddingRight: 'clamp(16px, 4vw, 0px)',
               }}
             >
               A small group, building with patience and care.
             </p>
           </motion.div>
 
-          <div className="flex flex-row justify-center items-start gap-8 mt-16" style={{ flexWrap: 'nowrap', maxWidth: '1200px', margin: '4rem auto 0' }}>
+          <div className="flex justify-center items-start mt-16" style={{ flexDirection: 'row', flexWrap: 'wrap', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: 'clamp(32px, 4vw, 64px) auto 0', gap: 'clamp(16px, 2vw, 32px)', alignItems: 'stretch' }}>
             {teamMembers.map((member, i) => (
               <motion.div
                 key={i}
@@ -570,9 +625,10 @@ export function About() {
                   backdropFilter: 'blur(40px)',
                   border: '1px solid rgba(255,255,255,0.12)',
                   boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
-                  flex: '1',
-                  minWidth: '250px',
-                  maxWidth: '300px',
+                  flex: '1 1 auto',
+                  width: 'clamp(280px, calc(33.333% - 22px), 300px)',
+                  maxWidth: 'calc(100% - 32px)',
+                  minWidth: 'clamp(250px, 90vw, 300px)',
                   cursor: member.linkedin ? 'pointer' : 'default',
                 }}
                 initial={{ opacity: 0, y: 30 }}
@@ -590,7 +646,7 @@ export function About() {
                 }}
               >
                 {/* Image container with glow */}
-                <div className="relative mb-4 mx-auto" style={{ width: '140px', height: '140px' }}>
+                <div className="relative mb-4 mx-auto" style={{ width: 'clamp(100px, 14vw, 140px)', height: 'clamp(100px, 14vw, 140px)' }}>
                   <div 
                     className="absolute inset-0 rounded-2xl"
                     style={{
@@ -607,11 +663,11 @@ export function About() {
 
                 <h3 
                   style={{
-                    fontSize: '16px',
+                    fontSize: 'clamp(14px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
                     fontWeight: 500,
-                    marginBottom: '4px',
+                    marginBottom: 'clamp(4px, 0.25vw, 4px)',
                   }}
                 >
                   {member.name}
@@ -619,9 +675,9 @@ export function About() {
 
                 <p 
                   style={{
-                    fontSize: '13px',
+                    fontSize: 'clamp(12px, 1.3vw, 13px)',
                     color: '#808080',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Urbanist, sans-serif',
               fontWeight: 400,
                   }}
                 >

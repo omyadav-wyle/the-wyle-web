@@ -89,17 +89,20 @@ export function CloneWithConscience() {
   ];
 
   return (
-    <section ref={sectionRef} className="relative px-16" style={{ background: '#000000', paddingTop: '2rem', paddingBottom: '2rem' }}>
+    <section ref={sectionRef} className="relative px-16" style={{ background: '#000000', paddingTop: 'clamp(32px, 2vw, 32px)', paddingBottom: 'clamp(32px, 2vw, 32px)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
       {/* Heading */}
       <motion.h2
         className="text-center mb-4"
         style={{
-          fontSize: '40px',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontSize: 'clamp(24px, 4vw, 40px)',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
           marginTop: '0px',
+          marginBottom: 'clamp(12px, 1.5vw, 16px)',
+          paddingLeft: 'clamp(16px, 4vw, 0px)',
+          paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -113,12 +116,14 @@ export function CloneWithConscience() {
       <motion.p
         className="text-center max-w-2xl mx-auto mb-2"
         style={{
-          fontSize: '15px',
+          fontSize: 'clamp(13px, 1.5vw, 15px)',
           color: '#C5C6C7',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontFamily: 'Montserrat, sans-serif',
           fontWeight: 500,
           lineHeight: '1.45',
-          marginBottom: '0.5rem',
+          marginBottom: 'clamp(8px, 0.5vw, 8px)',
+          paddingLeft: 'clamp(16px, 4vw, 0px)',
+          paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -132,12 +137,14 @@ export function CloneWithConscience() {
       <motion.p
         className="text-center max-w-2xl mx-auto"
         style={{
-          fontSize: '15px',
+          fontSize: 'clamp(13px, 1.5vw, 15px)',
           color: '#C5C6C7',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontFamily: 'Montserrat, sans-serif',
           fontWeight: 500,
           lineHeight: '1.45',
-          marginBottom: '1rem',
+          marginBottom: 'clamp(16px, 1vw, 16px)',
+          paddingLeft: 'clamp(16px, 4vw, 0px)',
+          paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -148,17 +155,39 @@ export function CloneWithConscience() {
       </motion.p>
 
       {/* Central Orbital System and Cards Container */}
-      <div ref={containerRef} className="relative" style={{ height: '700px', maxWidth: '1200px', margin: '0 auto' }}>
-        <div className="relative flex items-center justify-center" style={{ height: '100%' }}>
+      <div ref={containerRef} className="relative" style={{ height: 'clamp(500px, 70vh, 700px)', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: '0 auto', overflow: 'hidden' }}>
+        <div className="relative flex items-center justify-center" style={{ height: '100%', overflow: 'hidden' }}>
           {/* Left Side Cards: start centered on the circle and animate outward on scroll */}
-          <div className="absolute inset-0" style={{ zIndex: 20 }}>
+          <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
             {leftCards.map((item, i) => {
-              // responsive final offset so cards move from center to a side position
-              const baseFinalX = measured && containerDimensions.width
-                ? -Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
-                : 0;
-              const finalX = baseFinalX; // final X offset to the left of center (pushed farther)
-              const finalY = (i - 1) * 260; // increased vertical spacing from center to avoid overlap
+              // Responsive card width based on container size
+              const cardWidth = measured && containerDimensions.width
+                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              // Responsive final offset - ensure cards stay within bounds
+              // Leave at least 16px padding on each side
+              const maxOffset = measured && containerDimensions.width
+                ? Math.min(
+                    containerDimensions.width / 2 - cardWidth / 2 - 16, // Max offset to keep card in view
+                    containerDimensions.width * 0.35 // Or 35% of container width, whichever is smaller
+                  )
+                : 200;
+              
+              const baseFinalX = -Math.max(100, Math.min(maxOffset, 300));
+              const finalX = baseFinalX; // final X offset to the left of center
+              
+              // Responsive vertical spacing - scales with container width and height
+              const verticalSpacing = measured && containerDimensions.width
+                ? Math.max(
+                    120, 
+                    Math.min(
+                      220, 
+                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                    )
+                  )
+                : 180;
+              const finalY = (i - 1) * verticalSpacing; // increased vertical spacing from center to avoid overlap
 
               // raw transforms driven by scroll progress (0 = centered, 1 = at final position)
               const xRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalX]);
@@ -178,7 +207,8 @@ export function CloneWithConscience() {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: '200px',
+                    width: `${cardWidth}px`,
+                    maxWidth: '90%',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -195,16 +225,16 @@ export function CloneWithConscience() {
                       width: '100%',
                       background: 'rgba(0, 47, 58, 0.25)',
                       border: `1px solid rgba(27, 153, 139, 0.2)`,
-                      padding: '24px',
+                      padding: 'clamp(16px, 1.5vw, 24px)',
                       backdropFilter: 'blur(20px)',
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                   
                   >
-                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: 'clamp(12px, 1.6vw, 16px)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#C5C6C7', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'Urbanist, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
                   </motion.div>
                 </div>
               );
@@ -213,7 +243,7 @@ export function CloneWithConscience() {
           </div>
 
           {/* Central Orbital System */}
-          <div className="relative" style={{ width: '520px', height: '520px', flexShrink: 0 }}>
+          <div className="relative" style={{ width: 'clamp(300px, 52vw, 520px)', height: 'clamp(300px, 52vw, 520px)', flexShrink: 0 }}>
             <motion.div
               className="relative w-full h-full"
               style={{
@@ -408,13 +438,36 @@ export function CloneWithConscience() {
           </div>
 
           {/* Right Side Cards: mirror of left side, start centered and animate outward to the right */}
-          <div className="absolute inset-0" style={{ zIndex: 20 }}>
+          <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
             {rightCards.map((item, i) => {
-              const baseFinalX = measured && containerDimensions.width
-                ? Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
-                : 0;
-              const finalX = baseFinalX; // final X offset to the right of center (pushed farther)
-              const finalY = (i - 1) * 260;
+              // Responsive card width based on container size
+              const cardWidth = measured && containerDimensions.width
+                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              // Responsive final offset - ensure cards stay within bounds
+              // Leave at least 16px padding on each side
+              const maxOffset = measured && containerDimensions.width
+                ? Math.min(
+                    containerDimensions.width / 2 - cardWidth / 2 - 16, // Max offset to keep card in view
+                    containerDimensions.width * 0.35 // Or 35% of container width, whichever is smaller
+                  )
+                : 200;
+              
+              const baseFinalX = Math.max(100, Math.min(maxOffset, 300));
+              const finalX = baseFinalX; // final X offset to the right of center
+              
+              // Responsive vertical spacing - scales with container width and height
+              const verticalSpacing = measured && containerDimensions.width
+                ? Math.max(
+                    120, 
+                    Math.min(
+                      220, 
+                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                    )
+                  )
+                : 180;
+              const finalY = (i - 1) * verticalSpacing;
 
               const xRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalX]);
               const yRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalY]);
@@ -425,7 +478,7 @@ export function CloneWithConscience() {
               const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
               return (
-                <div key={`right-card-wrap-${i}`} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div key={`right-card-wrap-${i}`} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: `${cardWidth}px`, maxWidth: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <motion.div
                     className="rounded-2xl cursor-pointer group"
                     style={{
@@ -436,16 +489,16 @@ export function CloneWithConscience() {
                       width: '100%',
                       background: 'rgba(0, 47, 58, 0.25)',
                       border: `1px solid rgba(27, 153, 139, 0.2)`,
-                      padding: '24px',
+                      padding: 'clamp(16px, 1.5vw, 24px)',
                       backdropFilter: 'blur(20px)',
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                     
                   >
-                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: 'clamp(12px, 1.6vw, 16px)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#C5C6C7', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'Urbanist, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
 
                   </motion.div>
                 </div>
@@ -464,7 +517,7 @@ export function CloneWithConscience() {
               left: 0,
             }}
             viewBox={`0 0 ${containerDimensions.width} ${containerDimensions.height}`}
-            preserveAspectRatio="none"
+            preserveAspectRatio="xMidYMid meet"
           >
             {/* Left side wave connections */}
             {leftCards.map((_, i) => {
@@ -472,18 +525,45 @@ export function CloneWithConscience() {
               const centerX = containerDimensions.width / 2;
               const centerY = containerDimensions.height / 2;
 
-              // Card positions - left side cards
-              const cardWidth = 200;
-              const cardGap = 32;
-              const cardHeight = 200; // Approximate card height
-              const cardX = cardWidth / 2; // Center of card from left edge
-              const cardY = centerY + (i - 1) * (cardHeight + cardGap); // Vertical spacing from center
+              // Use the same responsive calculations as the cards
+              const cardWidth = measured && containerDimensions.width
+                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              const maxOffset = measured && containerDimensions.width
+                ? Math.min(
+                    containerDimensions.width / 2 - cardWidth / 2 - 16,
+                    containerDimensions.width * 0.35
+                  )
+                : 200;
+              
+              const finalX = -Math.max(100, Math.min(maxOffset, 300));
+              
+              const verticalSpacing = measured && containerDimensions.width
+                ? Math.max(
+                    120, 
+                    Math.min(
+                      220, 
+                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                    )
+                  )
+                : 180;
+              
+              const finalY = (i - 1) * verticalSpacing;
 
+              // Card position (matching the card's final position)
+              const cardX = centerX + finalX; // Actual card center X position
+              const cardY = centerY + finalY; // Actual card center Y position
+
+              // Calculate midpoint for smooth curve
               const midX = (centerX + cardX) / 2;
-              const waveAmplitude = 40;
+              const midY = (centerY + cardY) / 2;
+              
+              // Responsive wave amplitude
+              const waveAmplitude = Math.min(40, containerDimensions.width * 0.08);
 
               // Create smooth wave path using quadratic bezier
-              const wavePath = `M ${centerX} ${centerY} Q ${midX - waveAmplitude} ${centerY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${(centerY + cardY) / 2} T ${cardX} ${cardY}`;
+              const wavePath = `M ${centerX} ${centerY} Q ${midX - waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${midY} T ${cardX} ${cardY}`;
 
               return (
                 <g key={`left-wave-${i}`}>
@@ -491,7 +571,7 @@ export function CloneWithConscience() {
                     d={wavePath}
                     fill="none"
                     stroke={`rgba(27, 153, 139, 0.25)`}
-                    strokeWidth="2"
+                    strokeWidth={Math.max(1, Math.min(2, containerDimensions.width / 400))}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: 1 + i * 0.15, ease: 'easeOut' }}
@@ -506,18 +586,45 @@ export function CloneWithConscience() {
               const centerX = containerDimensions.width / 2;
               const centerY = containerDimensions.height / 2;
 
-              // Card positions - right side cards
-              const cardWidth = 200;
-              const cardGap = 32;
-              const cardHeight = 200;
-              const cardX = containerDimensions.width - (cardWidth / 2); // Center of card from right edge
-              const cardY = centerY + (i - 1) * (cardHeight + cardGap);
+              // Use the same responsive calculations as the cards
+              const cardWidth = measured && containerDimensions.width
+                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              const maxOffset = measured && containerDimensions.width
+                ? Math.min(
+                    containerDimensions.width / 2 - cardWidth / 2 - 16,
+                    containerDimensions.width * 0.35
+                  )
+                : 200;
+              
+              const finalX = Math.max(100, Math.min(maxOffset, 300));
+              
+              const verticalSpacing = measured && containerDimensions.width
+                ? Math.max(
+                    120, 
+                    Math.min(
+                      220, 
+                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                    )
+                  )
+                : 180;
+              
+              const finalY = (i - 1) * verticalSpacing;
 
+              // Card position (matching the card's final position)
+              const cardX = centerX + finalX; // Actual card center X position
+              const cardY = centerY + finalY; // Actual card center Y position
+
+              // Calculate midpoint for smooth curve
               const midX = (centerX + cardX) / 2;
-              const waveAmplitude = 40;
+              const midY = (centerY + cardY) / 2;
+              
+              // Responsive wave amplitude
+              const waveAmplitude = Math.min(40, containerDimensions.width * 0.08);
 
               // Create smooth wave path
-              const wavePath = `M ${centerX} ${centerY} Q ${midX + waveAmplitude} ${centerY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${(centerY + cardY) / 2} T ${cardX} ${cardY}`;
+              const wavePath = `M ${centerX} ${centerY} Q ${midX + waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${midY} T ${cardX} ${cardY}`;
 
               return (
                 <g key={`right-wave-${i}`}>
@@ -525,7 +632,7 @@ export function CloneWithConscience() {
                     d={wavePath}
                     fill="none"
                     stroke={`rgba(27, 153, 139, 0.25)`}
-                    strokeWidth="2"
+                    strokeWidth={Math.max(1, Math.min(2, containerDimensions.width / 400))}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: 1 + i * 0.15, ease: 'easeOut' }}
