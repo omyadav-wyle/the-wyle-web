@@ -5,6 +5,7 @@ import Lottie from 'lottie-react';
 import backgroundLinesWave from '../assets/background lines wave.json';
 import { Footer } from './Footer';
 import { Navigation } from './Navigation';
+import { useRef, useState, useEffect, useCallback } from 'react';
 
 export function About() {
   const teamMembers = [
@@ -32,13 +33,15 @@ export function About() {
     {
       title: 'Life comes first. Always.',
       description: 'If something doesn\'t make life feel better, calmer, or more human, it doesn\'t belong here.',
-      icon: (
-        <div className="relative w-20 h-20">
+      image: (
+        <div className="relative w-full h-full flex items-center justify-center">
           {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute inset-0"
+              className="absolute"
               style={{
+                width: '60px',
+                height: '60px',
                 borderRadius: '50% 40% 50% 40%',
                 border: '2px solid rgba(27, 153, 139, 0.6)',
               }}
@@ -56,13 +59,13 @@ export function About() {
             />
           ))}
         </div>
-      )
+      ),
     },
     {
       title: 'The best systems disappear.',
       description: 'Calm isn\'t added. It\'s what remains when unnecessary effort is removed.',
-      icon: (
-        <div className="relative w-20 h-20 flex items-center justify-center">
+      image: (
+        <div className="relative w-full h-full flex items-center justify-center">
           {[...Array(8)].map((_, i) => {
             const angle = (i * 45) * (Math.PI / 180);
             const radius = 30;
@@ -98,13 +101,13 @@ export function About() {
             }}
           />
         </div>
-      )
+      ),
     },
     {
       title: 'We think long, even when it\'s inconvenient.',
       description: 'What lasts is built slowly, with responsibility for what comes next.',
-      icon: (
-        <div className="relative w-20 h-20 flex items-center justify-center">
+      image: (
+        <div className="relative w-full h-full flex items-center justify-center">
           {[...Array(3)].map((_, i) => (
             <motion.div
               key={i}
@@ -134,9 +137,163 @@ export function About() {
             }}
           />
         </div>
-      )
+      ),
     }
   ];
+
+  // Interactive Card Component with Cursor Tracking
+  function InteractiveCard({ card, index }: { card: typeof philosophyCards[0], index: number }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+    const [isHovered, setIsHovered] = useState(false);
+    const animationFrameRef = useRef<number>();
+
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+      if (!cardRef.current) return;
+      
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      
+      animationFrameRef.current = requestAnimationFrame(() => {
+        setMousePosition({ x, y });
+      });
+    }, []);
+
+    const handleMouseEnter = useCallback(() => {
+      setIsHovered(true);
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+      setIsHovered(false);
+      setMousePosition({ x: 0.5, y: 0.5 });
+    }, []);
+
+    useEffect(() => {
+      return () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }, []);
+
+    // Calculate 3D perspective transform
+    const rotateX = (mousePosition.y - 0.5) * 10; // Max 5 degrees
+    const rotateY = (0.5 - mousePosition.x) * 10; // Max 5 degrees
+
+    // Calculate shine gradient position
+    const shineX = mousePosition.x * 100;
+    const shineY = mousePosition.y * 100;
+
+    return (
+      <motion.div
+        ref={cardRef}
+        className="h-full"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          perspective: '1000px',
+        }}
+      >
+        <motion.div
+          className="h-full flex flex-col overflow-hidden"
+          style={{
+            borderRadius: '16px',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
+            backdropFilter: 'blur(40px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: isHovered
+              ? '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(27, 153, 139, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              : '0 12px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            transform: isHovered
+              ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateY(-10px)`
+              : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            position: 'relative',
+            cursor: 'pointer',
+          }}
+        >
+          {/* Shine effect overlay */}
+          {isHovered && (
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `radial-gradient(circle 300px at ${shineX}% ${shineY}%, rgba(27, 153, 139, 0.15) 0%, transparent 70%)`,
+                opacity: 1,
+                transition: 'opacity 0.3s ease',
+                zIndex: 1,
+              }}
+            />
+          )}
+
+          {/* Image area at top */}
+          <div
+            className="relative overflow-hidden"
+            style={{
+              height: '200px',
+              minHeight: '200px',
+              background: 'linear-gradient(135deg, rgba(27, 153, 139, 0.1), rgba(0, 47, 58, 0.05))',
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+            >
+              {card.image}
+            </motion.div>
+          </div>
+
+          {/* Content section */}
+          <div className="flex-1 flex flex-col p-6 text-center" style={{ zIndex: 2, position: 'relative' }}>
+            <motion.h3
+              className="mb-3"
+              style={{
+                fontSize: 'clamp(20px, 2.5vw, 24px)',
+                color: isHovered ? '#FFFFFF' : '#FFFFFF',
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 500,
+                lineHeight: '1.3',
+                letterSpacing: '0.3px',
+                transition: 'color 0.3s ease',
+                textAlign: 'center',
+                marginTop: 'clamp(16px, 2vw, 24px)',
+              }}
+            >
+              {card.title}
+            </motion.h3>
+
+            <motion.p
+              className="mb-6 flex-1"
+              style={{
+                fontSize: 'clamp(14px, 1.8vw, 16px)',
+                color: isHovered ? '#C0C0C0' : '#B0B0B0',
+                fontFamily: 'Urbanist, sans-serif',
+                fontWeight: 400,
+                lineHeight: '1.7',
+                letterSpacing: '0.2px',
+                transition: 'color 0.3s ease',
+                textAlign: 'center',
+              }}
+            >
+              {card.description}
+            </motion.p>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
 
   return (
     <div className="relative w-full overflow-x-hidden" style={{ background: '#000000' }}>
@@ -264,11 +421,11 @@ export function About() {
 
       {/* What We Won't Compromise On Section */}
       <section className="relative py-24 overflow-visible">
-        <div className="max-w-7xl mx-auto px-16">
+        <div className="max-w-7xl mx-auto" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
           <motion.h2
             className="text-center mb-16"
             style={{
-              fontSize: '42px',
+              fontSize: 'clamp(32px, 5vw, 42px)',
               color: '#FFFFFF',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
@@ -282,70 +439,19 @@ export function About() {
             What We Won't Compromise On
           </motion.h2>
 
-          {/* Cards - Horizontal Layout */}
-          <div className="flex flex-col md:flex-row gap-8 mt-16 justify-center items-stretch" style={{ maxWidth: '1200px', margin: '4rem auto 0' }}>
+          {/* Responsive Grid Layout */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 30vw, 350px), 1fr))',
+              gap: 'clamp(24px, 3vw, 32px)',
+              maxWidth: '1200px',
+              margin: '4rem auto 0',
+              padding: '0 clamp(8px, 1vw, 16px)',
+            }}
+          >
             {philosophyCards.map((card, index) => (
-                  <motion.div
-                    key={index}
-                className="flex-1"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-                    whileHover={{
-                  scale: 1.03,
-                  y: -8,
-                  transition: { duration: 0.3 }
-                    }}
-                  >
-                    <div
-                  className="p-8 h-full flex flex-col"
-                      style={{
-                    minHeight: '320px',
-                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
-                        backdropFilter: 'blur(40px)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)',
-                    borderRadius: '28px',
-                    boxShadow: '0 12px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  {/* Icon - Centered at top */}
-                  <div className="flex items-center justify-center mb-6" style={{ minHeight: '100px' }}>
-                        {card.icon}
-                      </div>
-
-                  {/* Text - Below icon */}
-                  <div className="flex-1 flex flex-col justify-center text-center">
-                        <h3 
-                      className="mb-4"
-                          style={{
-                        fontSize: '24px',
-                            color: '#FFFFFF',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontWeight: 500,
-                            lineHeight: '1.3',
-                        letterSpacing: '0.3px',
-                          }}
-                        >
-                          {card.title}
-                        </h3>
-
-                        <p 
-                          style={{
-                        fontSize: '16px',
-                        color: '#B0B0B0',
-                        fontFamily: 'Urbanist, sans-serif',
-                        fontWeight: 400,
-                        lineHeight: '1.7',
-                        letterSpacing: '0.2px',
-                          }}
-                        >
-                          {card.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
+              <InteractiveCard key={index} card={card} index={index} />
             ))}
           </div>
         </div>
