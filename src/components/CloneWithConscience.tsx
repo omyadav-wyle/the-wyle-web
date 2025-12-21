@@ -160,32 +160,74 @@ export function CloneWithConscience() {
           {/* Left Side Cards: start centered on the circle and animate outward on scroll */}
           <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
             {leftCards.map((item, i) => {
-              // Responsive card width based on container size
+              // Responsive card width - balanced size for mobile to prevent overlap
               const cardWidth = measured && containerDimensions.width
-                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Reduced from 0.38 to 0.35
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
                 : 200;
               
-              // Responsive final offset - ensure cards stay within bounds
-              // Leave at least 16px padding on each side
+              // Estimate card height (approximate based on padding and text)
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Reduced from 180/0.38
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Increased padding
+              // More conservative max offset to prevent going out of screen
               const maxOffset = measured && containerDimensions.width
-                ? Math.min(
-                    containerDimensions.width / 2 - cardWidth / 2 - 16, // Max offset to keep card in view
-                    containerDimensions.width * 0.35 // Or 35% of container width, whichever is smaller
-                  )
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Reduced from 0.28
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
                 : 200;
               
-              const baseFinalX = -Math.max(100, Math.min(maxOffset, 300));
-              const finalX = baseFinalX; // final X offset to the left of center
+              // Calculate minimum offset based on circle size + card half-width + larger gap to prevent overlap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Increased gap from 18 to 25
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
               
-              // Responsive vertical spacing - scales with container width and height
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = -Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.max(
+                baseFinalX - middleCardOffset, // Subtract because baseFinalX is negative for left side
+                -maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
               const verticalSpacing = measured && containerDimensions.width
-                ? Math.max(
-                    120, 
-                    Math.min(
-                      220, 
-                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Increased spacing
+                      )
                     )
-                  )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
                 : 180;
               const finalY = (i - 1) * verticalSpacing; // increased vertical spacing from center to avoid overlap
 
@@ -242,8 +284,23 @@ export function CloneWithConscience() {
 
           </div>
 
-          {/* Central Orbital System */}
-          <div className="relative" style={{ width: 'clamp(300px, 52vw, 520px)', height: 'clamp(300px, 52vw, 520px)', flexShrink: 0 }}>
+          {/* Central Orbital System - Smaller on mobile to prevent overlap */}
+          <div 
+            className="relative" 
+            style={{ 
+              width: measured && containerDimensions.width < 640 
+                ? 'clamp(130px, 35vw, 160px)' 
+                : measured && containerDimensions.width < 1024
+                ? 'clamp(200px, 40vw, 300px)'
+                : 'clamp(250px, 35vw, 380px)', 
+              height: measured && containerDimensions.width < 640 
+                ? 'clamp(130px, 35vw, 160px)' 
+                : measured && containerDimensions.width < 1024
+                ? 'clamp(200px, 40vw, 300px)'
+                : 'clamp(250px, 35vw, 380px)', 
+              flexShrink: 0 
+            }}
+          >
             <motion.div
               className="relative w-full h-full"
               style={{
@@ -440,32 +497,74 @@ export function CloneWithConscience() {
           {/* Right Side Cards: mirror of left side, start centered and animate outward to the right */}
           <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
             {rightCards.map((item, i) => {
-              // Responsive card width based on container size
+              // Responsive card width - balanced size for mobile to prevent overlap
               const cardWidth = measured && containerDimensions.width
-                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Reduced from 0.38 to 0.35
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
                 : 200;
               
-              // Responsive final offset - ensure cards stay within bounds
-              // Leave at least 16px padding on each side
+              // Estimate card height (approximate based on padding and text)
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Reduced from 180/0.38
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Increased padding
+              // More conservative max offset to prevent going out of screen
               const maxOffset = measured && containerDimensions.width
-                ? Math.min(
-                    containerDimensions.width / 2 - cardWidth / 2 - 16, // Max offset to keep card in view
-                    containerDimensions.width * 0.35 // Or 35% of container width, whichever is smaller
-                  )
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Reduced from 0.28
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
                 : 200;
               
-              const baseFinalX = Math.max(100, Math.min(maxOffset, 300));
-              const finalX = baseFinalX; // final X offset to the right of center
+              // Calculate minimum offset based on circle size + card half-width + larger gap to prevent overlap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Increased gap from 18 to 25
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
               
-              // Responsive vertical spacing - scales with container width and height
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.min(
+                baseFinalX + middleCardOffset, // Add because baseFinalX is positive for right side
+                maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
               const verticalSpacing = measured && containerDimensions.width
-                ? Math.max(
-                    120, 
-                    Math.min(
-                      220, 
-                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Increased spacing
+                      )
                     )
-                  )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
                 : 180;
               const finalY = (i - 1) * verticalSpacing;
 
@@ -527,26 +626,72 @@ export function CloneWithConscience() {
 
               // Use the same responsive calculations as the cards
               const cardWidth = measured && containerDimensions.width
-                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Match card width
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
                 : 200;
               
+              // Estimate card height
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Match circle size
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Match padding
+              // More conservative max offset to prevent going out of screen
               const maxOffset = measured && containerDimensions.width
-                ? Math.min(
-                    containerDimensions.width / 2 - cardWidth / 2 - 16,
-                    containerDimensions.width * 0.35
-                  )
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Match max offset
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
                 : 200;
               
-              const finalX = -Math.max(100, Math.min(maxOffset, 300));
+              // Calculate minimum offset based on circle size + card half-width + larger gap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Match gap
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
               
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = -Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.max(
+                baseFinalX - middleCardOffset, // Subtract because baseFinalX is negative for left side
+                -maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
               const verticalSpacing = measured && containerDimensions.width
-                ? Math.max(
-                    120, 
-                    Math.min(
-                      220, 
-                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Match spacing
+                      )
                     )
-                  )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
                 : 180;
               
               const finalY = (i - 1) * verticalSpacing;
@@ -588,26 +733,72 @@ export function CloneWithConscience() {
 
               // Use the same responsive calculations as the cards
               const cardWidth = measured && containerDimensions.width
-                ? Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Match card width
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
                 : 200;
               
+              // Estimate card height
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Match circle size
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Match padding
+              // More conservative max offset to prevent going out of screen
               const maxOffset = measured && containerDimensions.width
-                ? Math.min(
-                    containerDimensions.width / 2 - cardWidth / 2 - 16,
-                    containerDimensions.width * 0.35
-                  )
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Match max offset
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
                 : 200;
               
-              const finalX = Math.max(100, Math.min(maxOffset, 300));
+              // Calculate minimum offset based on circle size + card half-width + larger gap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Match gap
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
               
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.min(
+                baseFinalX + middleCardOffset, // Add because baseFinalX is positive for right side
+                maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
               const verticalSpacing = measured && containerDimensions.width
-                ? Math.max(
-                    120, 
-                    Math.min(
-                      220, 
-                      Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Match spacing
+                      )
                     )
-                  )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
                 : 180;
               
               const finalY = (i - 1) * verticalSpacing;

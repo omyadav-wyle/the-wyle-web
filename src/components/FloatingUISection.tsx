@@ -1,51 +1,92 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import Lottie from 'lottie-react';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import backgroundAnimationData from '../assets/Background looping animation.json';
 
 export function FloatingUISection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1920);
+  
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
+  // Calculate responsive transform values based on viewport width
+  // On smaller screens, reduce the movement distance to keep elements within bounds
+  const getResponsiveValue = (desktopValue: number) => {
+    // Scale down movement on smaller screens
+    // For screens < 640px, use 30% of desktop value
+    // For screens 640-1024px, use 50% of desktop value
+    // For screens > 1024px, use full desktop value
+    if (windowWidth < 640) {
+      return desktopValue * 0.3;
+    } else if (windowWidth < 1024) {
+      return desktopValue * 0.5;
+    }
+    return desktopValue;
+  };
+
+  // Calculate responsive output ranges - recalculate when windowWidth changes
+  const calendarXRange = useMemo(() => [0, -getResponsiveValue(420)], [windowWidth]);
+  const calendarYRange = useMemo(() => [0, -getResponsiveValue(280)], [windowWidth]);
+  const carXRange = useMemo(() => [0, getResponsiveValue(420)], [windowWidth]);
+  const carYRange = useMemo(() => [0, -getResponsiveValue(220)], [windowWidth]);
+  const giftXRange = useMemo(() => [0, -getResponsiveValue(250)], [windowWidth]);
+  const giftYRange = useMemo(() => [0, getResponsiveValue(180)], [windowWidth]);
+  const cartXRange = useMemo(() => [0, getResponsiveValue(360)], [windowWidth]);
+  const cartYRange = useMemo(() => [0, getResponsiveValue(60)], [windowWidth]);
+  const foodXRange = useMemo(() => [0, getResponsiveValue(470)], [windowWidth]);
+  const foodYRange = useMemo(() => [0, -getResponsiveValue(160)], [windowWidth]);
+  const marinaXRange = useMemo(() => [0, -getResponsiveValue(480)], [windowWidth]);
+  const marinaYRange = useMemo(() => [0, getResponsiveValue(20)], [windowWidth]);
+  const birthdayXRange = useMemo(() => [0, getResponsiveValue(420)], [windowWidth]);
+  const birthdayYRange = useMemo(() => [0, getResponsiveValue(220)], [windowWidth]);
+
   // Dispersion transforms for each element - staggered to prevent overlap
   // Calendar - top left (moves first)
-  const calendarX = useTransform(scrollYProgress, [0.25, 0.65], [0, -420]);
-  const calendarY = useTransform(scrollYProgress, [0.25, 0.65], [0, -280]);
+  const calendarX = useTransform(scrollYProgress, [0.25, 0.65], calendarXRange);
+  const calendarY = useTransform(scrollYProgress, [0.25, 0.65], calendarYRange);
   const calendarOpacity = useTransform(scrollYProgress, [0.25, 0.45, 0.65], [1, 0.8, 0]);
   
   // Car - top right (moves early)
-  const carX = useTransform(scrollYProgress, [0.28, 0.68], [0, 420]);
-  const carY = useTransform(scrollYProgress, [0.28, 0.68], [0, -220]);
+  const carX = useTransform(scrollYProgress, [0.28, 0.68], carXRange);
+  const carY = useTransform(scrollYProgress, [0.28, 0.68], carYRange);
   const carOpacity = useTransform(scrollYProgress, [0.28, 0.48, 0.68], [1, 0.8, 0]);
   
   // Gift - left lower (moves mid-early)
-  const giftX = useTransform(scrollYProgress, [0.32, 0.72], [0, -250]);
-  const giftY = useTransform(scrollYProgress, [0.32, 0.72], [0, 180]);
+  const giftX = useTransform(scrollYProgress, [0.32, 0.72], giftXRange);
+  const giftY = useTransform(scrollYProgress, [0.32, 0.72], giftYRange);
   const giftOpacity = useTransform(scrollYProgress, [0.32, 0.52, 0.72], [1, 0.8, 0]);
   
   // Shopping Cart - right middle (moves mid)
-  const cartX = useTransform(scrollYProgress, [0.35, 0.75], [0, 360]);
-  const cartY = useTransform(scrollYProgress, [0.35, 0.75], [0, 60]);
+  const cartX = useTransform(scrollYProgress, [0.35, 0.75], cartXRange);
+  const cartY = useTransform(scrollYProgress, [0.35, 0.75], cartYRange);
   const cartOpacity = useTransform(scrollYProgress, [0.35, 0.55, 0.75], [1, 0.8, 0]);
   
   // Food ordering card - top right (moves early, curved path)
-  const foodX = useTransform(scrollYProgress, [0.3, 0.7], [0, 470]);
-  const foodY = useTransform(scrollYProgress, [0.3, 0.7], [0, -160]);
+  const foodX = useTransform(scrollYProgress, [0.3, 0.7], foodXRange);
+  const foodY = useTransform(scrollYProgress, [0.3, 0.7], foodYRange);
   const foodOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [1, 0.8, 0]);
   
   // Dubai Marina card - left middle (moves first, curved path)
-  const marinaX = useTransform(scrollYProgress, [0.27, 0.67], [0, -480]);
-  const marinaY = useTransform(scrollYProgress, [0.27, 0.67], [0, 20]);
+  const marinaX = useTransform(scrollYProgress, [0.27, 0.67], marinaXRange);
+  const marinaY = useTransform(scrollYProgress, [0.27, 0.67], marinaYRange);
   const marinaOpacity = useTransform(scrollYProgress, [0.27, 0.47, 0.67], [1, 0.8, 0]);
   
   // Birthday card - bottom right (moves last)
-  const birthdayX = useTransform(scrollYProgress, [0.38, 0.78], [0, 420]);
-  const birthdayY = useTransform(scrollYProgress, [0.38, 0.78], [0, 220]);
+  const birthdayX = useTransform(scrollYProgress, [0.38, 0.78], birthdayXRange);
+  const birthdayY = useTransform(scrollYProgress, [0.38, 0.78], birthdayYRange);
   const birthdayOpacity = useTransform(scrollYProgress, [0.38, 0.58, 0.78], [1, 0.8, 0]);
 
   // Notification fade-in (stays in phone)
@@ -60,7 +101,7 @@ export function FloatingUISection() {
       className="relative px-16" 
       style={{ 
         background: 'linear-gradient(to bottom, #000000 0%, #0B0B11 50%, #000000 100%)',
-        overflow: 'visible',
+        overflow: 'hidden',
         paddingTop: 'clamp(16px, 1vw, 16px)',
         paddingBottom: 'clamp(16px, 1vw, 16px)',
         paddingLeft: 'clamp(16px, 4vw, 64px)',

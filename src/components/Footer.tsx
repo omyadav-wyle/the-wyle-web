@@ -1,8 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Twitter, Instagram, Linkedin, MapPin } from 'lucide-react';
 import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
 
 export function Footer() {
+  const navigate = useNavigate();
+
+  const handleNavClick = (path: string) => {
+    // Scroll to top before navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Small delay to ensure scroll starts, then navigate
+    setTimeout(() => {
+      navigate(path);
+    }, 100);
+  };
+
   return (
     <footer className="relative py-16 px-16 w-full" style={{ background: '#000000', borderTop: '1px solid rgba(110, 216, 255, 0.1)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', paddingTop: 'clamp(32px, 4vw, 64px)', paddingBottom: 'clamp(32px, 4vw, 64px)', width: '100%', maxWidth: '100%' }}>
       {/* Main Footer Content */}
@@ -27,47 +38,56 @@ export function Footer() {
             
             {/* Navigation Links */}
             <div className="flex gap-6 items-center flex-wrap">
-              <Link
-                to="/"
-                className="transition-opacity hover:opacity-80"
+              <button
+                onClick={() => handleNavClick('/')}
+                className="transition-opacity hover:opacity-80 cursor-pointer"
                 style={{
                   fontSize: 'clamp(11px, 1.3vw, 13px)',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
                 }}
               >
                 Home
-              </Link>
+              </button>
               <span style={{ color: '#C5C6C7', opacity: 0.3 }}>|</span>
-              <Link
-                to="/about"
-                className="transition-opacity hover:opacity-80"
+              <button
+                onClick={() => handleNavClick('/about')}
+                className="transition-opacity hover:opacity-80 cursor-pointer"
                 style={{
                   fontSize: 'clamp(11px, 1.3vw, 13px)',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
                 }}
               >
                 About
-              </Link>
+              </button>
               <span style={{ color: '#C5C6C7', opacity: 0.3 }}>|</span>
-              <Link
-                to="/contact"
-                className="transition-opacity hover:opacity-80"
+              <button
+                onClick={() => handleNavClick('/user-contact')}
+                className="transition-opacity hover:opacity-80 cursor-pointer"
                 style={{
                   fontSize: 'clamp(11px, 1.3vw, 13px)',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 400,
                   color: '#C5C6C7',
                   opacity: 0.7,
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
                 }}
               >
                 Contact
-              </Link>
+              </button>
             </div>
           </div>
 

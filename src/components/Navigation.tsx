@@ -1,10 +1,11 @@
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
 
 export function Navigation() {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,6 +26,20 @@ export function Navigation() {
     setIsMenuOpen(false);
   }, [currentPath]);
 
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPath]);
+
+  const handleNavClick = (path: string) => {
+    // Scroll to top before navigation
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Small delay to ensure scroll starts, then navigate
+    setTimeout(() => {
+      navigate(path);
+    }, 100);
+  };
+
   return (
     <nav className="relative z-50 flex items-center justify-between px-16 pt-8" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', paddingTop: 'clamp(16px, 2vw, 32px)' }}>
       {/* Logo */}
@@ -37,14 +52,14 @@ export function Navigation() {
       {/* Desktop Navigation - Only visible on desktop/laptop */}
       {!isMobile && (
         <>
-          {/* Center Navigation - Glassmorphism */}
-          <div
-            className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-8 px-10 py-4 rounded-full"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-              backdropFilter: 'blur(30px)',
-              border: '1px solid rgba(255,255,255,0.15)',
-              boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+      {/* Center Navigation - Glassmorphism */}
+      <div
+        className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-8 px-10 py-4 rounded-full"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
+          backdropFilter: 'blur(30px)',
+          border: '1px solid rgba(255,255,255,0.15)',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
               gap: 'clamp(12px, 2vw, 32px)',
               paddingLeft: 'clamp(16px, 2.5vw, 40px)',
               paddingRight: 'clamp(16px, 2.5vw, 40px)',
@@ -52,64 +67,64 @@ export function Navigation() {
               paddingBottom: 'clamp(8px, 1vw, 16px)',
             }}
           >
-            <Link 
-              to="/" 
-              className={`text-sm transition-opacity hover:opacity-80 ${currentPath === '/' ? 'text-white' : 'text-gray-400'}`}
-              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)' }}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/about" 
-              className={`text-sm transition-opacity hover:opacity-80 ${currentPath === '/about' ? 'text-white' : 'text-gray-400'}`}
-              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)' }}
-            >
-              About
-            </Link>
+            <button
+              onClick={() => handleNavClick('/')}
+              className={`text-sm transition-opacity hover:opacity-80 cursor-pointer ${currentPath === '/' ? 'text-white' : 'text-gray-400'}`}
+              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)', background: 'none', border: 'none', padding: 0 }}
+        >
+          Home
+            </button>
+            <button
+              onClick={() => handleNavClick('/about')}
+              className={`text-sm transition-opacity hover:opacity-80 cursor-pointer ${currentPath === '/about' ? 'text-white' : 'text-gray-400'}`}
+              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)', background: 'none', border: 'none', padding: 0 }}
+        >
+          About
+            </button>
 
-            {/* Contact - navigate to UserContact form */}
-            <Link 
-              to="/user-contact" 
-              className={`text-sm transition-opacity hover:opacity-80 ${currentPath === '/user-contact' ? 'text-white' : 'text-gray-400'}`}
-              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)' }}
-            >
-              Contact
-            </Link>
-          </div>
+        {/* Contact - navigate to UserContact form */}
+            <button
+              onClick={() => handleNavClick('/user-contact')}
+              className={`text-sm transition-opacity hover:opacity-80 cursor-pointer ${currentPath === '/user-contact' ? 'text-white' : 'text-gray-400'}`}
+              style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)', background: 'none', border: 'none', padding: 0 }}
+        >
+          Contact
+            </button>
+      </div>
 
           {/* Partner with us button - Desktop */}
-          <Link
-            to="/contact"
-            className="px-6 py-3 rounded-full text-sm transition-all"
-            style={{
-              background: '#D5FF3F',
-              border: '1px solid #D5FF3F',
-              color: '#000000',
+          <button
+            onClick={() => handleNavClick('/contact')}
+            className="px-6 py-3 rounded-full text-sm transition-all cursor-pointer"
+        style={{
+          background: '#D5FF3F',
+          border: '1px solid #D5FF3F',
+          color: '#000000',
               fontFamily: 'Inter, sans-serif',
-              fontWeight: 500,
-              letterSpacing: '1.5px',
-              boxShadow: '0 0 20px rgba(213, 255, 63, 0.3)',
+          fontWeight: 500,
+          letterSpacing: '1.5px',
+          boxShadow: '0 0 20px rgba(213, 255, 63, 0.3)',
               paddingLeft: 'clamp(12px, 1.5vw, 24px)',
               paddingRight: 'clamp(12px, 1.5vw, 24px)',
               paddingTop: 'clamp(8px, 0.75vw, 12px)',
               paddingBottom: 'clamp(8px, 0.75vw, 12px)',
               fontSize: 'clamp(11px, 1.2vw, 14px)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#E5FF5F';
-              e.currentTarget.style.borderColor = '#E5FF5F';
-              e.currentTarget.style.boxShadow = '0 0 30px rgba(213, 255, 63, 0.5)';
-              e.currentTarget.style.transform = 'translateY(-2px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = '#D5FF3F';
-              e.currentTarget.style.borderColor = '#D5FF3F';
-              e.currentTarget.style.boxShadow = '0 0 20px rgba(213, 255, 63, 0.3)';
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-          >
-            Partner with us
-          </Link>
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = '#E5FF5F';
+          e.currentTarget.style.borderColor = '#E5FF5F';
+          e.currentTarget.style.boxShadow = '0 0 30px rgba(213, 255, 63, 0.5)';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = '#D5FF3F';
+          e.currentTarget.style.borderColor = '#D5FF3F';
+          e.currentTarget.style.boxShadow = '0 0 20px rgba(213, 255, 63, 0.3)';
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        Partner with us
+          </button>
         </>
       )}
 
@@ -198,10 +213,12 @@ export function Navigation() {
               >
                 {/* Menu Items */}
                 <div className="flex flex-col gap-6">
-                  <Link
-                    to="/"
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`text-lg transition-opacity hover:opacity-80 py-2 ${
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      handleNavClick('/');
+                    }}
+                    className={`text-lg transition-opacity hover:opacity-80 py-2 text-left cursor-pointer ${
                       currentPath === '/' ? 'text-white' : 'text-gray-400'
                     }`}
                     style={{
@@ -209,14 +226,21 @@ export function Navigation() {
                       fontWeight: 400,
                       letterSpacing: '2px',
                       borderBottom: currentPath === '/' ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                      background: 'none',
+                      borderTop: 'none',
+                      borderLeft: 'none',
+                      borderRight: 'none',
+                      padding: 0,
                     }}
                   >
                     Home
-                  </Link>
-                  <Link
-                    to="/about"
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`text-lg transition-opacity hover:opacity-80 py-2 ${
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      handleNavClick('/about');
+                    }}
+                    className={`text-lg transition-opacity hover:opacity-80 py-2 text-left cursor-pointer ${
                       currentPath === '/about' ? 'text-white' : 'text-gray-400'
                     }`}
                     style={{
@@ -224,14 +248,21 @@ export function Navigation() {
                       fontWeight: 400,
                       letterSpacing: '2px',
                       borderBottom: currentPath === '/about' ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                      background: 'none',
+                      borderTop: 'none',
+                      borderLeft: 'none',
+                      borderRight: 'none',
+                      padding: 0,
                     }}
                   >
                     About
-                  </Link>
-                  <Link
-                    to="/user-contact"
-                    onClick={() => setIsMenuOpen(false)}
-                    className={`text-lg transition-opacity hover:opacity-80 py-2 ${
+                  </button>
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      handleNavClick('/user-contact');
+                    }}
+                    className={`text-lg transition-opacity hover:opacity-80 py-2 text-left cursor-pointer ${
                       currentPath === '/user-contact' ? 'text-white' : 'text-gray-400'
                     }`}
                     style={{
@@ -239,16 +270,23 @@ export function Navigation() {
                       fontWeight: 400,
                       letterSpacing: '2px',
                       borderBottom: currentPath === '/user-contact' ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                      background: 'none',
+                      borderTop: 'none',
+                      borderLeft: 'none',
+                      borderRight: 'none',
+                      padding: 0,
                     }}
                   >
                     Contact
-                  </Link>
+                  </button>
 
                   {/* Partner with us button - Mobile */}
-                  <Link
-                    to="/contact"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="mt-4 px-6 py-3 rounded-full text-sm transition-all text-center"
+                  <button
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      handleNavClick('/contact');
+                    }}
+                    className="mt-4 px-6 py-3 rounded-full text-sm transition-all text-center cursor-pointer"
                     style={{
                       background: '#D5FF3F',
                       border: '1px solid #D5FF3F',
@@ -270,7 +308,7 @@ export function Navigation() {
                     }}
                   >
                     Partner with us
-                  </Link>
+                  </button>
                 </div>
               </div>
             </>
