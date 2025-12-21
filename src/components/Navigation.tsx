@@ -74,21 +74,22 @@ export function Navigation() {
         >
           Home
             </button>
+            <span className="text-white" style={{ fontSize: 'clamp(11px, 1.2vw, 14px)' }}>|</span>
             <button
               onClick={() => handleNavClick('/about')}
               className={`text-sm transition-opacity hover:opacity-80 cursor-pointer ${currentPath === '/about' ? 'text-white' : 'text-gray-400'}`}
               style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)', background: 'none', border: 'none', padding: 0 }}
         >
-          About
+          About Us
             </button>
-
+            <span className="text-white" style={{ fontSize: 'clamp(11px, 1.2vw, 14px)' }}>|</span>
         {/* Contact - navigate to UserContact form */}
             <button
               onClick={() => handleNavClick('/user-contact')}
               className={`text-sm transition-opacity hover:opacity-80 cursor-pointer ${currentPath === '/user-contact' ? 'text-white' : 'text-gray-400'}`}
               style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400, letterSpacing: '2px', fontSize: 'clamp(11px, 1.2vw, 14px)', background: 'none', border: 'none', padding: 0 }}
         >
-          Contact
+          Contact Us
             </button>
       </div>
 

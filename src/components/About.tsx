@@ -1,12 +1,13 @@
 import { motion } from 'motion/react';
 import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
-import Lottie from 'lottie-react';
-import backgroundLinesWave from '../assets/background lines wave.json';
 import { Footer } from './Footer';
 import { Navigation } from './Navigation';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import arvindImage from '../assets/arvind.webp';
+import amruthaImage from '../assets/amrutha.png';
+import azmatImage from '../assets/azmat.png';
+import aboutHeroVideo from '../assets/about_hero.mp4';
 
 export function About() {
   const teamMembers = [
@@ -19,13 +20,13 @@ export function About() {
     {
       name: 'Amrutha Veluthakal',
       role: 'CPO & Chief of Staff',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+      image: amruthaImage,
       linkedin: 'https://www.linkedin.com/in/v-amrutha-/'
     },
     {
       name: 'Azmat Ali',
       role: 'VP of Marketing & Innovation',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+      image: azmatImage,
       linkedin: 'https://www.linkedin.com/in/azmatali/'
     }
   ];
@@ -355,75 +356,87 @@ export function About() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
-        {/* Background Lines Wave Animation - Full Hero Section - Horizontal Flow */}
+      <section className="relative overflow-hidden" style={{ paddingTop: 'clamp(0px, 8vw, 128px)', paddingBottom: 'clamp(40px, 6vw, 80px)', minHeight: '60vh' }}>
+        {/* Background Video - about_hero.mp4 */}
         <div
-          className="absolute pointer-events-none"
+          className="absolute w-full pointer-events-none"
           style={{
-            zIndex: 0,
-            opacity: 0.5,
-            filter: 'hue-rotate(160deg) saturate(1.5) brightness(0.9) contrast(1.2)',
-            mixBlendMode: 'screen',
-            left: '50%',
-            top: 0,
+            top: 'clamp(-80px, -10vw, -40px)',
+            left: 0,
+            right: 0,
             bottom: 0,
-            width: '100vw',
-            height: '100%',
-            transform: 'translateX(-50%)',
+            height: 'calc(100% + clamp(80px, 10vw, 40px))',
+            overflow: 'hidden',
+            zIndex: 0,
           }}
         >
-          <Lottie
-            animationData={backgroundLinesWave}
-            loop={true}
-            autoplay={true}
+          <video
+            src={aboutHeroVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
+            className="absolute inset-0 w-full h-full object-cover"
             style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
+              objectPosition: 'center',
             }}
           />
         </div>
 
-        {/* Dark Teal overlay - matching HeroSection */}
+        {/* Dark Teal overlay - reduced opacity for better video visibility */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.5) 0%, rgba(0, 47, 58, 0.3) 50%, rgba(0, 47, 58, 0.5) 100%)',
+            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.2) 0%, rgba(0, 47, 58, 0.1) 50%, rgba(0, 47, 58, 0.2) 100%)',
             mixBlendMode: 'multiply',
           }}
         />
         
-        {/* Bright Turquoise highlight overlay - matching HeroSection */}
+        {/* Bright Turquoise highlight overlay - reduced opacity */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.4) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.15) 0%, transparent 70%)',
             mixBlendMode: 'screen',
           }}
         />
         
-        {/* Additional teal gradient for depth - matching HeroSection */}
+        {/* Additional teal gradient for depth - reduced opacity */}
         <div 
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 1,
-            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.2) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.3) 100%)',
+            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.1) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.15) 100%)',
             mixBlendMode: 'color',
           }}
         />
 
-        {/* Global bloom effect - Teal - matching HeroSection */}
+        {/* Global bloom effect - Teal - reduced opacity */}
         <div 
-          className="absolute inset-0 pointer-events-none mix-blend-screen opacity-40"
+          className="absolute inset-0 pointer-events-none mix-blend-screen opacity-20"
           style={{
             zIndex: 1,
-            background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.15) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.1) 0%, transparent 60%)',
           }}
         />
 
-        <div className="relative z-10 max-w-6xl mx-auto px-16 text-center">
+        {/* Gradient fade at bottom to blend with next section */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            height: '200px',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.8) 100%)',
+            backdropFilter: 'blur(2px)',
+          }}
+        />
+
+        <div className="relative max-w-6xl mx-auto px-16 text-center" style={{ marginTop: 'clamp(-40px, -5vw, -20px)', zIndex: 10 }}>
           <motion.h1
             className="mb-4"
             style={{
@@ -460,7 +473,7 @@ export function About() {
       </section>
 
       {/* What We Won't Compromise On Section */}
-      <section className="relative py-24 overflow-visible">
+      <section className="relative overflow-visible" style={{ background: 'transparent', paddingTop: 'clamp(20px, 3vw, 40px)', paddingBottom: 'clamp(40px, 5vw, 64px)', zIndex: 10 }}>
         <div className="max-w-7xl mx-auto" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
           <motion.h2
             className="text-center mb-16"
@@ -470,6 +483,11 @@ export function About() {
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
+              background: 'transparent',
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+              marginTop: 'clamp(-60px, -8vw, -40px)',
+              position: 'relative',
+              zIndex: 10,
             }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -481,7 +499,7 @@ export function About() {
 
           {/* Responsive Grid Layout */}
           <div
-            style={{
+                      style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 30vw, 350px), 1fr))',
               gap: 'clamp(24px, 3vw, 32px)',
@@ -793,21 +811,21 @@ export function About() {
               >
                 {/* Image container with glow */}
                 <div className="relative mb-4 mx-auto" style={{ width: 'clamp(100px, 14vw, 140px)', height: 'clamp(100px, 14vw, 140px)' }}>
-                  {i === 0 && (
-                    <div 
-                      className="absolute inset-0 rounded-2xl"
-                      style={{
-                        background: 'radial-gradient(circle, rgba(27, 153, 139, 0.3) 0%, transparent 70%)',
-                        filter: 'blur(15px)',
-                      }}
-                    />
+                  {(i === 0 || i === 1) && (
+                  <div 
+                    className="absolute inset-0 rounded-2xl"
+                    style={{
+                      background: 'radial-gradient(circle, rgba(27, 153, 139, 0.3) 0%, transparent 70%)',
+                      filter: 'blur(15px)',
+                    }}
+                  />
                   )}
-                  {i === 0 ? (
-                    <img 
+                  {(i === 0 || i === 1) ? (
+                  <img 
                       src={member.image}
-                      alt={member.name}
-                      className="relative w-full h-full object-cover rounded-2xl"
-                    />
+                    alt={member.name}
+                    className="relative w-full h-full object-cover rounded-2xl"
+                  />
                   ) : (
                     <div 
                       className="relative w-full h-full rounded-2xl"

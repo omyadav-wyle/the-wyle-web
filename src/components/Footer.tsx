@@ -69,7 +69,7 @@ export function Footer() {
                   padding: 0,
                 }}
               >
-                About
+                About Us
               </button>
               <span style={{ color: '#C5C6C7', opacity: 0.3 }}>|</span>
               <button
@@ -86,7 +86,7 @@ export function Footer() {
                   padding: 0,
                 }}
               >
-                Contact
+                Contact Us
               </button>
             </div>
           </div>
