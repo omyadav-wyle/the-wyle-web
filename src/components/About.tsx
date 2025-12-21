@@ -146,7 +146,7 @@ export function About() {
     const cardRef = useRef<HTMLDivElement>(null);
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
     const [isHovered, setIsHovered] = useState(false);
-    const animationFrameRef = useRef<number>();
+    const animationFrameRef = useRef<number | undefined>(undefined);
 
     const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
       if (!cardRef.current) return;
@@ -382,6 +382,45 @@ export function About() {
             }}
           />
         </div>
+
+        {/* Dark Teal overlay - matching HeroSection */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.5) 0%, rgba(0, 47, 58, 0.3) 50%, rgba(0, 47, 58, 0.5) 100%)',
+            mixBlendMode: 'multiply',
+          }}
+        />
+        
+        {/* Bright Turquoise highlight overlay - matching HeroSection */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.4) 0%, transparent 70%)',
+            mixBlendMode: 'screen',
+          }}
+        />
+        
+        {/* Additional teal gradient for depth - matching HeroSection */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.2) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.3) 100%)',
+            mixBlendMode: 'color',
+          }}
+        />
+
+        {/* Global bloom effect - Teal - matching HeroSection */}
+        <div 
+          className="absolute inset-0 pointer-events-none mix-blend-screen opacity-40"
+          style={{
+            zIndex: 1,
+            background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.15) 0%, transparent 60%)',
+          }}
+        />
 
         <div className="relative z-10 max-w-6xl mx-auto px-16 text-center">
           <motion.h1
