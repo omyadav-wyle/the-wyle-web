@@ -356,17 +356,17 @@ export function About() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ paddingTop: 'clamp(0px, 8vw, 128px)', paddingBottom: 'clamp(40px, 6vw, 80px)', minHeight: '60vh' }}>
+      <section className="relative" style={{ paddingTop: 'clamp(0px, 8vw, 128px)', paddingBottom: 'clamp(40px, 6vw, 80px)', minHeight: '100vh', overflow: 'hidden', isolation: 'isolate', position: 'relative', marginBottom: 0 }}>
         {/* Background Video - about_hero.mp4 */}
         <div
-          className="absolute w-full pointer-events-none"
+          className="absolute pointer-events-none"
           style={{
-            top: 'clamp(-80px, -10vw, -40px)',
+            top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            height: 'calc(100% + clamp(80px, 10vw, 40px))',
-            overflow: 'hidden',
+            width: '100%',
+            height: '100%',
             zIndex: 0,
           }}
         >
@@ -379,9 +379,16 @@ export function About() {
             preload="auto"
             disablePictureInPicture
             disableRemotePlayback
-            className="absolute inset-0 w-full h-full object-cover"
             style={{
-              objectPosition: 'center',
+              objectFit: 'cover',
+              objectPosition: 'center bottom',
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
             }}
           />
         </div>
@@ -473,7 +480,7 @@ export function About() {
       </section>
 
       {/* What We Won't Compromise On Section */}
-      <section className="relative overflow-visible" style={{ background: 'transparent', paddingTop: 'clamp(20px, 3vw, 40px)', paddingBottom: 'clamp(40px, 5vw, 64px)', zIndex: 10 }}>
+      <section className="relative" style={{ background: 'transparent', paddingTop: 'clamp(80px, 12vw, 120px)', paddingBottom: 'clamp(40px, 5vw, 64px)', zIndex: 10, isolation: 'isolate' }}>
         <div className="max-w-7xl mx-auto" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
           <motion.h2
             className="text-center mb-16"
@@ -485,7 +492,7 @@ export function About() {
               letterSpacing: '0.5px',
               background: 'transparent',
               textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
-              marginTop: 'clamp(-60px, -8vw, -40px)',
+              marginTop: '0px',
               position: 'relative',
               zIndex: 10,
             }}
@@ -811,7 +818,7 @@ export function About() {
               >
                 {/* Image container with glow */}
                 <div className="relative mb-4 mx-auto" style={{ width: 'clamp(100px, 14vw, 140px)', height: 'clamp(100px, 14vw, 140px)' }}>
-                  {(i === 0 || i === 1) && (
+                  {member.image && (
                   <div 
                     className="absolute inset-0 rounded-2xl"
                     style={{
@@ -820,7 +827,7 @@ export function About() {
                     }}
                   />
                   )}
-                  {(i === 0 || i === 1) ? (
+                  {member.image ? (
                   <img 
                       src={member.image}
                     alt={member.name}
