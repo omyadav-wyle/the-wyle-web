@@ -6,13 +6,14 @@ import backgroundLinesWave from '../assets/background lines wave.json';
 import { Footer } from './Footer';
 import { Navigation } from './Navigation';
 import { useRef, useState, useEffect, useCallback } from 'react';
+import arvindImage from '../assets/arvind.webp';
 
 export function About() {
   const teamMembers = [
     {
       name: 'Aravindh Sreekanthan',
       role: 'Founder & CEO',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
+      image: arvindImage,
       linkedin: 'https://www.linkedin.com/in/aravindh-sreekanthan'
     },
     {
@@ -792,18 +793,32 @@ export function About() {
               >
                 {/* Image container with glow */}
                 <div className="relative mb-4 mx-auto" style={{ width: 'clamp(100px, 14vw, 140px)', height: 'clamp(100px, 14vw, 140px)' }}>
-                  <div 
-                    className="absolute inset-0 rounded-2xl"
-                    style={{
-                      background: 'radial-gradient(circle, rgba(27, 153, 139, 0.3) 0%, transparent 70%)',
-                      filter: 'blur(15px)',
-                    }}
-                  />
-                  <img 
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Crect fill='%23181818' width='140' height='140'/%3E%3Ccircle cx='70' cy='50' r='20' fill='%23404040'/%3E%3Cpath d='M 30 110 Q 30 80, 70 80 Q 110 80, 110 110 L 110 140 L 30 140 Z' fill='%23404040'/%3E%3C/svg%3E"
-                    alt={member.name}
-                    className="relative w-full h-full object-cover rounded-2xl"
-                  />
+                  {i === 0 && (
+                    <div 
+                      className="absolute inset-0 rounded-2xl"
+                      style={{
+                        background: 'radial-gradient(circle, rgba(27, 153, 139, 0.3) 0%, transparent 70%)',
+                        filter: 'blur(15px)',
+                      }}
+                    />
+                  )}
+                  {i === 0 ? (
+                    <img 
+                      src={member.image}
+                      alt={member.name}
+                      className="relative w-full h-full object-cover rounded-2xl"
+                    />
+                  ) : (
+                    <div 
+                      className="relative w-full h-full rounded-2xl"
+                      style={{
+                        background: '#181818',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    />
+                  )}
                 </div>
 
                 <h3 
