@@ -41,8 +41,8 @@ export function FragmentedReality() {
   }, []);
 
   return (
-    <section className="relative px-16" style={{ background: '#000000', paddingTop: 'clamp(32px, 4vw, 64px)', paddingBottom: '0', overflow: 'hidden', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
-      {/* Wave Loop Background Animation with Teal Theme - Full Width */}
+    <section className="relative px-16" style={{ background: '#000000', paddingTop: 'clamp(32px, 4vw, 64px)', paddingBottom: '0', overflow: 'hidden', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', minHeight: '100vh' }}>
+      {/* Wave Loop Background Animation with Teal Theme - Section Only */}
       <div 
         className="absolute pointer-events-none"
         style={{
@@ -50,12 +50,12 @@ export function FragmentedReality() {
           opacity: 0.3,
           filter: 'hue-rotate(160deg) saturate(1.2) brightness(0.7) contrast(1.1)',
           mixBlendMode: 'screen',
-          left: '50%',
+          left: 0,
           top: 0,
+          right: 0,
           bottom: 0,
-          width: '100vw',
+          width: '100%',
           height: '100%',
-          transform: 'translateX(-50%)',
         }}
       >
         <Lottie
@@ -139,15 +139,13 @@ export function FragmentedReality() {
           />
 
           {/* Central Hub (WYLE Core) - Same shape as icons, behind icons, only visible in Order mode */}
-          <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 5, left: '50%', top: '50%', transform: 'translate(-50%, -50%)' }}>
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center" style={{ zIndex: 5 }}>
             <motion.div
-              className="absolute rounded-xl flex items-center justify-center"
+              className="rounded-xl flex items-center justify-center"
               initial={false}
               animate={{
                 opacity: mode === 'order' ? 1 : 0,
                 scale: mode === 'order' ? 1 : 0,
-                x: typeof window !== 'undefined' && window.innerWidth < 640 ? -20 : -24, // Offset by half width to center (same as icons)
-                y: typeof window !== 'undefined' && window.innerWidth < 640 ? -20 : -24, // Offset by half height to center (same as icons)
               }}
               transition={{ 
                 duration: 0.7, 
