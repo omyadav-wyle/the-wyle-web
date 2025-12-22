@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import marbleTexture from 'figma:asset/2d00f865631069f9d70237e84f9f12413b9b737c.png';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
+import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import heroVideo from '../assets/hero.mp4';
 import { Navigation } from './Navigation';
 
@@ -78,13 +79,43 @@ export function HeroSection() {
           disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover"
           style={{ 
+            mixBlendMode: 'screen', 
+            opacity: 0.85,
             WebkitPlaysinline: 'true',
+            filter: 'hue-rotate(160deg) saturate(1.8) brightness(0.85) contrast(1.3)',
+          }}
+        />
+        {/* Dark Teal overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.5) 0%, rgba(0, 47, 58, 0.3) 50%, rgba(0, 47, 58, 0.5) 100%)',
+            mixBlendMode: 'multiply',
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Bright Turquoise highlight overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.4) 0%, transparent 70%)',
+            mixBlendMode: 'screen',
+            pointerEvents: 'none',
+          }}
+        />
+        {/* Additional teal gradient for depth */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.2) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.3) 100%)',
+            mixBlendMode: 'color',
+            pointerEvents: 'none',
           }}
         />
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full" style={{ marginTop: 'clamp(-120px, -15vw, -80px)' }}>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full -mt-20">
         {/* SVG Filters for Internal Marble Texture */}
         <svg style={{ position: 'absolute', width: 0, height: 0 }}>
           <defs>
@@ -123,9 +154,9 @@ export function HeroSection() {
           </defs>
         </svg>
 
-        {/* Main Headline - Metallic Effect */}
-        <div className="relative mb-6" style={{ isolation: 'isolate', marginBottom: 'clamp(12px, 1.5vw, 24px)' }}>
-          {/* Base marble text layer - Peach metallic */}
+        {/* Main Headline - Contained Marble Effect */}
+        <div className="relative mb-6" style={{ isolation: 'isolate' }}>
+          {/* Base marble text layer with image - Teal filtered */}
           <motion.h1
             className="text-8xl text-center relative z-10"
             style={{
@@ -135,12 +166,11 @@ export function HeroSection() {
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
               fontWeight: 500,
               letterSpacing: '2px',
               willChange: 'opacity',
-              filter: 'brightness(1.1) saturate(1.3) contrast(1.2) hue-rotate(-15deg)',
-              fontSize: 'clamp(36px, 8vw, 96px)',
+              filter: 'hue-rotate(160deg) saturate(0.8) brightness(1.1)',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,21 +179,20 @@ export function HeroSection() {
             Life in a Flow
           </motion.h1>
 
-          {/* Slow shimmer overlay - Peach tones */}
+          {/* Slow shimmer overlay - stays inside text */}
           <motion.h1
             className="absolute inset-0 text-8xl text-center pointer-events-none"
             style={{
-              background: 'linear-gradient(90deg, transparent 0%, rgba(255,218,185,0.4) 25%, rgba(255,182,193,0.6) 50%, rgba(255,218,185,0.4) 75%, transparent 100%)',
+              background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 25%, rgba(255,255,255,0.25) 50%, rgba(255,255,255,0.15) 75%, transparent 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              fontFamily: 'Playfair Display, serif',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
               fontWeight: 500,
               letterSpacing: '2px',
               backgroundSize: '200% 100%',
               zIndex: 12,
               willChange: 'background-position, opacity',
-              fontSize: 'clamp(36px, 8vw, 96px)',
             }}
             animate={{
               backgroundPosition: ['-200% 0%', '200% 0%', '200% 0%', '200% 0%', '200% 0%'],
@@ -229,18 +258,17 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                fontFamily: 'Playfair Display, serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
-                filter: 'brightness(1.3) saturate(1.4) hue-rotate(-15deg)',
-                fontSize: 'clamp(36px, 8vw, 96px)',
+                filter: 'brightness(1.15) hue-rotate(160deg) saturate(0.8)',
               }}
             >
               Life in a Flow
             </h1>
           </motion.div>
 
-          {/* Electric ripple inside text - Peach tones */}
+          {/* Electric ripple inside text */}
           <motion.div
             className="absolute inset-0 overflow-hidden pointer-events-none"
             style={{
@@ -282,11 +310,10 @@ export function HeroSection() {
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                fontFamily: 'Playfair Display, serif',
+                fontFamily: 'Fredoka, system-ui, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
-                filter: 'brightness(1.4) saturate(1.5) hue-rotate(-15deg)',
-                fontSize: 'clamp(36px, 8vw, 96px)',
+                filter: 'brightness(1.2) saturate(1.01) hue-rotate(160deg) saturate(0.8)',
               }}
             >
               Life in a Flow
@@ -298,15 +325,11 @@ export function HeroSection() {
         <motion.p
           className="text-white max-w-xl text-center mb-20 relative z-20"
           style={{
-            fontFamily: 'Montserrat, sans-serif',
+            fontFamily: 'Fredoka, system-ui, sans-serif',
             letterSpacing: '2px',
-            fontSize: 'clamp(14px, 1.8vw, 18px)',
+            fontSize: '18px',
             lineHeight: '1.6',
             fontWeight: 400,
-            marginBottom: 'clamp(40px, 5vw, 80px)',
-            maxWidth: 'clamp(280px, 90vw, 640px)',
-            paddingLeft: 'clamp(16px, 4vw, 0px)',
-            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -316,6 +339,57 @@ export function HeroSection() {
         </motion.p>
       </div>
 
+      {/* Global bloom effect - Teal */}
+      <div className="absolute inset-0 pointer-events-none mix-blend-screen opacity-40"
+           style={{
+             background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.15) 0%, transparent 60%)',
+           }}
+      />
+
+      {/* Teal flow - left side */}
+      <div className="absolute pointer-events-none" style={{ left: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+        <motion.img 
+          src={imgPurpleFlow} 
+          alt="teal flow" 
+          className="h-[100vh]"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+          }}
+          animate={{
+            opacity: [0.1, 0.4, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            times: [0, 0.3, 0.6, 1],
+            ease: [0.4, 0, 0.2, 1],
+          }}
+        />
+      </div>
+
+      {/* Teal flow - right side */}
+      <div className="absolute pointer-events-none" style={{ right: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+        <motion.img 
+          src={imgPurpleFlow} 
+          alt="teal flow" 
+          className="h-[100vh]"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+          }}
+          animate={{
+            opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            times: [0, 0.2, 0.5, 0.7, 1],
+            ease: [0.4, 0, 0.2, 1],
+            delay: 0.3,
+          }}
+        />
+      </div>
 
       {/* Teal arc - behind navbar */}
       <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>

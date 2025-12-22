@@ -9,7 +9,6 @@ import { FloatingUISection } from './components/FloatingUISection';
 import { About } from './components/About';
 import { Services } from './components/Services';
 import { Contact } from './components/Contact';
-import { UserContact } from './components/UserContact';
 import { useEffect } from 'react';
 import { ProblemSection } from './components/ProblemSection';
 import { OtherApps } from '../src/components/OtherApps';
@@ -28,7 +27,7 @@ import { FragmentedReality } from './components/FragmentedReality';
   }, [location]);
 
   return (
-    <div className="relative w-full" style={{ background: '#000000', overflowX: 'hidden' }}>
+    <div className="relative w-full" style={{ background: '#000000' }}>
       {/* HERO SECTION
       <HeroSection />
 
@@ -69,7 +68,6 @@ export default function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/user-contact" element={<UserContact />} />
       </Routes>
     </Router>
   );

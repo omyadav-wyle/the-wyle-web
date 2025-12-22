@@ -1,92 +1,51 @@
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useState, useEffect, useMemo } from 'react';
+import { useRef } from 'react';
 import Lottie from 'lottie-react';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import backgroundAnimationData from '../assets/Background looping animation.json';
 
 export function FloatingUISection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1920);
-  
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  // Calculate responsive transform values based on viewport width
-  // On smaller screens, reduce the movement distance to keep elements within bounds
-  const getResponsiveValue = (desktopValue: number) => {
-    // Scale down movement on smaller screens
-    // For screens < 640px, use 30% of desktop value
-    // For screens 640-1024px, use 50% of desktop value
-    // For screens > 1024px, use full desktop value
-    if (windowWidth < 640) {
-      return desktopValue * 0.3;
-    } else if (windowWidth < 1024) {
-      return desktopValue * 0.5;
-    }
-    return desktopValue;
-  };
-
-  // Calculate responsive output ranges - recalculate when windowWidth changes
-  const calendarXRange = useMemo(() => [0, -getResponsiveValue(420)], [windowWidth]);
-  const calendarYRange = useMemo(() => [0, -getResponsiveValue(280)], [windowWidth]);
-  const carXRange = useMemo(() => [0, getResponsiveValue(420)], [windowWidth]);
-  const carYRange = useMemo(() => [0, -getResponsiveValue(220)], [windowWidth]);
-  const giftXRange = useMemo(() => [0, -getResponsiveValue(250)], [windowWidth]);
-  const giftYRange = useMemo(() => [0, getResponsiveValue(180)], [windowWidth]);
-  const cartXRange = useMemo(() => [0, getResponsiveValue(360)], [windowWidth]);
-  const cartYRange = useMemo(() => [0, getResponsiveValue(60)], [windowWidth]);
-  const foodXRange = useMemo(() => [0, getResponsiveValue(470)], [windowWidth]);
-  const foodYRange = useMemo(() => [0, -getResponsiveValue(160)], [windowWidth]);
-  const marinaXRange = useMemo(() => [0, -getResponsiveValue(480)], [windowWidth]);
-  const marinaYRange = useMemo(() => [0, getResponsiveValue(20)], [windowWidth]);
-  const birthdayXRange = useMemo(() => [0, getResponsiveValue(420)], [windowWidth]);
-  const birthdayYRange = useMemo(() => [0, getResponsiveValue(220)], [windowWidth]);
-
   // Dispersion transforms for each element - staggered to prevent overlap
   // Calendar - top left (moves first)
-  const calendarX = useTransform(scrollYProgress, [0.25, 0.65], calendarXRange);
-  const calendarY = useTransform(scrollYProgress, [0.25, 0.65], calendarYRange);
+  const calendarX = useTransform(scrollYProgress, [0.25, 0.65], [0, -420]);
+  const calendarY = useTransform(scrollYProgress, [0.25, 0.65], [0, -280]);
   const calendarOpacity = useTransform(scrollYProgress, [0.25, 0.45, 0.65], [1, 0.8, 0]);
   
   // Car - top right (moves early)
-  const carX = useTransform(scrollYProgress, [0.28, 0.68], carXRange);
-  const carY = useTransform(scrollYProgress, [0.28, 0.68], carYRange);
+  const carX = useTransform(scrollYProgress, [0.28, 0.68], [0, 420]);
+  const carY = useTransform(scrollYProgress, [0.28, 0.68], [0, -220]);
   const carOpacity = useTransform(scrollYProgress, [0.28, 0.48, 0.68], [1, 0.8, 0]);
   
   // Gift - left lower (moves mid-early)
-  const giftX = useTransform(scrollYProgress, [0.32, 0.72], giftXRange);
-  const giftY = useTransform(scrollYProgress, [0.32, 0.72], giftYRange);
+  const giftX = useTransform(scrollYProgress, [0.32, 0.72], [0, -250]);
+  const giftY = useTransform(scrollYProgress, [0.32, 0.72], [0, 180]);
   const giftOpacity = useTransform(scrollYProgress, [0.32, 0.52, 0.72], [1, 0.8, 0]);
   
   // Shopping Cart - right middle (moves mid)
-  const cartX = useTransform(scrollYProgress, [0.35, 0.75], cartXRange);
-  const cartY = useTransform(scrollYProgress, [0.35, 0.75], cartYRange);
+  const cartX = useTransform(scrollYProgress, [0.35, 0.75], [0, 360]);
+  const cartY = useTransform(scrollYProgress, [0.35, 0.75], [0, 60]);
   const cartOpacity = useTransform(scrollYProgress, [0.35, 0.55, 0.75], [1, 0.8, 0]);
   
   // Food ordering card - top right (moves early, curved path)
-  const foodX = useTransform(scrollYProgress, [0.3, 0.7], foodXRange);
-  const foodY = useTransform(scrollYProgress, [0.3, 0.7], foodYRange);
+  const foodX = useTransform(scrollYProgress, [0.3, 0.7], [0, 470]);
+  const foodY = useTransform(scrollYProgress, [0.3, 0.7], [0, -160]);
   const foodOpacity = useTransform(scrollYProgress, [0.3, 0.5, 0.7], [1, 0.8, 0]);
   
   // Dubai Marina card - left middle (moves first, curved path)
-  const marinaX = useTransform(scrollYProgress, [0.27, 0.67], marinaXRange);
-  const marinaY = useTransform(scrollYProgress, [0.27, 0.67], marinaYRange);
+  const marinaX = useTransform(scrollYProgress, [0.27, 0.67], [0, -480]);
+  const marinaY = useTransform(scrollYProgress, [0.27, 0.67], [0, 20]);
   const marinaOpacity = useTransform(scrollYProgress, [0.27, 0.47, 0.67], [1, 0.8, 0]);
   
   // Birthday card - bottom right (moves last)
-  const birthdayX = useTransform(scrollYProgress, [0.38, 0.78], birthdayXRange);
-  const birthdayY = useTransform(scrollYProgress, [0.38, 0.78], birthdayYRange);
+  const birthdayX = useTransform(scrollYProgress, [0.38, 0.78], [0, 420]);
+  const birthdayY = useTransform(scrollYProgress, [0.38, 0.78], [0, 220]);
   const birthdayOpacity = useTransform(scrollYProgress, [0.38, 0.58, 0.78], [1, 0.8, 0]);
 
   // Notification fade-in (stays in phone)
@@ -101,11 +60,9 @@ export function FloatingUISection() {
       className="relative px-16" 
       style={{ 
         background: 'linear-gradient(to bottom, #000000 0%, #0B0B11 50%, #000000 100%)',
-        overflow: 'hidden',
-        paddingTop: 'clamp(16px, 1vw, 16px)',
-        paddingBottom: 'clamp(16px, 1vw, 16px)',
-        paddingLeft: 'clamp(16px, 4vw, 64px)',
-        paddingRight: 'clamp(16px, 4vw, 64px)',
+        overflow: 'visible',
+        paddingTop: '1rem',
+        paddingBottom: '1rem',
       }}
     >
       {/* Lottie Background Animation with Teal Theme */}
@@ -140,19 +97,16 @@ export function FloatingUISection() {
       />
 
       {/* Heading and Subtext */}
-      <div className="relative z-10 text-center mb-16" style={{ paddingTop: 'clamp(40px, 5vw, 80px)', marginBottom: 'clamp(32px, 4vw, 64px)' }}>
+      <div className="relative z-10 text-center mb-16" style={{ paddingTop: '80px' }}>
         <motion.h2
           className="mb-4"
           style={{
-            fontSize: 'clamp(28px, 5vw, 48px)',
-            fontFamily: 'Poppins, sans-serif',
+            fontSize: '48px',
+            fontFamily: 'Fredoka, system-ui, sans-serif',
             fontWeight: 500,
             letterSpacing: '1px',
             color: '#FFFFFF',
             lineHeight: '1.2',
-            marginBottom: 'clamp(12px, 1.5vw, 16px)',
-            paddingLeft: 'clamp(16px, 4vw, 0px)',
-            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -163,13 +117,11 @@ export function FloatingUISection() {
         </motion.h2>
         <motion.p
           style={{
-            fontSize: 'clamp(14px, 1.8vw, 18px)',
-            fontFamily: 'Urbanist, sans-serif',
+            fontSize: '18px',
+            fontFamily: 'Inter, system-ui, sans-serif',
             fontWeight: 400,
             color: '#999999',
             lineHeight: '1.6',
-            paddingLeft: 'clamp(16px, 4vw, 0px)',
-            paddingRight: 'clamp(16px, 4vw, 0px)',
           }}
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -181,14 +133,14 @@ export function FloatingUISection() {
       </div>
 
       {/* Central Phone Container */}
-      <div className="relative z-20 flex items-center justify-center" style={{ minHeight: 'clamp(500px, 70vh, 700px)', marginTop: '0' }}>
+      <div className="relative z-20 flex items-center justify-center" style={{ minHeight: '700px', marginTop: '0' }}>
 
         {/* CENTER - Phone */}
         <div
           className="relative z-20"
           style={{
-            width: 'clamp(240px, 34vw, 340px)',
-            height: 'clamp(500px, 70vh, 700px)',
+            width: '340px',
+            height: '700px',
           }}
         >
           {/* Phone Frame */}
@@ -214,7 +166,7 @@ export function FloatingUISection() {
                 style={{
                   fontSize: '15px',
                   color: '#FFFFFF',
-                  fontFamily: 'Poppins, sans-serif',
+                  fontFamily: 'Fredoka, system-ui, sans-serif',
                   fontWeight: 500,
                 }}
               >
@@ -262,9 +214,9 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: 'clamp(12px, 1.6vw, 16px)',
+                    fontSize: '16px',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
                   You haven't eaten.
@@ -272,9 +224,9 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: 'clamp(10px, 1.2vw, 12px)',
+                    fontSize: '12px',
                     color: '#999999',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                     lineHeight: '1.4',
                   }}
                 >
@@ -296,9 +248,9 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: 'clamp(12px, 1.6vw, 16px)',
+                    fontSize: '16px',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
                   12:00 AM
@@ -306,9 +258,9 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: 'clamp(10px, 1.2vw, 12px)',
+                    fontSize: '12px',
                     color: '#999999',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
                   Today matters to someone.
@@ -329,9 +281,9 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: 'clamp(12px, 1.6vw, 16px)',
+                    fontSize: '16px',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                   }}
                 >
                   Tomorrow starts early.
@@ -339,9 +291,9 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: 'clamp(10px, 1.2vw, 12px)',
+                    fontSize: '12px',
                     color: '#999999',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                     lineHeight: '1.3',
                   }}
                 >
@@ -375,11 +327,11 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1.5"
                   style={{
-                    fontSize: 'clamp(12px, 1.5vw, 15px)',
+                    fontSize: '15px',
                     color: '#AAAAAA',
-                    fontFamily: 'Poppins, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 500,
-                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
+                    paddingLeft: '20px',
                   }}
                 >
                   Late night.
@@ -387,11 +339,11 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: 'clamp(10px, 1.2vw, 12px)',
+                    fontSize: '12px',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                     lineHeight: '1.5',
-                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
+                    paddingLeft: '20px',
                     margin: 0,
                   }}
                 >
@@ -425,11 +377,11 @@ export function FloatingUISection() {
                 <h3 
                   className="mb-1"
                   style={{
-                    fontSize: 'clamp(11px, 1.4vw, 14px)',
+                    fontSize: '14px',
                     color: '#AAAAAA',
-                    fontFamily: 'Poppins, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 500,
-                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
+                    paddingLeft: '20px',
                   }}
                 >
                   Running low?
@@ -437,11 +389,11 @@ export function FloatingUISection() {
                 
                 <p 
                   style={{
-                    fontSize: 'clamp(9px, 1.1vw, 11px)',
+                    fontSize: '11px',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Inter, system-ui, sans-serif',
                     lineHeight: '1.4',
-                    paddingLeft: 'clamp(16px, 1.25vw, 20px)',
+                    paddingLeft: '20px',
                     margin: 0,
                   }}
                 >
@@ -454,8 +406,8 @@ export function FloatingUISection() {
             <div
               className="absolute top-0 left-1/2 -translate-x-1/2 rounded-b-3xl"
               style={{
-                width: 'clamp(85px, 12vw, 120px)',
-                height: 'clamp(20px, 2.8vw, 28px)',
+                width: '120px',
+                height: '28px',
                 background: '#000000',
               }}
             />

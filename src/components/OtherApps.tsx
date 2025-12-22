@@ -32,8 +32,8 @@ export function OtherApps() {
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-16" style={{ background: '#000000', paddingTop: 'clamp(48px, 8vw, 128px)', paddingBottom: 'clamp(48px, 8vw, 128px)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
-      <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(32px, 5vw, 80px)' }}>
+    <section ref={sectionRef} className="relative py-32 px-16" style={{ background: '#000000' }}>
+      <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center">
         {/* Left Column - Text Content */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -43,11 +43,11 @@ export function OtherApps() {
         >
           <motion.h2
             style={{
-              fontSize: 'clamp(28px, 5vw, 48px)',
-              fontFamily: 'Poppins, sans-serif',
+              fontSize: '48px',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
               fontWeight: 500,
               color: '#FEFFFE',
-              marginBottom: 'clamp(16px, 1.5vw, 24px)',
+              marginBottom: '24px',
               lineHeight: '1.2',
             }}
             initial={{ opacity: 0, y: 20 }}
@@ -91,12 +91,12 @@ export function OtherApps() {
                 <div>
                   <motion.h3
                     style={{
-                      fontSize: 'clamp(16px, 2vw, 20px)',
-                      fontFamily: 'Poppins, sans-serif',
+                      fontSize: '20px',
+                      fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                       fontWeight: 600,
                       color: '#FEFFFE',
-                      marginBottom: 'clamp(6px, 0.5vw, 8px)',
+                      marginBottom: '8px',
                     }}
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -107,8 +107,8 @@ export function OtherApps() {
                   </motion.h3>
                   <motion.p
                     style={{
-                      fontSize: 'clamp(14px, 1.6vw, 16px)',
-                      fontFamily: 'Urbanist, sans-serif',
+                      fontSize: '16px',
+                      fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                       color: 'rgba(254, 255, 254, 0.7)',
                       lineHeight: '1.6',
@@ -127,8 +127,8 @@ export function OtherApps() {
 
           <motion.p
             style={{
-              fontSize: 'clamp(14px, 1.8vw, 18px)',
-              fontFamily: 'Urbanist, sans-serif',
+              fontSize: '18px',
+              fontFamily: 'Fredoka, system-ui, sans-serif',
               fontWeight: 400,
               color: 'rgba(254, 255, 254, 0.7)',
               lineHeight: '1.8',
@@ -152,7 +152,7 @@ export function OtherApps() {
           style={{ y: dashboardY, opacity: dashboardOpacity }}
         >
           {/* Futuristic Dashboard Mockup */}
-          <div className="relative h-[400px] flex items-center justify-center" style={{ height: 'clamp(300px, 50vh, 400px)' }}>
+          <div className="relative h-[400px] flex items-center justify-center">
             {/* Multiple floating notifications that merge into one */}
             {[
               { app: 'Slack', message: 'New message from team', time: '2m', color: '#1B998B', delay: 0, startX: -120, startY: -80 },
@@ -169,7 +169,7 @@ export function OtherApps() {
                 style={{
                   background: 'rgba(0, 47, 58, 0.9)',
                   border: '1px solid rgba(27, 153, 139, 0.3)',
-                  minWidth: 'clamp(200px, 26vw, 260px)',
+                  minWidth: '260px',
                   backdropFilter: 'blur(10px)',
                 }}
                 initial={{
@@ -216,7 +216,7 @@ export function OtherApps() {
                     <span
                       style={{
                         fontSize: '11px',
-                        fontFamily: 'Poppins, sans-serif',
+                        fontFamily: 'Fredoka, system-ui, sans-serif',
                         fontWeight: 500,
                         color: '#000000',
                         textTransform: 'uppercase',
@@ -233,7 +233,7 @@ export function OtherApps() {
                       <span
                         style={{
                           fontSize: '12px',
-                          fontFamily: 'Inter, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
                           fontWeight: 500,
                           color: '#FEFFFE',
                           letterSpacing: '0.2px',
@@ -244,7 +244,7 @@ export function OtherApps() {
                       <span
                         style={{
                           fontSize: '10px',
-                          fontFamily: 'Inter, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                           color: 'rgba(254, 255, 254, 0.4)',
                         }}
@@ -255,7 +255,7 @@ export function OtherApps() {
                     <p
                       style={{
                         fontSize: '11px',
-                        fontFamily: 'Urbanist, sans-serif',
+                        fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                         color: 'rgba(254, 255, 254, 0.7)',
                         lineHeight: '1.4',
@@ -284,7 +284,7 @@ export function OtherApps() {
                 background: 'rgba(0, 47, 58, 0.95)',
                 border: '1.5px solid rgba(27, 153, 139, 0.5)',
                 backdropFilter: 'blur(20px)',
-                minWidth: 'clamp(260px, 34vw, 340px)',
+                minWidth: '340px',
               }}
               initial={{
                 opacity: 0,
@@ -327,7 +327,7 @@ export function OtherApps() {
                       <span
                         style={{
                           fontSize: '16px',
-                          fontFamily: 'Poppins, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                           fontWeight: 700,
                           color: '#FEFFFE',
@@ -341,7 +341,7 @@ export function OtherApps() {
                       <div
                         style={{
                           fontSize: '14px',
-                          fontFamily: 'Poppins, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
                           fontWeight: 500,
                           color: '#FEFFFE',
                           marginBottom: '2px',
@@ -353,7 +353,7 @@ export function OtherApps() {
                       <div
                         style={{
                           fontSize: '10px',
-                          fontFamily: 'Poppins, sans-serif',
+                          fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                           color: 'rgba(254, 255, 254, 0.5)',
                         }}
@@ -369,7 +369,6 @@ export function OtherApps() {
                       fontSize: '11px',
                       fontWeight: 700,
                       color: '#000000',
-                      fontFamily: 'Inter, sans-serif',
                     }}
                     animate={{
                       scale: [1, 1.1, 1],
@@ -387,7 +386,7 @@ export function OtherApps() {
                 <p
                   style={{
                     fontSize: '12px',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'Fredoka, system-ui, sans-serif',
                     fontWeight: 400,
                     color: 'rgba(254, 255, 254, 0.8)',
                     lineHeight: '1.5',
