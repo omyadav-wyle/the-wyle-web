@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
 import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import { Footer } from './Footer';
@@ -7,25 +5,20 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Navigation } from './Navigation';
-
+import '../index.css';
 export function Contact() {
   const [formData, setFormData] = useState({
     businessName: '',
-    industry: '',
-    country: '',
-    city: '',
-    employees: '',
-    outlets: '',
-    fullName: '',
+    contactName: '',
+    contactTitle: '',
     email: '',
     phone: '',
-    department: '',
-    message: '',
+    city: '',
   });
 
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
-  const [statusType, setStatusType] = useState(''); // 'successerror'
+  const [statusType, setStatusType] = useState(''); // 'success' | 'error'
 
   // Handle input changes
   const handleChange = (e: any) => {
@@ -45,18 +38,13 @@ export function Contact() {
     // Validation
     if (
       !formData.businessName.trim() ||
-      !formData.industry.trim() ||
-      !formData.country.trim() ||
-      !formData.city.trim() ||
-      !formData.employees.trim() ||
-      !formData.outlets.trim() ||
-      !formData.fullName.trim() ||
+      !formData.contactName.trim() ||
+      !formData.contactTitle.trim() ||
       !formData.email.trim() ||
       !formData.phone.trim() ||
-      !formData.department.trim() ||
-      !formData.message.trim()
+      !formData.city.trim()
     ) {
-      setStatusMessage('Please fill in all fields');
+      setStatusMessage('Please fill in all required fields');
       setStatusType('error');
       setLoading(false);
       return;
@@ -73,7 +61,7 @@ export function Contact() {
 
     try {
       // Use the same AppScript URL
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwK55GHroxhyvqusEAofVae9sle4UDebd37aajM15De-fnGvWN052kxslOwcomvLuSS/exec';
+      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw14vj9WDKp-5zKwb9pKlKAj44OAOtlI6NO9cNka0R4Qn9glUZnFN3KNSTA_tYY4T8U/exec';
 
       // Send data as URL-encoded form data to avoid CORS issues
       const formDataToSend = new URLSearchParams();
@@ -92,16 +80,11 @@ export function Contact() {
       // Reset form
       setFormData({
         businessName: '',
-        industry: '',
-        country: '',
-        city: '',
-        employees: '',
-        outlets: '',
-        fullName: '',
+        contactName: '',
+        contactTitle: '',
         email: '',
         phone: '',
-        department: '',
-        message: '',
+        city: '',
       });
     } catch (error: any) {
       console.error('Error submitting form:', error);
@@ -124,57 +107,89 @@ export function Contact() {
 
       {/* Navigation */}
       <Navigation/>
+
+      {/* Teal arc - behind navbar */}
+      <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>
+        {/* Heavily blurred base layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur base" 
+          className="h-[105vh]"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Medium blur layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur medium" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Soft blur overlay */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur soft" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+      </div>
+
       {/* Hero Section */}
       <section className="relative pt-24 pb-16 px-16">
-        {/* Purple arc - left side */}
-        <div className="absolute pointer-events-none" style={{ left: '-40px', top: '50%', zIndex: 1, transform: 'translateY(-50%) scaleX(-1)' }}>
-          {/* Heavily blurred base layer */}
-          <img 
-            src={arcImage} 
-            alt="purple arc blur base" 
-            className="h-[50vh]"
+        {/* Teal flow - left side */}
+        <div className="absolute pointer-events-none" style={{ left: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
             style={{
               mixBlendMode: 'screen',
-              filter: 'blur(50px) brightness(1.6)',
-              opacity: 0.5,
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
             }}
-          />
-          
-          {/* Medium blur layer */}
-          <img 
-            src={arcImage} 
-            alt="purple arc blur medium" 
-            className="h-[50vh] absolute top-0 right-0"
-            style={{
-              mixBlendMode: 'screen',
-              filter: 'blur(30px) brightness(1.4)',
-              opacity: 0.6,
+            animate={{
+              opacity: [0.1, 0.4, 0.2, 0.1],
             }}
-          />
-          
-          {/* Soft blur overlay */}
-          <img 
-            src={arcImage} 
-            alt="purple arc blur soft" 
-            className="h-[50vh] absolute top-0 right-0"
-            style={{
-              mixBlendMode: 'screen',
-              opacity: 0.5,
-              filter: 'blur(15px) brightness(1.2)',
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
             }}
           />
         </div>
 
-        {/* Purple flow - right side */}
-        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
-          <img 
+        {/* Teal flow - right side */}
+        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+          <motion.img 
             src={imgPurpleFlow} 
-            alt="purple flow" 
+            alt="teal flow" 
             className="h-[100vh]"
             style={{
               mixBlendMode: 'screen',
-              opacity: 0.6,
-              filter: 'blur(3px)',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
             }}
           />
         </div>
@@ -182,67 +197,85 @@ export function Contact() {
         <div className="max-w-7xl mx-auto relative z-10">
           <h1
             style={{
-              fontSize: '64px',
+              fontSize: 'var(--font-size-heading)',
               color: '#FFFFFF',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'var(--font-heading)',
               fontWeight: 500,
               letterSpacing: '-1px',
               lineHeight: '1.2',
               marginBottom: '24px',
             }}
           >
-            Grow You Business<br />with WYLE
+            Let's start with intent.
           </h1>
 
           <p
             style={{
-              fontSize: '16px',
+              fontSize: 'var(--font-size-subheading)',
               color: '#CCCCCC',
-              fontFamily: 'Fredoka, system-ui, sans-serif',
+              fontFamily: 'var(--font-body)',
+              fontWeight: 400,
               letterSpacing: '0.3px',
               lineHeight: '1.6',
-              maxWidth: '600px',
+              maxWidth: '900px',
             }}
           >
-            If you're interested in what's taking shape, or want to be part of the early
-            conversations, we'd love to hear from you.
+            We're selective about who we work with, and thoughtful about how we do it.<br />
+            If you believe good systems should feel effortless, this is a good place to begin.
           </p>
         </div>
       </section>
 
       {/* Contact Form Section */}
       <section className="relative py-12 px-16 pb-32">
-        {/* Purple flow - right side of form */}
+        {/* Teal flow - right side of form */}
         <div className="absolute pointer-events-none" style={{ right: '-500px', top: '40%', zIndex: 1, transform: 'translateY(-50%) rotate(15deg)' }}>
-          <img 
+          <motion.img 
             src={imgPurpleFlow} 
-            alt="purple flow form" 
+            alt="teal flow form" 
             className="h-[60vh]"
             style={{
               mixBlendMode: 'screen',
-              opacity: 0.4,
-              filter: 'blur(3px)',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.3, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
             }}
           />
         </div>
 
-        {/* Purple flow - left side near message */}
+        {/* Teal flow - left side near message */}
         <div className="absolute pointer-events-none" style={{ left: '-500px', bottom: '0%', zIndex: 1, transform: 'rotate(-15deg)' }}>
-          <img 
+          <motion.img 
             src={imgPurpleFlow} 
-            alt="purple flow form left" 
+            alt="teal flow form left" 
             className="h-[60vh]"
             style={{
               mixBlendMode: 'screen',
-              opacity: 0.4,
-              filter: 'blur(3px)',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.3, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
             }}
           />
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           <form className="space-y-12" onSubmit={handleSubmit}>
-            {/* Two Column Grid - Row 1 */}
+            {/* Two Column Grid */}
             <div className="grid grid-cols-2 gap-x-16 gap-y-12">
               {/* Business Name */}
               <div>
@@ -252,7 +285,8 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
@@ -265,220 +299,104 @@ export function Contact() {
                   name="businessName"
                   value={formData.businessName}
                   onChange={handleChange}
-                  className="w-full pb-2"
+                  className="w-full pb-2 transition-all"
                   style={{
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    color: '#FFFFFF',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
                 />
               </div>
 
-              {/* Industry */}
+              {/* Contact Person Name */}
               <div>
                 <label 
-                  htmlFor="industry"
+                  htmlFor="contactName"
                   style={{
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Industry <span style={{ color: '#FF0000' }}>*</span>
+                  Contact Person Name <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="industry"
-                  name="industry"
-                  value={formData.industry}
+                  id="contactName"
+                  name="contactName"
+                  value={formData.contactName}
                   onChange={handleChange}
-                  className="w-full pb-2"
+                  className="w-full pb-2 transition-all"
                   style={{
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    color: '#FFFFFF',
+                    fontFamily: 'Poppins, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
                 />
               </div>
 
-              {/* Country */}
+              {/* Contact Person Title */}
               <div>
                 <label 
-                  htmlFor="country"
+                  htmlFor="contactTitle"
                   style={{
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Country <span style={{ color: '#FF0000' }}>*</span>
+                  Contact Person Title <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="country"
-                  name="country"
-                  value={formData.country}
+                  id="contactTitle"
+                  name="contactTitle"
+                  value={formData.contactTitle}
                   onChange={handleChange}
-                  className="w-full pb-2"
+                  className="w-full pb-2 transition-all"
                   style={{
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* City */}
-              <div>
-                <label 
-                  htmlFor="city"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  City <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
-                />
-              </div>
-
-              {/* Number Of Employees */}
-              <div>
-                <label 
-                  htmlFor="employees"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
                   }}
-                >
-                  Number Of Employees <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="employees"
-                  name="employees"
-                  value={formData.employees}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
                   }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* Number Of Outlets */}
-              <div>
-                <label 
-                  htmlFor="outlets"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Number Of Outlets <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="outlets"
-                  name="outlets"
-                  value={formData.outlets}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
-                />
-              </div>
-
-              {/* Full Name */}
-              <div>
-                <label 
-                  htmlFor="fullName"
-                  style={{
-                    display: 'block',
-                    fontSize: '14px',
-                    color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    marginBottom: '12px',
-                    letterSpacing: '0.3px',
-                  }}
-                >
-                  Full Name <span style={{ color: '#FF0000' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  className="w-full pb-2"
-                  style={{
-                    background: 'transparent',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                  placeholder="Your answer"
                 />
               </div>
 
@@ -490,7 +408,8 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
@@ -503,16 +422,22 @@ export function Contact() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full pb-2"
+                  className="w-full pb-2 transition-all"
                   style={{
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    color: '#FFFFFF',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
                 />
               </div>
 
@@ -524,12 +449,13 @@ export function Contact() {
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Phone Number <span style={{ color: '#FF0000' }}>*</span>
+                  Phone No <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="tel"
@@ -537,86 +463,65 @@ export function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full pb-2"
+                  className="w-full pb-2 transition-all"
                   style={{
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    color: '#FFFFFF',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
                 />
               </div>
 
-              {/* Which department */}
+              {/* City */}
               <div>
                 <label 
-                  htmlFor="department"
+                  htmlFor="city"
                   style={{
                     display: 'block',
                     fontSize: '14px',
                     color: '#FFFFFF',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 400,
                     marginBottom: '12px',
                     letterSpacing: '0.3px',
                   }}
                 >
-                  Department <span style={{ color: '#FF0000' }}>*</span>
+                  City <span style={{ color: '#FF0000' }}>*</span>
                 </label>
                 <input
                   type="text"
-                  id="department"
-                  name="department"
-                  value={formData.department}
+                  id="city"
+                  name="city"
+                  value={formData.city}
                   onChange={handleChange}
-                  className="w-full pb-2"
+                  className="w-full pb-2 transition-all"
                   style={{
                     background: 'transparent',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#999999',
-                    fontFamily: 'Fredoka, system-ui, sans-serif',
+                    color: '#FFFFFF',
+                    fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
+                  onFocus={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#FFB5A7';
+                  }}
+                  onBlur={(e) => {
+                    e.currentTarget.style.borderBottomColor = 'rgba(255, 255, 255, 0.2)';
+                  }}
                 />
               </div>
-            </div>
-
-            {/* Message - Full Width */}
-            <div>
-              <label 
-                htmlFor="message"
-                style={{
-                  display: 'block',
-                  fontSize: '14px',
-                  color: '#FFFFFF',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
-                  marginBottom: '12px',
-                  letterSpacing: '0.3px',
-                }}
-              >
-                Message <span style={{ color: '#FF0000' }}>*</span>
-              </label>
-              <input
-                type="text"
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full pb-2"
-                style={{
-                  background: 'transparent',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                  color: '#999999',
-                  fontFamily: 'Fredoka, system-ui, sans-serif',
-                  fontSize: '14px',
-                  outline: 'none',
-                }}
-                placeholder="Your answer"
-              />
             </div>
 
             {/* Status Message */}
@@ -635,7 +540,7 @@ export function Contact() {
                       ? '1px solid rgba(34, 197, 94, 0.3)'
                       : '1px solid rgba(239, 68, 68, 0.3)',
                   color: statusType === 'success' ? '#22c55e' : '#ef4444',
-                  fontFamily: 'Inter, system-ui, sans-serif',
+                  fontFamily: 'Poppins, sans-serif',
                   fontSize: '14px',
                 }}
               >
@@ -648,17 +553,35 @@ export function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="px-8 py-3 rounded-full text-sm transition-opacity hover:opacity-80 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-4 rounded-lg font-bold transition-all flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-                  backdropFilter: 'blur(30px)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  color: '#FFFFFF',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  letterSpacing: '1.5px',
+                  background: '#D5FF3F',
+                  border: '1px solid #D5FF3F',
+                  color: '#000000',
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 500,
+                  fontSize: '16px',
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                  boxShadow: '0 0 20px rgba(213, 255, 63, 0.3)',
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.background = '#E5FF5F';
+                    e.currentTarget.style.borderColor = '#E5FF5F';
+                    e.currentTarget.style.boxShadow = '0 0 30px rgba(213, 255, 63, 0.5)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.background = '#D5FF3F';
+                    e.currentTarget.style.borderColor = '#D5FF3F';
+                    e.currentTarget.style.boxShadow = '0 0 20px rgba(213, 255, 63, 0.3)';
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }
                 }}
               >
-                {loading ? 'Submitting...' : 'Submit Request'}
+                {loading ? 'Submitting...' : 'Begin'}
                 {!loading && <ArrowRight className="w-4 h-4" />}
               </button>
             </div>

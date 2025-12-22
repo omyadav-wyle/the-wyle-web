@@ -1,11 +1,9 @@
 import { motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
 import marbleTexture from 'figma:asset/2d00f865631069f9d70237e84f9f12413b9b737c.png';
-import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
-import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import heroVideo from '../assets/hero.mp4';
 import { Navigation } from './Navigation';
-
+import '../index.css';
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -78,44 +76,12 @@ export function HeroSection() {
           disablePictureInPicture
           disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ 
-            mixBlendMode: 'screen', 
-            opacity: 0.85,
-            WebkitPlaysinline: 'true',
-            filter: 'hue-rotate(160deg) saturate(1.8) brightness(0.85) contrast(1.3)',
-          }}
-        />
-        {/* Dark Teal overlay */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.5) 0%, rgba(0, 47, 58, 0.3) 50%, rgba(0, 47, 58, 0.5) 100%)',
-            mixBlendMode: 'multiply',
-            pointerEvents: 'none',
-          }}
-        />
-        {/* Bright Turquoise highlight overlay */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.4) 0%, transparent 70%)',
-            mixBlendMode: 'screen',
-            pointerEvents: 'none',
-          }}
-        />
-        {/* Additional teal gradient for depth */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.2) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.3) 100%)',
-            mixBlendMode: 'color',
-            pointerEvents: 'none',
-          }}
+         
         />
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full -mt-20">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full" style={{ marginTop: 'clamp(-200px, -30vw, -80px)' }}>
         {/* SVG Filters for Internal Marble Texture */}
         <svg style={{ position: 'absolute', width: 0, height: 0 }}>
           <defs>
@@ -131,9 +97,9 @@ export function HeroSection() {
               <feColorMatrix
                 in="turbulence"
                 type="matrix"
-                values="1 0 0 0 0.95
-                        0.95 0 0 0 0.9
-                        0.9 0 0.95 0 1
+                values="0.3 0.3 0.3 0 0.9
+                        0.3 0.3 0.3 0 0.9
+                        0.3 0.3 0.3 0 0.95
                         0 0 0 0.08 0"
                 result="colorNoise"
               />
@@ -156,7 +122,7 @@ export function HeroSection() {
 
         {/* Main Headline - Contained Marble Effect */}
         <div className="relative mb-6" style={{ isolation: 'isolate' }}>
-          {/* Base marble text layer with image - Teal filtered */}
+          {/* Base marble text layer with image - Grey/White filtered */}
           <motion.h1
             className="text-8xl text-center relative z-10"
             style={{
@@ -170,7 +136,8 @@ export function HeroSection() {
               fontWeight: 500,
               letterSpacing: '2px',
               willChange: 'opacity',
-              filter: 'hue-rotate(160deg) saturate(0.8) brightness(1.1)',
+              filter: 'brightness(1.4) saturate(0.3) contrast(1.1) grayscale(0.7)',
+              fontSize: 'var(--font-size-heading)',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -193,6 +160,7 @@ export function HeroSection() {
               backgroundSize: '200% 100%',
               zIndex: 12,
               willChange: 'background-position, opacity',
+              fontSize: 'var(--font-size-heading)',
             }}
             animate={{
               backgroundPosition: ['-200% 0%', '200% 0%', '200% 0%', '200% 0%', '200% 0%'],
@@ -261,7 +229,8 @@ export function HeroSection() {
                 fontFamily: 'Fredoka, system-ui, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
-                filter: 'brightness(1.15) hue-rotate(160deg) saturate(0.8)',
+                filter: 'brightness(1.5) saturate(0.3) contrast(1.1) grayscale(0.7)',
+                fontSize: 'var(--font-size-heading)',
               }}
             >
               Life in a Flow
@@ -313,7 +282,8 @@ export function HeroSection() {
                 fontFamily: 'Fredoka, system-ui, sans-serif',
                 fontWeight: 500,
                 letterSpacing: '2px',
-                filter: 'brightness(1.2) saturate(1.01) hue-rotate(160deg) saturate(0.8)',
+                filter: 'brightness(1.6) saturate(0.3) contrast(1.1) grayscale(0.7)',
+                fontSize: 'var(--font-size-heading)',
               }}
             >
               Life in a Flow
@@ -325,9 +295,9 @@ export function HeroSection() {
         <motion.p
           className="text-white max-w-xl text-center mb-20 relative z-20"
           style={{
-            fontFamily: 'Fredoka, system-ui, sans-serif',
+            fontFamily: 'var(--font-subtext)',
             letterSpacing: '2px',
-            fontSize: '18px',
+            fontSize: 'var(--font-size-subheading)',
             lineHeight: '1.6',
             fontWeight: 400,
           }}
@@ -345,90 +315,6 @@ export function HeroSection() {
              background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.15) 0%, transparent 60%)',
            }}
       />
-
-      {/* Teal flow - left side */}
-      <div className="absolute pointer-events-none" style={{ left: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
-        <motion.img 
-          src={imgPurpleFlow} 
-          alt="teal flow" 
-          className="h-[100vh]"
-          style={{
-            mixBlendMode: 'screen',
-            filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
-          }}
-          animate={{
-            opacity: [0.1, 0.4, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            times: [0, 0.3, 0.6, 1],
-            ease: [0.4, 0, 0.2, 1],
-          }}
-        />
-      </div>
-
-      {/* Teal flow - right side */}
-      <div className="absolute pointer-events-none" style={{ right: '-380px', top: '80%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
-        <motion.img 
-          src={imgPurpleFlow} 
-          alt="teal flow" 
-          className="h-[100vh]"
-          style={{
-            mixBlendMode: 'screen',
-            filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
-          }}
-          animate={{
-            opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            times: [0, 0.2, 0.5, 0.7, 1],
-            ease: [0.4, 0, 0.2, 1],
-            delay: 0.3,
-          }}
-        />
-      </div>
-
-      {/* Teal arc - behind navbar */}
-      <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>
-        {/* Heavily blurred base layer */}
-        <img 
-          src={arcImage} 
-          alt="teal arc blur base" 
-          className="h-[105vh]"
-          style={{
-            mixBlendMode: 'screen',
-            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
-            opacity: 0.5,
-          }}
-        />
-        
-        {/* Medium blur layer */}
-        <img 
-          src={arcImage} 
-          alt="teal arc blur medium" 
-          className="h-[105vh] absolute top-0 left-0"
-          style={{
-            mixBlendMode: 'screen',
-            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
-            opacity: 0.5,
-          }}
-        />
-        
-        {/* Soft blur overlay */}
-        <img 
-          src={arcImage} 
-          alt="teal arc blur soft" 
-          className="h-[105vh] absolute top-0 left-0"
-          style={{
-            mixBlendMode: 'screen',
-            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
-            opacity: 0.5,
-          }}
-        />
-      </div>
     </div>
   );
 }

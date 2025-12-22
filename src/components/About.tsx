@@ -1,164 +1,51 @@
 import { motion } from 'motion/react';
-import { Link } from 'react-router-dom';
-import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
-import handImage from 'figma:asset/22ed4d14276b411b9dce2af250a2a23095a047e2.png';
-import waveImage from 'figma:asset/1aac5d74c3a8da7e05fea7551c55919bdf99ce39.png';
+import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
+import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import { Footer } from './Footer';
-import React from 'react';
-
+import { Navigation } from './Navigation';
+import { useRef, useState, useEffect, useCallback } from 'react';
+import arvindImage from '../assets/arvind.webp';
+import amruthaImage from '../assets/amrutha.png';
+import azmatImage from '../assets/azmat.png';
+import aboutHeroVideo from '../assets/about_hero.mp4';
+import '../index.css';
 export function About() {
   const teamMembers = [
     {
-      name: 'Sarah Al Massoudi',
-      role: 'Chief Executive Officer',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      description: 'Visionary leader with 15+ years of experience building scalable platforms across emerging markets. Sarah drives wyle\'s strategic vision of invisible technology that seamlessly integrates into daily life.'
+      name: 'Aravindh Sreekanthan',
+      role: 'Founder & CEO',
+      image: arvindImage,
+      linkedin: 'https://www.linkedin.com/in/aravindh-sreekanthan'
     },
     {
-      name: 'Ahmed Naseeb',
-      role: 'Chief Technology Officer',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      description: 'Engineering expert specializing in distributed systems and AI infrastructure. Ahmed leads the technical architecture that powers wyle\'s intelligent, adaptive platform across multiple services.'
+      name: 'Amrutha Veluthakal',
+      role: 'CPO & Chief of Staff',
+      image: amruthaImage,
+      linkedin: 'https://www.linkedin.com/in/v-amrutha-/'
     },
     {
-      name: 'Amina Al-Saeed',
-      role: 'Chief Product Officer',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      description: 'Product strategist focused on user-centric design and seamless experiences. Amina ensures every feature disappears into the background while delivering maximum value to users.'
-    },
-    {
-      name: 'Marcus Chen',
-      role: 'Chief Design Officer',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      description: 'Design leader championing minimalist aesthetics and purposeful motion. Marcus crafts the calm, magnetic visual language that defines wyle\'s presence and user interactions.'
-    },
-    {
-      name: 'Layla Mouawad',
-      role: 'Chief Data Officer',
-      image: 'https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400',
-      description: 'Data scientist and privacy advocate pioneering ethical AI solutions. Layla ensures wyle\'s intelligent systems respect user privacy while delivering personalized, predictive experiences.'
+      name: 'Azmat Ali',
+      role: 'VP, Marketing & Innovation',
+      image: azmatImage,
+      linkedin: 'https://www.linkedin.com/in/azmatali/'
     }
   ];
 
-  const [activeCardIndex, setActiveCardIndex] = React.useState(0);
-  const [isTransitioning, setIsTransitioning] = React.useState(false);
-  const [previousActiveIndex, setPreviousActiveIndex] = React.useState(0);
-  const [selectedTeamMember, setSelectedTeamMember] = React.useState<typeof teamMembers[0] | null>(null);
-  const [isScrollLocked, setIsScrollLocked] = React.useState(false);
-  const [hasCompletedCarousel, setHasCompletedCarousel] = React.useState(false);
-  
-  const carouselSectionRef = React.useRef<HTMLElement>(null);
-  const scrollTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
-
-  const handleCardChange = (newIndex: number) => {
-    if (newIndex === activeCardIndex) return;
-    setIsTransitioning(true);
-    setPreviousActiveIndex(activeCardIndex);
-    setActiveCardIndex(newIndex);
-    // Reset transition state after animation completes
-    setTimeout(() => setIsTransitioning(false), 400);
-  };
-
-  // Scroll-jacking effect - SLOWER ONE-BY-ONE PROGRESSION
-  React.useEffect(() => {
-    let lastScrollTime = 0;
-    const scrollCooldown = 2000; // INCREASED - 2 seconds between cards for deliberate progression
-    let accumulatedDelta = 0;
-    const scrollThreshold = 250; // INCREASED - requires more intentional scrolling
-    let hasCompletedForward = false;
-    let hasCompletedBackward = false;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (!carouselSectionRef.current) return;
-
-      const rect = carouselSectionRef.current.getBoundingClientRect();
-      
-      // Only engage when carousel is ACTUALLY in viewport
-      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-      
-      // Active zone for scroll-jacking
-      const isInActiveZone = rect.top < window.innerHeight - 100 && rect.bottom > 100;
-
-      // ONLY block scroll if carousel is actually visible
-      if (!isInViewport) {
-        return; // Let scroll pass through naturally
-      }
-
-      const now = Date.now();
-      const scrollingDown = e.deltaY > 0;
-      const scrollingUp = e.deltaY < 0;
-
-      // Track completion states
-      if (activeCardIndex === 5) hasCompletedForward = true;
-      if (activeCardIndex === 0) hasCompletedBackward = true;
-
-      // EXIT CONDITIONS - Allow scroll at boundaries after completion
-      const canScrollDown = scrollingDown && activeCardIndex === 5 && hasCompletedForward;
-      const canScrollUp = scrollingUp && activeCardIndex === 0 && hasCompletedBackward;
-
-      if (canScrollDown || canScrollUp) {
-        // Release scroll - allow natural page scrolling
-        accumulatedDelta = 0;
-        // Reset completion flags when section scrolls far away
-        if (canScrollDown && rect.top < -500) hasCompletedForward = false;
-        if (canScrollUp && rect.bottom > window.innerHeight + 500) hasCompletedBackward = false;
-        return; // Don't prevent default - let scroll happen naturally
-      }
-
-      // BLOCK ALL SCROLLING when carousel is in viewport
-      e.preventDefault();
-      e.stopPropagation();
-
-      // If in active zone, engage scroll-jacking
-      if (isInActiveZone) {
-        // Check cooldown FIRST - if in cooldown, HARD BLOCK everything
-        if (now - lastScrollTime < scrollCooldown) {
-          // Complete hard block - reset accumulator to prevent any buildup during cooldown
-          accumulatedDelta = 0;
-          return;
-        }
-
-        // Accumulate scroll delta only after cooldown expires
-        accumulatedDelta += Math.abs(e.deltaY);
-
-        // Only trigger card change if scrolled enough
-        if (accumulatedDelta >= scrollThreshold) {
-          lastScrollTime = now;
-          accumulatedDelta = 0; // Reset accumulator immediately
-
-          if (scrollingDown && activeCardIndex < 5) {
-            // Advance to next card
-            handleCardChange(activeCardIndex + 1);
-          } else if (scrollingUp && activeCardIndex > 0) {
-            // Go back to previous card
-            handleCardChange(activeCardIndex - 1);
-          }
-          // If at boundaries but haven't completed, block scroll (no action)
-        }
-      }
-    };
-
-    // Use capture phase to intercept scroll events before they bubble
-    window.addEventListener('wheel', handleWheel, { passive: false, capture: true });
-    
-    return () => {
-      window.removeEventListener('wheel', handleWheel, { capture: true } as any);
-    };
-  }, [activeCardIndex]);
-
   const philosophyCards = [
     {
-      title: 'Technology should feel invisible.',
-      description: 'We believe technology should fade into the background, working quietly to simplify life without demanding attention.',
-      icon: (
-        <div className="relative w-20 h-20">
+      title: 'Life comes first. Always.',
+      description: 'If something doesn\'t make life feel better, calmer, or more human, it doesn\'t belong here.',
+      image: (
+        <div className="relative w-full h-full flex items-center justify-center">
           {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute inset-0"
+              className="absolute"
               style={{
+                width: '60px',
+                height: '60px',
                 borderRadius: '50% 40% 50% 40%',
-                border: '2px solid rgba(139, 92, 246, 0.6)',
+                border: '2px solid rgba(27, 153, 139, 0.6)',
               }}
               animate={{
                 scale: [1, 1.2, 1],
@@ -174,13 +61,13 @@ export function About() {
             />
           ))}
         </div>
-      )
+      ),
     },
     {
-      title: 'Intelligence should adapt, not interrupt.',
-      description: 'Smart systems should respond naturally to your needs, anticipating challenges and adjusting in real time without distractions, alerts, or unnecessary input.',
-      icon: (
-        <div className="relative w-20 h-20 flex items-center justify-center">
+      title: 'The best systems disappear.',
+      description: 'Calm isn\'t added. It\'s what remains when unnecessary effort is removed.',
+      image: (
+        <div className="relative w-full h-full flex items-center justify-center">
           {[...Array(8)].map((_, i) => {
             const angle = (i * 45) * (Math.PI / 180);
             const radius = 30;
@@ -189,8 +76,8 @@ export function About() {
                 key={i}
                 className="absolute w-3 h-3 rounded-full"
                 style={{
-                  background: 'radial-gradient(circle, rgba(199, 162, 255, 0.9), rgba(139, 92, 246, 0.6))',
-                  boxShadow: '0 0 10px rgba(199, 162, 255, 0.6)',
+                  background: 'radial-gradient(circle, rgba(27, 153, 139, 0.9), rgba(0, 47, 58, 0.6))',
+                  boxShadow: '0 0 10px rgba(27, 153, 139, 0.6)',
                   left: '50%',
                   top: '50%',
                   transform: `translate(-50%, -50%) translate(${Math.cos(angle) * radius}px, ${Math.sin(angle) * radius}px)`,
@@ -211,18 +98,18 @@ export function About() {
           <div 
             className="w-4 h-4 rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(199, 162, 255, 1), rgba(139, 92, 246, 0.8))',
-              boxShadow: '0 0 15px rgba(199, 162, 255, 0.8)',
+              background: 'radial-gradient(circle, rgba(27, 153, 139, 1), rgba(0, 47, 58, 0.8))',
+              boxShadow: '0 0 15px rgba(27, 153, 139, 0.8)',
             }}
           />
         </div>
-      )
+      ),
     },
     {
-      title: 'Design should create calm.',
-      description: 'Thoughtful design brings clarity through space, balance, and gentle motion, creating environments that feel effortless and focused.',
-      icon: (
-        <div className="relative w-20 h-20 flex items-center justify-center">
+      title: 'We think long, even when it\'s inconvenient.',
+      description: 'What lasts is built slowly, with responsibility for what comes next.',
+      image: (
+        <div className="relative w-full h-full flex items-center justify-center">
           {[...Array(3)].map((_, i) => (
             <motion.div
               key={i}
@@ -230,7 +117,7 @@ export function About() {
               style={{
                 width: `${40 + i * 20}px`,
                 height: `${40 + i * 20}px`,
-                border: '2px solid rgba(139, 92, 246, 0.5)',
+                border: '2px solid rgba(27, 153, 139, 0.5)',
                 borderRadius: '50%',
                 transform: `rotate(${i * 45}deg)`,
               }}
@@ -247,130 +134,173 @@ export function About() {
           <div 
             className="w-4 h-4 rounded-full relative z-10"
             style={{
-              background: 'radial-gradient(circle, rgba(199, 162, 255, 1), rgba(139, 92, 246, 0.8))',
-              boxShadow: '0 0 20px rgba(199, 162, 255, 0.8)',
+              background: 'radial-gradient(circle, rgba(27, 153, 139, 1), rgba(0, 47, 58, 0.8))',
+              boxShadow: '0 0 20px rgba(27, 153, 139, 0.8)',
             }}
           />
         </div>
-      )
-    },
-    {
-      title: 'Everything should connect seamlessly.',
-      description: 'Your digital ecosystem should work as one unified experience, flowing from task to task without friction or fragmentation.',
-      icon: (
-        <div className="relative w-20 h-20">
-          <svg className="absolute inset-0" width="80" height="80" viewBox="0 0 80 80">
-            <motion.line
-              x1="40" y1="20" x2="40" y2="60"
-              stroke="rgba(139, 92, 246, 0.5)"
-              strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-            <motion.line
-              x1="20" y1="40" x2="60" y2="40"
-              stroke="rgba(139, 92, 246, 0.5)"
-              strokeWidth="2"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, delay: 0.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </svg>
-          {[[40, 20], [40, 60], [20, 40], [60, 40], [40, 40]].map((pos, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-3 h-3 rounded-full"
-              style={{
-                background: 'radial-gradient(circle, rgba(199, 162, 255, 0.9), rgba(139, 92, 246, 0.7))',
-                boxShadow: '0 0 10px rgba(199, 162, 255, 0.6)',
-                left: `${pos[0]}px`,
-                top: `${pos[1]}px`,
-                transform: 'translate(-50%, -50%)',
-              }}
-              animate={{
-                scale: [1, 1.4, 1],
-              }}
-              transition={{
-                duration: 2,
-                delay: i * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </div>
-      )
-    },
-    {
-      title: 'Privacy is non-negotiable.',
-      description: 'Your data belongs to you. We build systems that protect your information while delivering intelligent, personalized experiences.',
-      icon: (
-        <div className="relative w-20 h-20 flex items-center justify-center">
-          <svg width="50" height="60" viewBox="0 0 50 60">
-            <motion.path
-              d="M 25 5 L 45 15 L 45 30 Q 45 50, 25 55 Q 5 50, 5 30 L 5 15 Z"
-              stroke="rgba(139, 92, 246, 0.7)"
-              strokeWidth="2"
-              fill="rgba(139, 92, 246, 0.1)"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </svg>
-          <div className="absolute">
-            <div 
-              className="w-3 h-3 rounded-full"
-              style={{
-                background: 'radial-gradient(circle, rgba(199, 162, 255, 1), rgba(139, 92, 246, 0.8))',
-                boxShadow: '0 0 15px rgba(199, 162, 255, 0.8)',
-              }}
-            />
-          </div>
-        </div>
-      )
-    },
-    {
-      title: 'Simplicity is the ultimate sophistication.',
-      description: 'Complex problems deserve elegant solutions. We strip away unnecessary layers to reveal what truly matters.',
-      icon: (
-        <div className="relative w-20 h-20 flex items-center justify-center">
-          {[...Array(3)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                width: `${20 + i * 15}px`,
-                height: `${20 + i * 15}px`,
-                border: '1px solid rgba(139, 92, 246, 0.6)',
-              }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{
-                scale: [0, 1.2, 1],
-                opacity: [0, 0.8, 0],
-              }}
-              transition={{
-                duration: 3,
-                delay: i * 0.8,
-                repeat: Infinity,
-                ease: "easeOut",
-              }}
-            />
-          ))}
-          <div 
-            className="w-2 h-2 rounded-full relative z-10"
-            style={{
-              background: 'radial-gradient(circle, rgba(199, 162, 255, 1), rgba(139, 92, 246, 0.9))',
-              boxShadow: '0 0 15px rgba(199, 162, 255, 0.9)',
-            }}
-          />
-        </div>
-      )
+      ),
     }
   ];
 
+  // Interactive Card Component with Cursor Tracking
+  function InteractiveCard({ card, index }: { card: typeof philosophyCards[0], index: number }) {
+    const cardRef = useRef<HTMLDivElement>(null);
+    const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+    const [isHovered, setIsHovered] = useState(false);
+    const animationFrameRef = useRef<number | undefined>(undefined);
+
+    const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+      if (!cardRef.current) return;
+      
+      const rect = cardRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+      
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+      
+      animationFrameRef.current = requestAnimationFrame(() => {
+        setMousePosition({ x, y });
+      });
+    }, []);
+
+    const handleMouseEnter = useCallback(() => {
+      setIsHovered(true);
+    }, []);
+
+    const handleMouseLeave = useCallback(() => {
+      setIsHovered(false);
+      setMousePosition({ x: 0.5, y: 0.5 });
+    }, []);
+
+    useEffect(() => {
+      return () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }, []);
+
+    // Calculate 3D perspective transform
+    const rotateX = (mousePosition.y - 0.5) * 10; // Max 5 degrees
+    const rotateY = (0.5 - mousePosition.x) * 10; // Max 5 degrees
+
+    // Calculate shine gradient position
+    const shineX = mousePosition.x * 100;
+    const shineY = mousePosition.y * 100;
+
+    return (
+      <motion.div
+        ref={cardRef}
+        className="h-full"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          perspective: '1000px',
+        }}
+      >
+        <motion.div
+          className="h-full flex flex-col overflow-hidden"
+          style={{
+            borderRadius: '16px',
+            background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02))',
+            backdropFilter: 'blur(40px)',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            boxShadow: isHovered
+              ? '0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(27, 153, 139, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+              : '0 12px 48px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+            transform: isHovered
+              ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03) translateY(-10px)`
+              : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0px)',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            position: 'relative',
+            cursor: 'pointer',
+          }}
+        >
+          {/* Shine effect overlay */}
+          {isHovered && (
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: `radial-gradient(circle 300px at ${shineX}% ${shineY}%, rgba(27, 153, 139, 0.15) 0%, transparent 70%)`,
+                opacity: 1,
+                transition: 'opacity 0.3s ease',
+                zIndex: 1,
+              }}
+            />
+          )}
+
+          {/* Image area at top */}
+          <div
+            className="relative overflow-hidden"
+            style={{
+              height: '200px',
+              minHeight: '200px',
+              background: 'linear-gradient(135deg, rgba(27, 153, 139, 0.1), rgba(0, 47, 58, 0.05))',
+            }}
+          >
+            <motion.div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{
+                transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+            >
+              {card.image}
+            </motion.div>
+          </div>
+
+          {/* Content section */}
+          <div className="flex-1 flex flex-col p-6 text-center" style={{ zIndex: 2, position: 'relative' , paddingLeft:'clamp(16px, 4vw, 24px)', paddingRight:'clamp(16px, 4vw, 24px)'}}>
+            <motion.h3
+              className="mb-3"
+              style={{
+                // fontSize: 'clamp(20px, 2.5vw, 24px)',
+                color: isHovered ? '#FFFFFF' : '#FFFFFF',
+                fontFamily: 'var(--font-subtext)',
+                fontSize:'var(--font-size-subheading)',
+                fontWeight: 500,
+                lineHeight: '1.3',
+                letterSpacing: '0.3px',
+                transition: 'color 0.3s ease',
+                textAlign: 'center',
+                marginTop: 'clamp(16px, 2vw, 24px)',
+              }}
+            >
+              {card.title}
+            </motion.h3>
+
+            <motion.p
+              className="mb-6 flex-1"
+              style={{
+                // fontSize: 'clamp(14px, 1.8vw, 16px)',
+                color: isHovered ? '#C0C0C0' : '#B0B0B0',
+                fontFamily:   'var(--font-body)',
+                fontSize:'var(--font-size-body)',
+                fontWeight: 400,
+                lineHeight: '1.7',
+                letterSpacing: '0.2px',
+                transition: 'color 0.3s ease',
+                textAlign: 'center',
+              }}
+            >
+              {card.description}
+            </motion.p>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  }
+
   return (
-    <div className="relative w-full" style={{ background: '#000000' }}>
+    <div className="relative w-full overflow-x-hidden" style={{ background: '#000000' }}>
       {/* Grain texture overlay */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
            style={{
@@ -386,55 +316,144 @@ export function About() {
       />
 
       {/* Top Navigation */}
-      <nav className="relative z-50 flex items-center justify-between px-16 pt-8">
-        {/* Logo */}
-        <Link to="/">
-          <div className="text-white text-3xl tracking-tight" style={{ fontFamily: 'Varela Round, system-ui, sans-serif' }}>
-            <img src={logoImage} alt="wyle" className="h-14" style={{ marginLeft: '-8px' }} />
-          </div>
-        </Link>
+      <Navigation/>
 
-        {/* Center Navigation - Glassmorphism */}
-        <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center gap-8 px-10 py-4 rounded-full"
+      {/* Teal arc - behind navbar */}
+      <div className="absolute pointer-events-none" style={{ zIndex: 1, top: '-45%', transform: 'translateX(-65%) rotate(-90deg)' }}>
+        {/* Heavily blurred base layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur base" 
+          className="h-[105vh]"
           style={{
-               background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-               backdropFilter: 'blur(30px)',
-               border: '1px solid rgba(255,255,255,0.15)',
-               boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-             }}>
-          <Link to="/" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Home</Link>
-          <Link to="/services" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Services</Link>
-          <Link to="/about" className="text-white text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>About</Link>
-          <Link to="/contact" className="text-gray-400 text-sm transition-opacity hover:opacity-80" style={{ fontFamily: 'Inter, system-ui, sans-serif', letterSpacing: '2px' }}>Contact</Link>
+            mixBlendMode: 'screen',
+            filter: 'blur(50px) brightness(1.6) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Medium blur layer */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur medium" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(30px) brightness(1.4) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
+        
+        {/* Soft blur overlay */}
+        <img 
+          src={arcImage} 
+          alt="teal arc blur soft" 
+          className="h-[105vh] absolute top-0 left-0"
+          style={{
+            mixBlendMode: 'screen',
+            filter: 'blur(15px) brightness(1.2) hue-rotate(160deg) saturate(1.5)',
+            opacity: 0.5,
+          }}
+        />
       </div>
 
-        {/* Right - Contact us button */}
-        <a 
-          href="#contact"
-          className="px-6 py-3 rounded-full text-sm transition-opacity hover:opacity-80"
+      {/* Hero Section */}
+      <section className="relative" style={{ paddingTop: 'clamp(0px, 24vw, 128px)', paddingBottom: 'clamp(40px, 6vw, 80px)', minHeight: '100vh', overflow: 'hidden', isolation: 'isolate', position: 'relative', marginBottom: 0 }}>
+        {/* Background Video - about_hero.mp4 */}
+        <div
+          className="absolute pointer-events-none"
           style={{
-            background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-            backdropFilter: 'blur(30px)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            color: '#FFFFFF',
-            fontFamily: 'Inter, system-ui, sans-serif',
-            letterSpacing: '1.5px',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            width: '100%',
+            height: '100%',
+            zIndex: 0,
           }}
         >
-          Contact us
-        </a>
-      </nav>
+          <video
+            src={aboutHeroVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disablePictureInPicture
+            disableRemotePlayback
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center bottom',
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+            }}
+          />
+        </div>
 
-      {/* Hero Section - The People Behind the Flow */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
-        <div className="max-w-6xl mx-auto px-16 text-center">
+        {/* Dark Teal overlay - reduced opacity for better video visibility */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: 'linear-gradient(135deg, rgba(0, 47, 58, 0.2) 0%, rgba(0, 47, 58, 0.1) 50%, rgba(0, 47, 58, 0.2) 100%)',
+            mixBlendMode: 'multiply',
+          }}
+        />
+        
+        {/* Bright Turquoise highlight overlay - reduced opacity */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: 'radial-gradient(ellipse at 50% 50%, rgba(27, 153, 139, 0.15) 0%, transparent 70%)',
+            mixBlendMode: 'screen',
+          }}
+        />
+        
+        {/* Additional teal gradient for depth - reduced opacity */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            background: 'linear-gradient(180deg, rgba(0, 47, 58, 0.1) 0%, transparent 30%, transparent 70%, rgba(0, 47, 58, 0.15) 100%)',
+            mixBlendMode: 'color',
+          }}
+        />
+
+        {/* Global bloom effect - Teal - reduced opacity */}
+        <div 
+          className="absolute inset-0 pointer-events-none mix-blend-screen opacity-20"
+          style={{
+            zIndex: 1,
+            background: 'radial-gradient(ellipse at 50% 45%, rgba(27, 153, 139, 0.1) 0%, transparent 60%)',
+          }}
+        />
+
+        {/* Gradient fade at bottom to blend with next section */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 pointer-events-none"
+          style={{
+            zIndex: 1,
+            height: '200px',
+            background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.8) 100%)',
+            backdropFilter: 'blur(2px)',
+          }}
+        />
+
+        <div className="relative max-w-6xl mx-auto px-16 text-center" style={{ marginTop: 'clamp(-40px, -5vw, -20px)', zIndex: 10 }}>
           <motion.h1
             className="mb-4"
             style={{
-              fontSize: '64px',
+              // fontSize: '64px',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: 500,
+              fontSize: 'clamp(36px, 8vw, 96px)',
               letterSpacing: '1px',
               lineHeight: '1.2',
             }}
@@ -442,390 +461,217 @@ export function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            The People Behind<br />the Flow
+            Behind every flow is intent
           </motion.h1>
 
           <motion.p
             style={{
-              fontSize: '18px',
+              fontSize: 'var(--font-size-subheading)',
               color: '#A0A0A0',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontFamily: 'var(--font-subtext)',
+              fontWeight: 400,
               letterSpacing: '0.5px',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            What if technology disappeared into the background
+            We started by paying attention.
           </motion.p>
 
-          {/* Horizontal flowing purple energy wave removed */}
-          
-          <div className="relative mt-24 h-64 overflow-visible">
-            {/* Energy Wave Image - Animated reveal - flows horizontally, positioned higher */}
-            <motion.div 
-              className="absolute pointer-events-none z-30"
-              style={{
-                top: '10%',
-                left: '15%',
-                width: '100%',
-                height: '360px',
-                transform: 'translateY(-50%)',
-              }}
-              initial={{ clipPath: 'inset(0 0% 0 100%)' }}
-              animate={{
-                clipPath: ['inset(0 0% 0 100%)', 'inset(0 0% 0 0%)', 'inset(0 0% 0 0%)'],
-              }}
-              transition={{
-                duration: 12,
-                repeat: Infinity,
-                times: [0, 0.15, 1],
-                ease: [0.4, 0, 0.2, 1],
-              }}
-            >
-              <img
-                src={waveImage}
-                alt="energy wave"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  mixBlendMode: 'screen',
-                }}
-              />
-            </motion.div>
-
-            {/* Hand - Static - positioned further to the left */}
-            <div
-              className="absolute pointer-events-none z-20"
-              style={{
-                top: '50%',
-                left: '-15%',
-                width: '650px',
-                transform: 'translateY(-50%)',
-              }}
-            >
-              <img 
-                src={handImage}
-                alt="hand"
-                style={{
-                  width: '100%',
-                  height: 'auto',
-                  display: 'block',
-                  mixBlendMode: 'screen',
-                }}
-              />
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* Our Philosophy Section */}
-      <section className="relative py-24" ref={carouselSectionRef}>
-        <div className="max-w-7xl mx-auto px-16">
+      {/* What We Won't Compromise On Section */}
+      <section className="relative" style={{ background: 'transparent', paddingTop: 'clamp(80px, 12vw, 120px)', paddingBottom: 'clamp(40px, 5vw, 64px)', zIndex: 10, isolation: 'isolate' }}>
+        <div className="max-w-7xl mx-auto" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
           <motion.h2
             className="text-center mb-16"
             style={{
-              fontSize: '42px',
+              fontSize: 'clamp(32px, 5vw, 42px)',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: 500,
               letterSpacing: '0.5px',
+              background: 'transparent',
+              textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+              marginTop: '0px',
+              position: 'relative',
+              zIndex: 10,
             }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Our Philosophy
+            What We Won't Compromise On
           </motion.h2>
 
-          {/* 3D Carousel Container with perspective */}
-          <div 
-            className="relative overflow-visible pb-12"
-            style={{
-              perspective: '1800px',
-              perspectiveOrigin: 'center center',
+          {/* Responsive Grid Layout */}
+          <div
+                      style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(280px, 30vw, 350px), 1fr))',
+              gap: 'clamp(24px, 3vw, 32px)',
+              maxWidth: '1200px',
+              margin: '4rem auto 0',
+              padding: '0 clamp(8px, 1vw, 16px)',
             }}
           >
-            {/* Carousel track */}
-            <div className="relative flex items-center justify-center" style={{ height: '400px' }}>
-              {philosophyCards
-                .map((card, index) => ({ card, index }))
-                .map(({ card, index }) => {
-                const isActive = index === activeCardIndex;
-                const offset = index - activeCardIndex;
-                
-                // Position all 6 cards
-                let xPos = 0;
-                let rotateY = 0;
-                let scale = 1;
-                let opacity = 1;
-                let zIndex = 10;
-                
-                if (isActive) {
-                  // Center card - active
-                  xPos = 0;
-                  rotateY = 0;
-                  scale = 1;
-                  opacity = 1;
-                  zIndex = 50;
-                } else if (offset === -1 || offset === 1) {
-                  // Immediate neighbors - close to center
-                  xPos = offset * 380;
-                  rotateY = offset * 25; // Angle outward
-                  scale = 0.9;
-                  opacity = 0.7;
-                  zIndex = 40;
-                } else if (offset === -2 || offset === 2) {
-                  // Second neighbors - further out
-                  xPos = offset * 480;
-                  rotateY = offset * 35;
-                  scale = 0.8;
-                  opacity = 0.5;
-                  zIndex = 30;
-                } else {
-                  // Furthest cards
-                  xPos = offset * 560;
-                  rotateY = offset * 40;
-                  scale = 0.7;
-                  opacity = 0.35;
-                  zIndex = 20;
-                }
-                
-                return (
-                  <motion.div
-                    key={index}
-                    className="absolute cursor-pointer"
-                    style={{
-                      width: '440px',
-                      zIndex: zIndex,
-                    }}
-                    animate={{
-                      x: xPos,
-                      rotateY: rotateY,
-                      scale: scale,
-                      opacity: opacity,
-                    }}
-                    transition={{
-                      type: "spring",
-                      stiffness: 180,
-                      damping: 25,
-                      mass: 1.2,
-                    }}
-                    onClick={() => handleCardChange(index)}
-                  >
-                    <div
-                      className="p-8 flex items-start justify-between"
-                      style={{
-                        minHeight: '260px',
-                        background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03))',
-                        backdropFilter: 'blur(40px)',
-                        border: '1px solid rgba(255, 255, 255, 0.12)',
-                        borderRadius: '24px',
-                        boxShadow: isActive 
-                          ? '0 20px 60px rgba(139, 92, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
-                          : '0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
-                      }}
-                    >
-                      {/* Left - Text */}
-                      <div className="flex-1 pr-6">
-                        <h3 
-                      className="mb-4"
-                          style={{
-                            fontSize: '22px',
-                            color: '#FFFFFF',
-                            fontFamily: 'Inter, system-ui, sans-serif',
-                            fontWeight: 600,
-                            lineHeight: '1.3',
-                          }}
-                        >
-                          {card.title}
-                        </h3>
-
-                        <p 
-                          style={{
-                            fontSize: '15px',
-                            color: '#A0A0A0',
-                            fontFamily: 'Inter, system-ui, sans-serif',
-                        lineHeight: '1.7',
-                          }}
-                        >
-                          {card.description}
-                        </p>
-                      </div>
-
-                      {/* Right - 3D Wireframe Icon */}
-                      <div className="flex items-center justify-center" style={{ width: '110px', flexShrink: 0 }}>
-                        {card.icon}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Navigation dots - REMOVED */}
+            {philosophyCards.map((card, index) => (
+              <InteractiveCard key={index} card={card} index={index} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Why Wyle Section */}
-      <section className="relative py-24">
-        <div className="max-w-7xl mx-auto px-16">
-          <div className="grid grid-cols-2 gap-20 items-center">
-            {/* Left - Text */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 
-                className="mb-6"
+      {/* What We're Here To Do Section */}
+      <section className="relative py-32 overflow-hidden">
+        {/* Teal flow - left side */}
+        <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
             style={{
-                  fontSize: '48px',
-                  color: '#FFFFFF',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  fontWeight: 600,
-                  letterSpacing: '0.5px',
-                }}
-              >
-                Why Wyle
-              </h2>
-
-              <p 
-                style={{
-                  fontSize: '20px',
-                  color: '#A0A0A0',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  lineHeight: '1.8',
-                }}
-              >
-                It's not the food delivery, rides or groceries app. But it's something that quietly connects all of these things in the background.
-              </p>
-            </motion.div>
-
-            {/* Right - Glowing fragmented orb */}
-            <motion.div
-              className="relative h-96 flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* Core glow */}
-              <div 
-                className="absolute w-40 h-40 rounded-full"
-                style={{
-                  background: 'radial-gradient(circle, rgba(199, 162, 255, 0.8) 0%, rgba(139, 92, 246, 0.4) 40%, transparent 70%)',
-                  filter: 'blur(20px)',
-                }}
-              />
-
-              {/* Geometric shards */}
-              {[...Array(12)].map((_, i) => {
-                const angle = (i * 30) * (Math.PI / 180);
-                const distance = 80 + (i % 3) * 20;
-                const x = Math.cos(angle) * distance;
-                const y = Math.sin(angle) * distance;
-                
-                return (
-                  <motion.div
-                    key={i}
-                    className="absolute"
-            style={{
-                      left: '50%',
-                      top: '50%',
-                      width: '30px',
-                      height: '30px',
-                      background: 'linear-gradient(135deg, rgba(199, 162, 255, 0.6), rgba(139, 92, 246, 0.3))',
-                      border: '1px solid rgba(199, 162, 255, 0.4)',
-                      transform: `translate(-50%, -50%) translate(${x}px, ${y}px) rotate(${i * 30}deg)`,
-                      clipPath: 'polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)',
-                      filter: 'blur(0.5px)',
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
             }}
             animate={{
-                      x: [x, x + Math.cos(angle) * 10, x],
-                      y: [y, y + Math.sin(angle) * 10, y],
-                      opacity: [0.4, 0.8, 0.4],
+              opacity: [0.1, 0.4, 0.2, 0.1],
             }}
             transition={{
-                      duration: 3,
-                      delay: i * 0.1,
+              duration: 6,
               repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                );
-              })}
-
-              {/* Center core */}
-              <div 
-                className="relative w-24 h-24 rounded-full"
-                style={{
-                  background: 'radial-gradient(circle, rgba(199, 162, 255, 0.9) 0%, rgba(139, 92, 246, 0.5) 100%)',
-                  border: '2px solid rgba(255, 255, 255, 0.2)',
-                  boxShadow: '0 0 60px rgba(199, 162, 255, 0.6), inset 0 0 30px rgba(255, 255, 255, 0.1)',
-                }}
-              />
-            </motion.div>
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
+            }}
+          />
         </div>
-        </div>
-      </section>
 
-      {/* Our Mission Section */}
-      <section className="relative py-32">
-        <div className="max-w-4xl mx-auto px-16 text-center">
+        {/* Teal flow - right side */}
+        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
+            }}
+          />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-16 text-center relative z-10">
           {/* Curved arc above */}
-          <svg 
-            className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-12"
-            width="400" 
-            height="100" 
-            viewBox="0 0 400 100"
+          <motion.svg 
+            className="absolute left-1/2 transform -translate-x-1/2"
+            style={{ 
+              width: '800px',
+              height: '140px',
+              marginTop: '-100px',
+              marginBottom: '40px',
+            }}
+            viewBox="0 0 800 140"
+            initial={{ opacity: 0, y: -30, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            animate={{
+              y: [0, -12, 0],
+              scale: [1, 1.02, 1],
+            }}
+            transition={{
+              opacity: { duration: 0.8, ease: "easeOut" },
+              y: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              scale: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
           >
             <defs>
               <linearGradient id="arcGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0" />
-                <stop offset="50%" stopColor="#C7A2FF" stopOpacity="0.8" />
-                <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0" />
+                <stop offset="0%" stopColor="#002F3A" stopOpacity="0" />
+                <stop offset="50%" stopColor="#1B998B" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#002F3A" stopOpacity="0" />
               </linearGradient>
             </defs>
             <motion.path
-              d="M 50 80 Q 200 20, 350 80"
+              d="M 50 120 Q 400 25, 750 120"
               stroke="url(#arcGradient)"
-              strokeWidth="2"
+              strokeWidth="3"
               fill="none"
               initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 1.5, ease: "easeOut" }}
+              animate={{
+                pathLength: [1, 1.03, 1],
+                opacity: [1, 0.85, 1],
+                strokeWidth: [3, 3.5, 3],
+              }}
+              transition={{
+                pathLength: {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                opacity: {
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                strokeWidth: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+                default: {
+                  duration: 1.5,
+                  ease: "easeOut",
+                },
+              }}
             />
-          </svg>
+          </motion.svg>
 
           <motion.h2
             className="mb-6"
             style={{
-              fontSize: '48px',
+              fontSize: 'var(--font-size-heading-sm)',
               color: '#FFFFFF',
-              fontFamily: 'Inter, system-ui, sans-serif',
-              fontWeight: 600,
+              fontFamily: 'Poppins, sans-serif',
+              fontWeight: 500,
               letterSpacing: '0.5px',
+              paddingTop: '60px',
             }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Our Mission
+            What We're Here To Do
           </motion.h2>
 
           <motion.h3
             className="mb-8"
             style={{
-              fontSize: '28px',
-              color: '#C7A2FF',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontSize: 'var(--font-size-subheading)',
+              color: '#1B998B',
+              fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.5px',
             }}
@@ -834,61 +680,117 @@ export function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Build an Operating System That You Don't Notice
+            Build what life quietly asks for.
           </motion.h3>
 
           <motion.p
             style={{
-              fontSize: '18px',
-              color: '#A0A0A0',
-              fontFamily: 'Inter, system-ui, sans-serif',
+              fontSize: 'var(--font-size-body)',
+              color: '#FFFFFF',
+              fontFamily: 'var(--font-body)',
+              fontWeight: 400,
               lineHeight: '1.9',
+              textAlign: 'center',
+              maxWidth: '900px',
+              margin: '0 auto',
             }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            The best technology is the kind you barely notice. It doesn't force you to think about menus, logins, or switching between apps. It just flows. wyle is designed to work invisibly across every part of your life—rides, groceries, food, wellness, finances—creating a seamless, connected, and responsive experience, powered by intelligent design and systems that work effortlessly together. We're not here to make more things—we're here to make everything work as one.
+            The most meaningful things don't demand attention. They support the day without interrupting it. We're here to remove friction, not add choice. To reduce noise, not introduce more. Not to build more things. But to help everything work together, naturally.
           </motion.p>
         </div>
       </section>
 
-      {/* The Minds Behind WYLE Section */}
-      <section className="relative py-24 pb-32">
-        <div className="max-w-7xl mx-auto px-16">
+      {/* The Stewards Section */}
+      <section className="relative py-6
+       pb-24 overflow-hidden">
+        {/* Teal flow - left side */}
+        <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.3, 0.6, 1],
+              ease: [0.4, 0, 0.2, 1],
+            }}
+          />
+        </div>
+
+        {/* Teal flow - right side */}
+        <div className="absolute pointer-events-none" style={{ right: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(-20deg)' }}>
+          <motion.img 
+            src={imgPurpleFlow} 
+            alt="teal flow" 
+            className="h-[100vh]"
+            style={{
+              mixBlendMode: 'screen',
+              filter: 'blur(3px) hue-rotate(160deg) saturate(1.5)',
+            }}
+            animate={{
+              opacity: [0.1, 0.15, 0.4, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              times: [0, 0.2, 0.5, 0.7, 1],
+              ease: [0.4, 0, 0.2, 1],
+              delay: 0.3,
+            }}
+          />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-16 relative z-10" style={{ paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
           <motion.div
-            className="text-center mb-6"
+            className="text-center mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <h2 
-              className="mb-3"
+              className="mb-2"
               style={{
-                fontSize: '48px',
+                fontSize: 'clamp(28px, 5vw, 48px)',
                 color: '#FFFFFF',
-                fontFamily: 'Inter, system-ui, sans-serif',
-                fontWeight: 600,
+                fontFamily: 'Poppins, sans-serif',
+                fontWeight: 500,
                 letterSpacing: '0.5px',
+                marginBottom: 'clamp(4px, 0.5vw, 8px)',
+                paddingLeft: 'clamp(16px, 4vw, 0px)',
+                paddingRight: 'clamp(16px, 4vw, 0px)',
               }}
             >
-              The Minds Behind WYLE
+              The Stewards
             </h2>
             <p 
               style={{
-                fontSize: '16px',
+                fontSize: 'clamp(14px, 1.6vw, 16px)',
                 color: '#A0A0A0',
-                fontFamily: 'Inter, system-ui, sans-serif',
+                fontFamily: 'var(--font-subtext)',
+              fontWeight: 400,
                 letterSpacing: '0.5px',
+                paddingLeft: 'clamp(16px, 4vw, 0px)',
+                paddingRight: 'clamp(16px, 4vw, 0px)',
               }}
             >
-              Visionaries driving innovation and sustainable growth across the UAE
+              A small group, building with patience and care.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-5 gap-6 mt-16">
+          <div className="flex justify-center items-start mt-16" style={{ flexDirection: 'row', flexWrap: 'wrap', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: 'clamp(32px, 4vw, 64px) auto 0', gap: 'clamp(16px, 2vw, 32px)', alignItems: 'stretch' }}>
             {teamMembers.map((member, i) => (
               <motion.div
                 key={i}
@@ -898,6 +800,11 @@ export function About() {
                   backdropFilter: 'blur(40px)',
                   border: '1px solid rgba(255,255,255,0.12)',
                   boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
+                  flex: '1 1 auto',
+                  width: 'clamp(280px, calc(33.333% - 22px), 300px)',
+                  maxWidth: 'calc(100% - 32px)',
+                  minWidth: 'clamp(250px, 90vw, 300px)',
+                  cursor: member.linkedin ? 'pointer' : 'default',
                 }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -907,31 +814,49 @@ export function About() {
                 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                onClick={() => setSelectedTeamMember(member)}
+                onClick={() => {
+                  if (member.linkedin) {
+                    window.open(member.linkedin, '_blank');
+                  }
+                }}
               >
                 {/* Image container with glow */}
-                <div className="relative mb-4 mx-auto" style={{ width: '140px', height: '140px' }}>
+                <div className="relative mb-4 mx-auto" style={{ width: 'clamp(100px, 14vw, 140px)', height: 'clamp(100px, 14vw, 140px)' }}>
+                  {member.image && (
                   <div 
                     className="absolute inset-0 rounded-2xl"
                     style={{
-                      background: 'radial-gradient(circle, rgba(199, 162, 255, 0.3) 0%, transparent 70%)',
+                      background: 'radial-gradient(circle, rgba(27, 153, 139, 0.3) 0%, transparent 70%)',
                       filter: 'blur(15px)',
                     }}
                   />
+                  )}
+                  {member.image ? (
                   <img 
-                    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Crect fill='%23181818' width='140' height='140'/%3E%3Ccircle cx='70' cy='50' r='20' fill='%23404040'/%3E%3Cpath d='M 30 110 Q 30 80, 70 80 Q 110 80, 110 110 L 110 140 L 30 140 Z' fill='%23404040'/%3E%3C/svg%3E"
+                      src={member.image}
                     alt={member.name}
                     className="relative w-full h-full object-cover rounded-2xl"
                   />
+                  ) : (
+                    <div 
+                      className="relative w-full h-full rounded-2xl"
+                      style={{
+                        background: '#181818',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    />
+                  )}
                 </div>
 
                 <h3 
                   style={{
-                    fontSize: '16px',
+                    fontSize: 'clamp(14px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    fontWeight: 600,
-                    marginBottom: '4px',
+                    fontFamily: 'Poppins, sans-serif',
+                    fontWeight: 500,
+                    marginBottom: 'clamp(4px, 0.25vw, 4px)',
                   }}
                 >
                   {member.name}
@@ -939,9 +864,10 @@ export function About() {
 
                 <p 
                   style={{
-                    fontSize: '13px',
+                    fontSize: 'clamp(12px, 1.3vw, 13px)',
                     color: '#808080',
-                    fontFamily: 'Inter, system-ui, sans-serif',
+                    fontFamily: 'var(--font-body)',
+              fontWeight: 400,
                   }}
                 >
                   {member.role}
@@ -954,118 +880,6 @@ export function About() {
 
       {/* Footer */}
       <Footer />
-
-      {/* Team Member Detail Modal */}
-      {selectedTeamMember && (
-        <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center px-16"
-          style={{
-            background: 'rgba(0, 0, 0, 0.85)',
-            backdropFilter: 'blur(10px)',
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setSelectedTeamMember(null)}
-        >
-          <motion.div
-            className="relative max-w-3xl w-full rounded-3xl p-10 flex gap-8"
-            style={{
-              background: 'linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06))',
-              backdropFilter: 'blur(40px)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              boxShadow: '0 20px 80px rgba(139, 92, 246, 0.3), inset 0 1px 0 rgba(255,255,255,0.15)',
-            }}
-            initial={{ scale: 0.9, y: 20 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.9, y: 20 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={() => setSelectedTeamMember(null)}
-              className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-opacity hover:opacity-70"
-              style={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-              }}
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M2 2L14 14M14 2L2 14" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </button>
-
-            {/* Left - Image */}
-            <div 
-              className="relative rounded-2xl p-4"
-              style={{ 
-                width: '220px', 
-                flexShrink: 0,
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))',
-                backdropFilter: 'blur(40px)',
-                border: '1px solid rgba(255,255,255,0.12)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08)',
-              }}
-            >
-              <div 
-                className="absolute inset-0 rounded-2xl"
-                style={{
-                  background: 'radial-gradient(circle, rgba(199, 162, 255, 0.4) 0%, transparent 70%)',
-                  filter: 'blur(30px)',
-                }}
-              />
-              <img 
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='260' viewBox='0 0 220 260'%3E%3Crect fill='%23181818' width='220' height='260'/%3E%3Ccircle cx='110' cy='80' r='38' fill='%23404040'/%3E%3Cpath d='M 45 210 Q 45 145, 110 145 Q 175 145, 175 210 L 175 260 L 45 260 Z' fill='%23404040'/%3E%3C/svg%3E"
-                alt={selectedTeamMember.name}
-                className="relative w-full h-auto rounded-2xl"
-                style={{
-                  border: '2px solid rgba(199, 162, 255, 0.3)',
-                }}
-              />
-            </div>
-
-            {/* Right - Info */}
-            <div className="flex-1 flex flex-col justify-center">
-              <h3 
-                className="mb-2"
-                style={{
-                  fontSize: '28px',
-                  color: '#FFFFFF',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  fontWeight: 600,
-                  letterSpacing: '0.5px',
-                }}
-              >
-                {selectedTeamMember.name}
-              </h3>
-
-              <p 
-                className="mb-5"
-                style={{
-                  fontSize: '15px',
-                  color: '#C7A2FF',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  fontWeight: 500,
-                  letterSpacing: '1px',
-                }}
-              >
-                {selectedTeamMember.role}
-              </p>
-
-              <p 
-                style={{
-                  fontSize: '15px',
-                  color: '#A0A0A0',
-                  fontFamily: 'Inter, system-ui, sans-serif',
-                  lineHeight: '1.8',
-                }}
-              >
-                {selectedTeamMember.description}
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { motion } from 'motion/react';
 import Lottie from 'lottie-react';
 import waveLoopAnimation from '../assets/Wave Loop.json';
-
+import '../index.css';
 export function FragmentedReality() {
   const [mode, setMode] = useState<'chaos' | 'order'>('chaos');
 
@@ -36,8 +36,8 @@ export function FragmentedReality() {
   }, []);
 
   return (
-    <section className="relative px-16" style={{ background: '#000000', paddingTop: '4rem', paddingBottom: '0', overflow: 'hidden' }}>
-      {/* Wave Loop Background Animation with Teal Theme - Full Width */}
+    <section className="relative px-16" style={{ background: '#000000', paddingBottom: '0', overflow: 'hidden', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', minHeight: '80vh' }}>
+      {/* Wave Loop Background Animation with Teal Theme - Section Only */}
       <div 
         className="absolute pointer-events-none"
         style={{
@@ -69,8 +69,8 @@ export function FragmentedReality() {
       <h2 
         className="relative z-10 text-center mb-6"
         style={{
-          fontSize: '48px',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontSize: 'var(--font-size-heading-sm)',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
@@ -78,20 +78,20 @@ export function FragmentedReality() {
           lineHeight: '1.2',
         }}
       >
-        The Fragmented Reality
+        Fragmented by design
       </h2>
       <p 
         className="relative z-10 text-center max-w-2xl mx-auto"
         style={{
-          fontSize: '16px',
+          fontSize: 'var(--font-size-body)',
           color: '#C5C6C7',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontFamily: 'var(--font-body)',
           fontWeight: 400,
           lineHeight: '1.6',
           marginBottom: '2rem',
         }}
       >
-        See how WYLE organizes your digital entropy.
+        Life is one flow. Your apps broke it into pieces.
       </p>
       
       <div className="relative z-10 max-w-4xl mx-auto">
@@ -235,7 +235,7 @@ export function FragmentedReality() {
                   />
                 )}
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  <span>Entropy</span>
+                  <span>Fragmented</span>
                   {mode === 'chaos' && (
                     <motion.span
                       initial={{ scale: 0 }}
@@ -275,7 +275,7 @@ export function FragmentedReality() {
                   />
                 )}
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  <span>Harmony</span>
+                  <span>Intent</span>
                   {mode === 'order' && (
                     <motion.span
                       initial={{ scale: 0 }}

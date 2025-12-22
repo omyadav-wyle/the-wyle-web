@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import ecosystemCircle from '../assets/ecosystem-circle.svg';
+import '../index.css';
 
 export function CloneWithConscience() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -89,17 +90,21 @@ export function CloneWithConscience() {
   ];
 
   return (
-    <section ref={sectionRef} className="relative px-16" style={{ background: '#000000', paddingTop: '2rem', paddingBottom: '2rem' }}>
+    <section ref={sectionRef} className="relative px-16" style={{ background: '#000000', paddingTop: 'clamp(32px, 2vw, 32px)', paddingBottom: 'clamp(32px, 2vw, 32px)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
       {/* Heading */}
       <motion.h2
         className="text-center mb-4"
         style={{
-          fontSize: '40px',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontSize: 'var(--font-size-heading-sm)',
+          fontFamily: 'Poppins, sans-serif',
           fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
           marginTop: '0px',
+          // marginBottom: 'clamp(12px, 1vw, 16px)',
+          marginBottom: 'clamp(0px, 0vw, 0px)',
+          paddingLeft: 'clamp(16px, 4vw, 0px)',
+          paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -113,12 +118,24 @@ export function CloneWithConscience() {
       <motion.p
         className="text-center max-w-2xl mx-auto mb-2"
         style={{
-          fontSize: '15px',
-          color: '#C5C6C7',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
-          fontWeight: 500,
-          lineHeight: '1.45',
-          marginBottom: '0.5rem',
+          // fontSize: 'clamp(13px, 1.5vw, 15px)',
+          // color: '#C5C6C7',
+          // fontWeight: 500,
+          // lineHeight: '1.45',
+          // marginBottom: 'clamp(8px, 0.5vw, 8px)',
+          // paddingLeft: 'clamp(16px, 4vw, 0px)',
+          // paddingRight: 'clamp(16px, 4vw, 0px)',
+           fontSize: 'var(--font-size-body)',       // slightly bigger than description
+    // fontWeight: 500,                             // medium weight
+    //  fontSize: 'clamp(24px, 4vw, 40px)',
+      fontFamily: 'var(--font-subtext)',
+      fontWeight: 500,
+    color: '#FFFFFF',                            // accent color to stand out
+    lineHeight: '1.5',
+    letterSpacing: '0.5px',
+    marginBottom: 'clamp(10px, 1vw, 16px)',
+    paddingLeft: 'clamp(16px, 4vw, 0px)',
+    paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -132,12 +149,14 @@ export function CloneWithConscience() {
       <motion.p
         className="text-center max-w-2xl mx-auto"
         style={{
-          fontSize: '15px',
+          fontSize: 'var(--font-size-body)',
           color: '#C5C6C7',
-          fontFamily: 'Fredoka, system-ui, sans-serif',
+          fontFamily: 'var(--font-subtext)',
           fontWeight: 500,
           lineHeight: '1.45',
-          marginBottom: '1rem',
+          // marginBottom: 'clamp(16px, 1vw, 16px)',
+          paddingLeft: 'clamp(16px, 4vw, 0px)',
+          paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -148,17 +167,81 @@ export function CloneWithConscience() {
       </motion.p>
 
       {/* Central Orbital System and Cards Container */}
-      <div ref={containerRef} className="relative" style={{ height: '700px', maxWidth: '1200px', margin: '0 auto' }}>
-        <div className="relative flex items-center justify-center" style={{ height: '100%' }}>
+      <div ref={containerRef} className="relative" style={{ height: 'clamp(500px, 50vh, 700px)', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: '0 auto', overflow: 'hidden' }}>
+        <div className="relative flex items-center justify-center" style={{ height: '100%', overflow: 'hidden' }}>
           {/* Left Side Cards: start centered on the circle and animate outward on scroll */}
-          <div className="absolute inset-0" style={{ zIndex: 20 }}>
+          <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
             {leftCards.map((item, i) => {
-              // responsive final offset so cards move from center to a side position
-              const baseFinalX = measured && containerDimensions.width
-                ? -Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
-                : 0;
-              const finalX = baseFinalX; // final X offset to the left of center (pushed farther)
-              const finalY = (i - 1) * 260; // increased vertical spacing from center to avoid overlap
+              // Responsive card width - balanced size for mobile to prevent overlap
+              const cardWidth = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Reduced from 0.38 to 0.35
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              // Estimate card height (approximate based on padding and text)
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Reduced from 180/0.38
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Increased padding
+              // More conservative max offset to prevent going out of screen
+              const maxOffset = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Reduced from 0.28
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
+                : 200;
+              
+              // Calculate minimum offset based on circle size + card half-width + larger gap to prevent overlap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Increased gap from 18 to 25
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
+              
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = -Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.max(
+                baseFinalX - middleCardOffset, // Subtract because baseFinalX is negative for left side
+                -maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
+              const verticalSpacing = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Increased spacing
+                      )
+                    )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
+                : 180;
+              const finalY = (i - 1) * verticalSpacing; // increased vertical spacing from center to avoid overlap
 
               // raw transforms driven by scroll progress (0 = centered, 1 = at final position)
               const xRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalX]);
@@ -178,7 +261,8 @@ export function CloneWithConscience() {
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: '200px',
+                    width: `${cardWidth}px`,
+                    maxWidth: '90%',
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -195,16 +279,16 @@ export function CloneWithConscience() {
                       width: '100%',
                       background: 'rgba(0, 47, 58, 0.25)',
                       border: `1px solid rgba(27, 153, 139, 0.2)`,
-                      padding: '24px',
+                      padding: 'clamp(16px, 1.5vw, 24px)',
                       backdropFilter: 'blur(20px)',
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                   
                   >
-                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: 'var(--font-size-body)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#C5C6C7', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'var(--font-body)', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
                   </motion.div>
                 </div>
               );
@@ -212,8 +296,23 @@ export function CloneWithConscience() {
 
           </div>
 
-          {/* Central Orbital System */}
-          <div className="relative" style={{ width: '520px', height: '520px', flexShrink: 0 }}>
+          {/* Central Orbital System - Smaller on mobile to prevent overlap */}
+          <div 
+            className="relative" 
+            style={{ 
+              width: measured && containerDimensions.width < 640 
+                ? 'clamp(130px, 35vw, 160px)' 
+                : measured && containerDimensions.width < 1024
+                ? 'clamp(200px, 40vw, 300px)'
+                : 'clamp(250px, 35vw, 380px)', 
+              height: measured && containerDimensions.width < 640 
+                ? 'clamp(130px, 35vw, 160px)' 
+                : measured && containerDimensions.width < 1024
+                ? 'clamp(200px, 40vw, 300px)'
+                : 'clamp(250px, 35vw, 380px)', 
+              flexShrink: 0 
+            }}
+          >
             <motion.div
               className="relative w-full h-full"
               style={{
@@ -408,13 +507,78 @@ export function CloneWithConscience() {
           </div>
 
           {/* Right Side Cards: mirror of left side, start centered and animate outward to the right */}
-          <div className="absolute inset-0" style={{ zIndex: 20 }}>
+          <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
             {rightCards.map((item, i) => {
-              const baseFinalX = measured && containerDimensions.width
-                ? Math.min(500, Math.max(300, Math.floor(containerDimensions.width / 2 - 180)))
-                : 0;
-              const finalX = baseFinalX; // final X offset to the right of center (pushed farther)
-              const finalY = (i - 1) * 260;
+              // Responsive card width - balanced size for mobile to prevent overlap
+              const cardWidth = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Reduced from 0.38 to 0.35
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              // Estimate card height (approximate based on padding and text)
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Reduced from 180/0.38
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Increased padding
+              // More conservative max offset to prevent going out of screen
+              const maxOffset = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Reduced from 0.28
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
+                : 200;
+              
+              // Calculate minimum offset based on circle size + card half-width + larger gap to prevent overlap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Increased gap from 18 to 25
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
+              
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.min(
+                baseFinalX + middleCardOffset, // Add because baseFinalX is positive for right side
+                maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
+              const verticalSpacing = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Increased spacing
+                      )
+                    )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
+                : 180;
+              const finalY = (i - 1) * verticalSpacing;
 
               const xRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalX]);
               const yRaw = useTransform(scrollYProgress, [0, 0.5], [0, finalY]);
@@ -425,7 +589,7 @@ export function CloneWithConscience() {
               const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
               return (
-                <div key={`right-card-wrap-${i}`} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '200px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div key={`right-card-wrap-${i}`} style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: `${cardWidth}px`, maxWidth: '90%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                   <motion.div
                     className="rounded-2xl cursor-pointer group"
                     style={{
@@ -436,16 +600,16 @@ export function CloneWithConscience() {
                       width: '100%',
                       background: 'rgba(0, 47, 58, 0.25)',
                       border: `1px solid rgba(27, 153, 139, 0.2)`,
-                      padding: '24px',
+                      padding: 'clamp(16px, 1.5vw, 24px)',
                       backdropFilter: 'blur(20px)',
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
                     }}
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                     
                   >
-                    <h3 style={{ fontSize: '16px', color: '#FFFFFF', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 500, marginBottom: '4px', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: 'clamp(12px, 1.6vw, 16px)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: '12px', color: '#C5C6C7', fontFamily: 'Fredoka, system-ui, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'var(--font-body)', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
 
                   </motion.div>
                 </div>
@@ -464,7 +628,7 @@ export function CloneWithConscience() {
               left: 0,
             }}
             viewBox={`0 0 ${containerDimensions.width} ${containerDimensions.height}`}
-            preserveAspectRatio="none"
+            preserveAspectRatio="xMidYMid meet"
           >
             {/* Left side wave connections */}
             {leftCards.map((_, i) => {
@@ -472,18 +636,91 @@ export function CloneWithConscience() {
               const centerX = containerDimensions.width / 2;
               const centerY = containerDimensions.height / 2;
 
-              // Card positions - left side cards
-              const cardWidth = 200;
-              const cardGap = 32;
-              const cardHeight = 200; // Approximate card height
-              const cardX = cardWidth / 2; // Center of card from left edge
-              const cardY = centerY + (i - 1) * (cardHeight + cardGap); // Vertical spacing from center
+              // Use the same responsive calculations as the cards
+              const cardWidth = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Match card width
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              // Estimate card height
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Match circle size
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Match padding
+              // More conservative max offset to prevent going out of screen
+              const maxOffset = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Match max offset
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
+                : 200;
+              
+              // Calculate minimum offset based on circle size + card half-width + larger gap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Match gap
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
+              
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = -Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.max(
+                baseFinalX - middleCardOffset, // Subtract because baseFinalX is negative for left side
+                -maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
+              const verticalSpacing = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Match spacing
+                      )
+                    )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
+                : 180;
+              
+              const finalY = (i - 1) * verticalSpacing;
 
+              // Card position (matching the card's final position)
+              const cardX = centerX + finalX; // Actual card center X position
+              const cardY = centerY + finalY; // Actual card center Y position
+
+              // Calculate midpoint for smooth curve
               const midX = (centerX + cardX) / 2;
-              const waveAmplitude = 40;
+              const midY = (centerY + cardY) / 2;
+              
+              // Responsive wave amplitude
+              const waveAmplitude = Math.min(40, containerDimensions.width * 0.08);
 
               // Create smooth wave path using quadratic bezier
-              const wavePath = `M ${centerX} ${centerY} Q ${midX - waveAmplitude} ${centerY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${(centerY + cardY) / 2} T ${cardX} ${cardY}`;
+              const wavePath = `M ${centerX} ${centerY} Q ${midX - waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${midY} T ${cardX} ${cardY}`;
 
               return (
                 <g key={`left-wave-${i}`}>
@@ -491,7 +728,7 @@ export function CloneWithConscience() {
                     d={wavePath}
                     fill="none"
                     stroke={`rgba(27, 153, 139, 0.25)`}
-                    strokeWidth="2"
+                    strokeWidth={Math.max(1, Math.min(2, containerDimensions.width / 400))}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: 1 + i * 0.15, ease: 'easeOut' }}
@@ -506,18 +743,91 @@ export function CloneWithConscience() {
               const centerX = containerDimensions.width / 2;
               const centerY = containerDimensions.height / 2;
 
-              // Card positions - right side cards
-              const cardWidth = 200;
-              const cardGap = 32;
-              const cardHeight = 200;
-              const cardX = containerDimensions.width - (cardWidth / 2); // Center of card from right edge
-              const cardY = centerY + (i - 1) * (cardHeight + cardGap);
+              // Use the same responsive calculations as the cards
+              const cardWidth = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(120, Math.min(150, containerDimensions.width * 0.35)) // Match card width
+                  : Math.max(140, Math.min(200, containerDimensions.width * 0.4))
+                : 200;
+              
+              // Estimate card height
+              const cardHeight = measured && containerDimensions.width < 640 ? 70 : 80;
+              
+              // Calculate circle size for offset calculation
+              const circleSize = measured && containerDimensions.width < 640
+                ? Math.min(160, containerDimensions.width * 0.35) // Match circle size
+                : measured && containerDimensions.width < 1024
+                ? Math.min(280, containerDimensions.width * 0.38)
+                : 380;
+              const circleRadius = circleSize / 2;
+              
+              // Responsive final offset - ensure proper padding from screen edges
+              const padding = measured && containerDimensions.width < 640 ? 24 : 16; // Match padding
+              // More conservative max offset to prevent going out of screen
+              const maxOffset = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.26 // Match max offset
+                    )
+                  : Math.min(
+                      containerDimensions.width / 2 - cardWidth / 2 - padding,
+                      containerDimensions.width * 0.35
+                    )
+                : 200;
+              
+              // Calculate minimum offset based on circle size + card half-width + larger gap
+              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Match gap
+              const minOffset = circleRadius + (cardWidth / 2) + gap;
+              
+              // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
+              const baseFinalX = Math.min(Math.max(minOffset, 0), maxOffset);
+              
+              // Push middle cards (i === 1) slightly further away from center, but stay within bounds
+              const middleCardOffset = measured && containerDimensions.width < 640 
+                ? (i === 1 ? 15 : 0) // Middle card gets 15px extra offset on mobile
+                : (i === 1 ? 20 : 0); // Middle card gets 20px extra offset on desktop
+              
+              // Ensure the offset doesn't push cards out of screen
+              const finalX = Math.min(
+                baseFinalX + middleCardOffset, // Add because baseFinalX is positive for right side
+                maxOffset // Don't exceed maxOffset
+              );
+              
+              // Responsive vertical spacing - increased to prevent card overlap
+              const verticalSpacing = measured && containerDimensions.width
+                ? containerDimensions.width < 640
+                  ? Math.max(
+                      cardHeight + 20, // Card height + gap between cards
+                      Math.min(
+                        140, 
+                        Math.min(containerDimensions.width * 0.13, containerDimensions.height * 0.16) // Match spacing
+                      )
+                    )
+                  : Math.max(
+                      120, 
+                      Math.min(
+                        220, 
+                        Math.min(containerDimensions.width * 0.15, containerDimensions.height * 0.2)
+                      )
+                    )
+                : 180;
+              
+              const finalY = (i - 1) * verticalSpacing;
 
+              // Card position (matching the card's final position)
+              const cardX = centerX + finalX; // Actual card center X position
+              const cardY = centerY + finalY; // Actual card center Y position
+
+              // Calculate midpoint for smooth curve
               const midX = (centerX + cardX) / 2;
-              const waveAmplitude = 40;
+              const midY = (centerY + cardY) / 2;
+              
+              // Responsive wave amplitude
+              const waveAmplitude = Math.min(40, containerDimensions.width * 0.08);
 
               // Create smooth wave path
-              const wavePath = `M ${centerX} ${centerY} Q ${midX + waveAmplitude} ${centerY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${(centerY + cardY) / 2} T ${cardX} ${cardY}`;
+              const wavePath = `M ${centerX} ${centerY} Q ${midX + waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${midY} T ${cardX} ${cardY}`;
 
               return (
                 <g key={`right-wave-${i}`}>
@@ -525,7 +835,7 @@ export function CloneWithConscience() {
                     d={wavePath}
                     fill="none"
                     stroke={`rgba(27, 153, 139, 0.25)`}
-                    strokeWidth="2"
+                    strokeWidth={Math.max(1, Math.min(2, containerDimensions.width / 400))}
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
                     transition={{ duration: 1, delay: 1 + i * 0.15, ease: 'easeOut' }}

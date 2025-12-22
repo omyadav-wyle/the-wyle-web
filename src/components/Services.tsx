@@ -8,7 +8,7 @@ import imgImagePhotoroom35 from 'figma:asset/277c230f7e5017bbbad9cf38dfe00ac4f1e
 import imgPurpleFlow from 'figma:asset/ce5a05e25e4ed19cbb4fd661fce25c8291906644.png';
 import { Footer } from './Footer';
 import { Navigation } from './Navigation';
-
+import '../index.css';
 export function Services() {
   return (
     <div className="bg-black relative w-full min-h-screen overflow-hidden">
