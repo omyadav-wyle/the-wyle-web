@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { AlertCircle, TrendingDown, DollarSign } from 'lucide-react';
 import { useRef } from 'react';
-
+import '../index.css';
 export function ProblemSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -93,7 +93,6 @@ export function ProblemSection() {
                     style={{
                       fontSize: '20px',
                       fontFamily: 'Poppins, sans-serif',
-              fontWeight: 400,
                       fontWeight: 600,
                       color: '#FFFFFF',
                       marginBottom: '8px',

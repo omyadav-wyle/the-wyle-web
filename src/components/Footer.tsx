@@ -1,7 +1,9 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { Twitter, Instagram, Linkedin, MapPin } from 'lucide-react';
+import { Twitter,X , Instagram, Linkedin, MapPin } from 'lucide-react';
 import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
-
+import { FaXTwitter } from 'react-icons/fa6'; 
+// npm install @heroicons/react
+import '../index.css';
 export function Footer() {
   const navigate = useNavigate();
 
@@ -108,7 +110,7 @@ export function Footer() {
                   border: '1px solid rgba(110, 216, 255, 0.2)',
                 }}
               >
-                <Twitter size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                <FaXTwitter   size={16} color="#D5FF3F" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
               <a
                 href="https://www.instagram.com/wyle.ai"
@@ -124,7 +126,7 @@ export function Footer() {
                   border: '1px solid rgba(110, 216, 255, 0.2)',
                 }}
               >
-                <Instagram size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                <Instagram size={16} color="#D5FF3F" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
               <a
                 href="https://www.linkedin.com/company/wyle-global-corporation/posts/?feedView=all"
@@ -140,7 +142,7 @@ export function Footer() {
                   border: '1px solid rgba(110, 216, 255, 0.2)',
                 }}
               >
-                <Linkedin size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                <Linkedin size={16} color="#D5FF3F" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
               <a
                 href="https://maps.app.goo.gl/cyX8V3suKxunWiH17"
@@ -158,7 +160,7 @@ export function Footer() {
                 }}
                 aria-label="Open location in Google Maps"
               >
-                <MapPin size={16} color="#6ED8FF" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
+                <MapPin size={16} color="#D5FF3F" style={{ width: '16px', height: '16px', flexShrink: 0 }} />
               </a>
             </div>
           </div>
@@ -172,7 +174,7 @@ export function Footer() {
           <div
             style={{
               fontSize: 'clamp(10px, 1.2vw, 12px)',
-              fontFamily: 'Urbanist, sans-serif',
+              fontFamily: 'var(--font-body)',
               fontWeight: 400,
               color: '#C5C6C7',
               opacity: 0.7,

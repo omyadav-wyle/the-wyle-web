@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Navigation } from './Navigation';
-
+import '../index.css';
 export function Contact() {
   const [formData, setFormData] = useState({
     businessName: '',
@@ -197,9 +197,9 @@ export function Contact() {
         <div className="max-w-7xl mx-auto relative z-10">
           <h1
             style={{
-              fontSize: '64px',
+              fontSize: 'var(--font-size-heading)',
               color: '#FFFFFF',
-              fontFamily: 'Poppins, sans-serif',
+              fontFamily: 'var(--font-heading)',
               fontWeight: 500,
               letterSpacing: '-1px',
               lineHeight: '1.2',
@@ -211,13 +211,13 @@ export function Contact() {
 
           <p
             style={{
-              fontSize: '16px',
+              fontSize: 'var(--font-size-subheading)',
               color: '#CCCCCC',
-              fontFamily: 'Urbanist, sans-serif',
+              fontFamily: 'var(--font-body)',
               fontWeight: 400,
               letterSpacing: '0.3px',
               lineHeight: '1.6',
-              maxWidth: '600px',
+              maxWidth: '900px',
             }}
           >
             We're selective about who we work with, and thoughtful about how we do it.<br />

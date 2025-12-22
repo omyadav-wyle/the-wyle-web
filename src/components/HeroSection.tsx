@@ -4,7 +4,7 @@ import marbleTexture from 'figma:asset/2d00f865631069f9d70237e84f9f12413b9b737c.
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import heroVideo from '../assets/hero.mp4';
 import { Navigation } from './Navigation';
-
+import '../index.css';
 export function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -77,14 +77,12 @@ export function HeroSection() {
           disablePictureInPicture
           disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ 
-            WebkitPlaysinline: 'true',
-          }}
+         
         />
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full" style={{ marginTop: 'clamp(-120px, -15vw, -80px)' }}>
+      <div className="relative z-10 flex flex-col items-center justify-center h-full" style={{ marginTop: 'clamp(-200px, -30vw, -80px)' }}>
         {/* SVG Filters for Internal Marble Texture */}
         <svg style={{ position: 'absolute', width: 0, height: 0 }}>
           <defs>
@@ -140,7 +138,7 @@ export function HeroSection() {
               letterSpacing: '2px',
               willChange: 'opacity',
               filter: 'brightness(1.1) saturate(1.3) contrast(1.2) hue-rotate(-15deg)',
-              fontSize: 'clamp(36px, 8vw, 96px)',
+              fontSize: 'var(--font-size-heading)',
             }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -163,7 +161,7 @@ export function HeroSection() {
               backgroundSize: '200% 100%',
               zIndex: 12,
               willChange: 'background-position, opacity',
-              fontSize: 'clamp(36px, 8vw, 96px)',
+              fontSize: 'var(--font-size-heading)',
             }}
             animate={{
               backgroundPosition: ['-200% 0%', '200% 0%', '200% 0%', '200% 0%', '200% 0%'],
@@ -233,7 +231,7 @@ export function HeroSection() {
                 fontWeight: 500,
                 letterSpacing: '2px',
                 filter: 'brightness(1.3) saturate(1.4) hue-rotate(-15deg)',
-                fontSize: 'clamp(36px, 8vw, 96px)',
+                fontSize: 'var(--font-size-heading)',
               }}
             >
               Life in a Flow
@@ -286,7 +284,7 @@ export function HeroSection() {
                 fontWeight: 500,
                 letterSpacing: '2px',
                 filter: 'brightness(1.4) saturate(1.5) hue-rotate(-15deg)',
-                fontSize: 'clamp(36px, 8vw, 96px)',
+                fontSize: 'var(--font-size-heading)',
               }}
             >
               Life in a Flow
@@ -298,9 +296,9 @@ export function HeroSection() {
         <motion.p
           className="text-white max-w-xl text-center mb-20 relative z-20"
           style={{
-            fontFamily: 'Montserrat, sans-serif',
+            fontFamily: 'var(--font-subtext)',
             letterSpacing: '2px',
-            fontSize: 'clamp(14px, 1.8vw, 18px)',
+            fontSize: 'var(--font-size-subheading)',
             lineHeight: '1.6',
             fontWeight: 400,
             marginBottom: 'clamp(40px, 5vw, 80px)',

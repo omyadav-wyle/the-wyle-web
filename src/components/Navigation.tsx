@@ -2,7 +2,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import logoImage from 'figma:asset/f8de8f3738c5bcb97304e439ce6aaac268588795.png';
-
+import '../index.css';
 export function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();

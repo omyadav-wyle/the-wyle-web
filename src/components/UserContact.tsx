@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Navigation } from './Navigation';
-
+import '../index.css';
 export function UserContact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -192,7 +192,7 @@ export function UserContact() {
         <div className="max-w-7xl mx-auto relative z-10">
           <h1
             style={{
-              fontSize: '64px',
+              fontSize: 'var(--font-size-heading)',
               color: '#FFFFFF',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
@@ -201,21 +201,22 @@ export function UserContact() {
               marginBottom: '24px',
             }}
           >
-            Get early access and share feedback.
+            Curious? So are we.
           </h1>
 
           <p
             style={{
-              fontSize: '16px',
+              fontSize: 'var(--font-size-subheading)',
               color: '#CCCCCC',
-              fontFamily: 'Poppins, sans-serif',
+              fontFamily: 'var(--font-subtext)',
               fontWeight: 400,
               letterSpacing: '0.3px',
               lineHeight: '1.6',
               maxWidth: '600px',
             }}
           >
-            Help us build something that truly matters. Join us in creating a more connected, effortless digital experience.
+             If you’re interested in what’s taking shape, or want to be part of the early
+conversations, we’d love to hear from you.
           </p>
         </div>
       </section>
@@ -277,7 +278,7 @@ export function UserContact() {
                   htmlFor="name"
                   style={{
                     display: 'block',
-                    fontSize: '14px',
+                    fontSize: 'var(--font-size-body)',
                     color: '#FFFFFF',
                     fontFamily: 'Poppins, sans-serif',
                     fontWeight: 400,
@@ -299,7 +300,7 @@ export function UserContact() {
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
                     fontFamily: 'Poppins, sans-serif',
-                    fontSize: '14px',
+                    fontSize: 'var(--font-size-body)',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
@@ -318,7 +319,7 @@ export function UserContact() {
                   htmlFor="email"
                   style={{
                     display: 'block',
-                    fontSize: '14px',
+                    fontSize: 'var(--font-size-body)',
                     color: '#FFFFFF',
                     fontFamily: 'Poppins, sans-serif',
                     fontWeight: 400,
@@ -340,7 +341,7 @@ export function UserContact() {
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
                     fontFamily: 'Poppins, sans-serif',
-                    fontSize: '14px',
+                    fontSize: 'var(--font-size-body)',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
@@ -359,7 +360,7 @@ export function UserContact() {
                   htmlFor="phone"
                   style={{
                     display: 'block',
-                    fontSize: '14px',
+                    fontSize: 'var(--font-size-body)',
                     color: '#FFFFFF',
                     fontFamily: 'Poppins, sans-serif',
                     fontWeight: 400,
@@ -381,7 +382,7 @@ export function UserContact() {
                     borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                     color: '#FFFFFF',
                     fontFamily: 'Poppins, sans-serif',
-                    fontSize: '14px',
+                    fontSize: 'var(--font-size-body)',
                     outline: 'none',
                   }}
                   placeholder="Your answer"
@@ -402,7 +403,7 @@ export function UserContact() {
                 htmlFor="message"
                 style={{
                   display: 'block',
-                  fontSize: '14px',
+                  fontSize: 'var(--font-size-body)',
                   color: '#FFFFFF',
                   fontFamily: 'Poppins, sans-serif',
                   fontWeight: 400,
@@ -410,7 +411,7 @@ export function UserContact() {
                   letterSpacing: '0.3px',
                 }}
               >
-                Comments/Message <span style={{ color: '#999999', fontSize: '12px' }}>(Optional)</span>
+                Comments/Message <span style={{ color: '#999999', fontSize: 'var(--font-size-body)' }}>(Optional)</span>
               </label>
               <textarea
                 id="message"
@@ -424,7 +425,7 @@ export function UserContact() {
                   borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
                   color: '#FFFFFF',
                   fontFamily: 'Poppins, sans-serif',
-                  fontSize: '14px',
+                  fontSize: 'clamp(12px, 1.6vw, 14px)',
                   outline: 'none',
                 }}
                 placeholder="Your answer"
@@ -454,7 +455,7 @@ export function UserContact() {
                       : '1px solid rgba(239, 68, 68, 0.3)',
                   color: statusType === 'success' ? '#22c55e' : '#ef4444',
                   fontFamily: 'Poppins, sans-serif',
-                  fontSize: '14px',
+                  fontSize: 'clamp(12px, 1.6vw, 14px)',
                 }}
               >
                 {statusMessage}
@@ -473,7 +474,7 @@ export function UserContact() {
                   color: '#000000',
                   fontFamily: 'Poppins, sans-serif',
                   fontWeight: 500,
-                  fontSize: '16px',
+                  fontSize: 'clamp(14px, 1.8vw, 18px)',
                   cursor: loading ? 'not-allowed' : 'pointer',
                   boxShadow: '0 0 20px rgba(213, 255, 63, 0.3)',
                 }}

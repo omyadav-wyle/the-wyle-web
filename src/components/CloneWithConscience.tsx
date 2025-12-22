@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { useRef, useEffect, useState } from 'react';
 import ecosystemCircle from '../assets/ecosystem-circle.svg';
+import '../index.css';
 
 export function CloneWithConscience() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -94,13 +95,14 @@ export function CloneWithConscience() {
       <motion.h2
         className="text-center mb-4"
         style={{
-          fontSize: 'clamp(24px, 4vw, 40px)',
+          fontSize: 'var(--font-size-heading-sm)',
           fontFamily: 'Poppins, sans-serif',
           fontWeight: 500,
           letterSpacing: '1px',
           color: '#FFFFFF',
           marginTop: '0px',
-          marginBottom: 'clamp(12px, 1.5vw, 16px)',
+          // marginBottom: 'clamp(12px, 1vw, 16px)',
+          marginBottom: 'clamp(0px, 0vw, 0px)',
           paddingLeft: 'clamp(16px, 4vw, 0px)',
           paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
@@ -116,14 +118,24 @@ export function CloneWithConscience() {
       <motion.p
         className="text-center max-w-2xl mx-auto mb-2"
         style={{
-          fontSize: 'clamp(13px, 1.5vw, 15px)',
-          color: '#C5C6C7',
-          fontFamily: 'Montserrat, sans-serif',
-          fontWeight: 500,
-          lineHeight: '1.45',
-          marginBottom: 'clamp(8px, 0.5vw, 8px)',
-          paddingLeft: 'clamp(16px, 4vw, 0px)',
-          paddingRight: 'clamp(16px, 4vw, 0px)',
+          // fontSize: 'clamp(13px, 1.5vw, 15px)',
+          // color: '#C5C6C7',
+          // fontWeight: 500,
+          // lineHeight: '1.45',
+          // marginBottom: 'clamp(8px, 0.5vw, 8px)',
+          // paddingLeft: 'clamp(16px, 4vw, 0px)',
+          // paddingRight: 'clamp(16px, 4vw, 0px)',
+           fontSize: 'var(--font-size-body)',       // slightly bigger than description
+    // fontWeight: 500,                             // medium weight
+    //  fontSize: 'clamp(24px, 4vw, 40px)',
+      fontFamily: 'var(--font-subtext)',
+      fontWeight: 500,
+    color: '#FFFFFF',                            // accent color to stand out
+    lineHeight: '1.5',
+    letterSpacing: '0.5px',
+    marginBottom: 'clamp(10px, 1vw, 16px)',
+    paddingLeft: 'clamp(16px, 4vw, 0px)',
+    paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -137,12 +149,12 @@ export function CloneWithConscience() {
       <motion.p
         className="text-center max-w-2xl mx-auto"
         style={{
-          fontSize: 'clamp(13px, 1.5vw, 15px)',
+          fontSize: 'var(--font-size-body)',
           color: '#C5C6C7',
-          fontFamily: 'Montserrat, sans-serif',
+          fontFamily: 'var(--font-subtext)',
           fontWeight: 500,
           lineHeight: '1.45',
-          marginBottom: 'clamp(16px, 1vw, 16px)',
+          // marginBottom: 'clamp(16px, 1vw, 16px)',
           paddingLeft: 'clamp(16px, 4vw, 0px)',
           paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
@@ -155,7 +167,7 @@ export function CloneWithConscience() {
       </motion.p>
 
       {/* Central Orbital System and Cards Container */}
-      <div ref={containerRef} className="relative" style={{ height: 'clamp(500px, 70vh, 700px)', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: '0 auto', overflow: 'hidden' }}>
+      <div ref={containerRef} className="relative" style={{ height: 'clamp(500px, 50vh, 700px)', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: '0 auto', overflow: 'hidden' }}>
         <div className="relative flex items-center justify-center" style={{ height: '100%', overflow: 'hidden' }}>
           {/* Left Side Cards: start centered on the circle and animate outward on scroll */}
           <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
@@ -274,9 +286,9 @@ export function CloneWithConscience() {
                     transition={{ duration: 0.35, delay: i * 0.03 }}
                   
                   >
-                    <h3 style={{ fontSize: 'clamp(12px, 1.6vw, 16px)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
+                    <h3 style={{ fontSize: 'var(--font-size-body)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'Urbanist, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'var(--font-body)', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
                   </motion.div>
                 </div>
               );
@@ -597,7 +609,7 @@ export function CloneWithConscience() {
                   >
                     <h3 style={{ fontSize: 'clamp(12px, 1.6vw, 16px)', color: '#FFFFFF', fontFamily: 'Poppins, sans-serif', fontWeight: 500, marginBottom: 'clamp(4px, 0.25vw, 4px)', letterSpacing: '0.2px' }}>{item.title}</h3>
 
-                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'Urbanist, sans-serif', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
+                    <p style={{ fontSize: 'clamp(10px, 1.2vw, 12px)', color: '#C5C6C7', fontFamily: 'var(--font-body)', fontWeight: 400, lineHeight: '1.4', margin: 0 }}>{item.subtitle}</p>
 
                   </motion.div>
                 </div>

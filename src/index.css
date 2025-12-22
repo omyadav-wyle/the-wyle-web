@@ -1375,6 +1375,17 @@
   --font-ui: 'Inter', sans-serif;
   --font-premium: 'Playfair Display', serif;
   
+  /* Responsive Font Size Variables */
+  --font-size-heading: clamp(36px, 8vw, 96px);    
+  --font-size-heading-sm:  clamp(28px, 5vw, 48px); /* main titles / hero headings */
+  --font-size-subheading: clamp(14px, 3vw, 24px);  /* secondary headings / subtexts */
+  --font-size-size-body: clamp(12px, 1.6vw, 14px);        /* normal body text */
+  --font-size-body-lg: clamp(16px, 2.5vw, 20px);     /* larger body text */
+
+  /* clamp(36px, 8vw, 96px) */
+  /* clamp(14px, 1.8vw, 18px) */
+  /* clamp(12px, 1.6vw, 14px) */
+  
   /* WYLE Brand Colors */
   --color-white: #FEFFEE;
   --color-black: #000000;
@@ -1382,6 +1393,8 @@
   --color-verdigris: #1B998B;
   --color-chartreuse: #D5FF3F;
   --color-peach: #FFB5A7;
+
+
 }
 
 .dark {

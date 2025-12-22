@@ -1,5 +1,5 @@
 import mapImage from 'figma:asset/08a5d57fa2f996c773f2e4076fa36024a0b87ad6.png';
-
+import '../index.css';
 export function MapSection() {
   return (
     <section className="relative" style={{ background: '#000000' }}>

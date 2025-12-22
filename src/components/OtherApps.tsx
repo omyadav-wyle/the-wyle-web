@@ -1,7 +1,8 @@
 import { motion, useScroll, useTransform } from 'motion/react';
 import { AlertCircle, TrendingDown, DollarSign } from 'lucide-react';
 import { useRef } from 'react';
-
+import { describe } from 'node:test';
+import '../index.css';
 export function OtherApps() {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
@@ -15,24 +16,25 @@ export function OtherApps() {
 
   const problemPoints = [
     {
-      icon: AlertCircle,
-      title: 'Real-time data gaps',
-      description: 'Traditional apps don\'t provide instant insights into what\'s happening in your daily life.',
+      // icon: AlertCircle,
+      // title: 'Real-time data gaps',
+      describe: '• Most apps only notice things after they’ve happened.',
     },
     {
-      icon: TrendingDown,
-      title: 'Zero intelligent insights',
-      description: 'No understanding of your patterns, preferences, or needs.',
+      // icon: TrendingDown,
+      // title: 'Zero intelligent insights',
+      describe: '• They don’t learn your patterns. They don’t anticipate what’s next.',
     },
     {
-      icon: DollarSign,
-      title: 'Wasted time = wasted opportunities',
-      description: 'Traditional apps don\'t help you understand WHERE your time and energy is actually being consumed.',
+      // icon: DollarSign,
+      // title: 'Wasted time = wasted opportunities',
+      describe: '• And they never show you where your time actually goes.',
     },
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-32 px-16" style={{ background: '#000000', paddingTop: 'clamp(48px, 8vw, 128px)', paddingBottom: 'clamp(48px, 8vw, 128px)', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' }}>
+    <section ref={sectionRef} className="relative py-32 px-16" style={{ background: '#000000', paddingTop: 'clamp(16px, 3vw, 128px)', paddingBottom: 'clamp(48px, 4vw, 128px)' }}>
+      {/* paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)' */}
       <div className="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(32px, 5vw, 80px)' }}>
         {/* Left Column - Text Content */}
         <motion.div
@@ -43,7 +45,7 @@ export function OtherApps() {
         >
           <motion.h2
             style={{
-              fontSize: 'clamp(28px, 5vw, 48px)',
+              fontSize: 'var(--font-size-heading-sm)',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
               color: '#FEFFFE',
@@ -60,75 +62,70 @@ export function OtherApps() {
           </motion.h2>
 
           <div className="space-y-6 mb-8">
-            {problemPoints.map((point, index) => (
-              <motion.div
-                key={index}
-                className="flex items-start gap-4"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.15,
-                  ease: 'easeOut'
-                }}
-              >
-                <motion.div
-                  style={{ marginTop: '4px', flexShrink: 0 }}
-                  whileInView={{ 
-                    rotate: [0, -10, 10, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.15 + 0.3,
-                    ease: 'easeInOut'
-                  }}
-                >
-                  <point.icon size={24} color="#1B998B" />
-                </motion.div>
-                <div>
-                  <motion.h3
-                    style={{
-                      fontSize: 'clamp(16px, 2vw, 20px)',
-                      fontFamily: 'Poppins, sans-serif',
-                    fontWeight: 400,
-                      fontWeight: 600,
-                      color: '#FEFFFE',
-                      marginBottom: 'clamp(6px, 0.5vw, 8px)',
-                    }}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 + 0.2 }}
-                  >
-                    {point.title}
-                  </motion.h3>
-                  <motion.p
-                    style={{
-                      fontSize: 'clamp(14px, 1.6vw, 16px)',
-                      fontFamily: 'Urbanist, sans-serif',
-                    fontWeight: 400,
-                      color: 'rgba(254, 255, 254, 0.7)',
-                      lineHeight: '1.6',
-                    }}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.15 + 0.3 }}
-                  >
-                    {point.description}
-                  </motion.p>
-                </div>
-              </motion.div>
-            ))}
+       {problemPoints.map((point) => (
+    <motion.div
+      key={point.describe} // use a unique key from the text itself
+      className="flex"
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+    >
+      <span
+        className="flex-shrink-0"
+        style={{
+          // display: 'inline-block',
+          // width: '1.2em',
+          // color: '#FEFFFE',
+          // textAlign: 'right',
+          // marginRight: '0.5em',
+          fontFamily: 'Poppins, sans-serif',
+      fontWeight: 500,
+    color: '#FFFFFF',                            // accent color to stand out
+    lineHeight: '1.5',
+    letterSpacing: '0.5px',
+    // marginBottom: 'clamp(10px, 1vw, 16px)',
+    // paddingLeft: 'clamp(16px, 4vw, 0px)',
+    paddingRight: 'clamp(16px, 4vw, 0px)',
+        }}
+      >
+        •
+      </span>
+
+      <div style={{ flex: 1 }}>
+        <motion.h3
+          style={{
+            // fontSize: 'clamp(16px, 2vw, 20px)',
+            // fontFamily: 'Poppins, sans-serif',
+            // fontWeight: 600,
+            // color: '#FEFFFE',
+            // lineHeight: '1.6', // ensures multi-line spacing matches the bullet
+            fontFamily:'var(--font-subtext)',
+      fontWeight: 500,
+    color: '#FFFFFF',                            // accent color to stand out
+    lineHeight: '1.5',
+    letterSpacing: '0.5px',
+    // marginBottom: 'clamp(10px, 1vw, 16px)',
+    // paddingLeft: 'clamp(16px, 4vw, 0px)',
+    // paddingRight: 'clamp(16px, 4vw, 0px)',
+            
+          }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          {point.describe.replace(/^•\s*/, '')}
+        </motion.h3>
+      </div>
+    </motion.div>
+  ))}
           </div>
 
           <motion.p
             style={{
-              fontSize: 'clamp(14px, 1.8vw, 18px)',
-              fontFamily: 'Urbanist, sans-serif',
+              fontSize: 'var(--font-size-subheading)',
+              fontFamily: 'var(--font-body)',
               fontWeight: 400,
               color: 'rgba(254, 255, 254, 0.7)',
               lineHeight: '1.8',
@@ -138,7 +135,7 @@ export function OtherApps() {
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            Most apps are disconnected silos. They don't learn from you, adapt to your lifestyle, or connect the dots between different aspects of your life.
+            Your life ends up split across tools that were never meant to work together.
           </motion.p>
         </motion.div>
 
@@ -255,7 +252,7 @@ export function OtherApps() {
                     <p
                       style={{
                         fontSize: '11px',
-                        fontFamily: 'Urbanist, sans-serif',
+                        fontFamily: 'var(--font-body)',
                     fontWeight: 400,
                         color: 'rgba(254, 255, 254, 0.7)',
                         lineHeight: '1.4',
@@ -328,7 +325,7 @@ export function OtherApps() {
                         style={{
                           fontSize: '16px',
                           fontFamily: 'Poppins, sans-serif',
-                    fontWeight: 400,
+                    // fontWeight: 400,
                           fontWeight: 700,
                           color: '#FEFFFE',
                           letterSpacing: '-1px',
@@ -387,7 +384,7 @@ export function OtherApps() {
                 <p
                   style={{
                     fontSize: '12px',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                     fontWeight: 400,
                     color: 'rgba(254, 255, 254, 0.8)',
                     lineHeight: '1.5',
@@ -395,7 +392,7 @@ export function OtherApps() {
                     marginBottom: '12px',
                   }}
                 >
-                  All your notifications in one intelligent stream
+                  Life is one flow. Your apps broke it into pieces.
                 </p>
 
                 <motion.div

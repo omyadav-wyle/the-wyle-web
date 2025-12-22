@@ -8,7 +8,7 @@ import arvindImage from '../assets/arvind.webp';
 import amruthaImage from '../assets/amrutha.png';
 import azmatImage from '../assets/azmat.png';
 import aboutHeroVideo from '../assets/about_hero.mp4';
-
+import '../index.css';
 export function About() {
   const teamMembers = [
     {
@@ -25,7 +25,7 @@ export function About() {
     },
     {
       name: 'Azmat Ali',
-      role: 'VP of Marketing & Innovation',
+      role: 'VP, Marketing & Innovation',
       image: azmatImage,
       linkedin: 'https://www.linkedin.com/in/azmatali/'
     }
@@ -258,13 +258,14 @@ export function About() {
           </div>
 
           {/* Content section */}
-          <div className="flex-1 flex flex-col p-6 text-center" style={{ zIndex: 2, position: 'relative' }}>
+          <div className="flex-1 flex flex-col p-6 text-center" style={{ zIndex: 2, position: 'relative' , paddingLeft:'clamp(16px, 4vw, 24px)', paddingRight:'clamp(16px, 4vw, 24px)'}}>
             <motion.h3
               className="mb-3"
               style={{
-                fontSize: 'clamp(20px, 2.5vw, 24px)',
+                // fontSize: 'clamp(20px, 2.5vw, 24px)',
                 color: isHovered ? '#FFFFFF' : '#FFFFFF',
-                fontFamily: 'Poppins, sans-serif',
+                fontFamily: 'var(--font-subtext)',
+                fontSize:'var(--font-size-subheading)',
                 fontWeight: 500,
                 lineHeight: '1.3',
                 letterSpacing: '0.3px',
@@ -279,9 +280,10 @@ export function About() {
             <motion.p
               className="mb-6 flex-1"
               style={{
-                fontSize: 'clamp(14px, 1.8vw, 16px)',
+                // fontSize: 'clamp(14px, 1.8vw, 16px)',
                 color: isHovered ? '#C0C0C0' : '#B0B0B0',
-                fontFamily: 'Urbanist, sans-serif',
+                fontFamily:   'var(--font-body)',
+                fontSize:'var(--font-size-body)',
                 fontWeight: 400,
                 lineHeight: '1.7',
                 letterSpacing: '0.2px',
@@ -356,7 +358,7 @@ export function About() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative" style={{ paddingTop: 'clamp(0px, 8vw, 128px)', paddingBottom: 'clamp(40px, 6vw, 80px)', minHeight: '100vh', overflow: 'hidden', isolation: 'isolate', position: 'relative', marginBottom: 0 }}>
+      <section className="relative" style={{ paddingTop: 'clamp(0px, 24vw, 128px)', paddingBottom: 'clamp(40px, 6vw, 80px)', minHeight: '100vh', overflow: 'hidden', isolation: 'isolate', position: 'relative', marginBottom: 0 }}>
         {/* Background Video - about_hero.mp4 */}
         <div
           className="absolute pointer-events-none"
@@ -447,10 +449,11 @@ export function About() {
           <motion.h1
             className="mb-4"
             style={{
-              fontSize: '64px',
+              // fontSize: '64px',
               color: '#FFFFFF',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
+              fontSize: 'clamp(36px, 8vw, 96px)',
               letterSpacing: '1px',
               lineHeight: '1.2',
             }}
@@ -463,9 +466,9 @@ export function About() {
 
           <motion.p
             style={{
-              fontSize: '18px',
+              fontSize: 'var(--font-size-subheading)',
               color: '#A0A0A0',
-              fontFamily: 'Montserrat, sans-serif',
+              fontFamily: 'var(--font-subtext)',
               fontWeight: 400,
               letterSpacing: '0.5px',
             }}
@@ -648,7 +651,7 @@ export function About() {
           <motion.h2
             className="mb-6"
             style={{
-              fontSize: '48px',
+              fontSize: 'var(--font-size-heading-sm)',
               color: '#FFFFFF',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
@@ -666,7 +669,7 @@ export function About() {
           <motion.h3
             className="mb-8"
             style={{
-              fontSize: '28px',
+              fontSize: 'var(--font-size-subheading)',
               color: '#1B998B',
               fontFamily: 'Poppins, sans-serif',
               fontWeight: 500,
@@ -682,9 +685,9 @@ export function About() {
 
           <motion.p
             style={{
-              fontSize: '18px',
+              fontSize: 'var(--font-size-body)',
               color: '#FFFFFF',
-              fontFamily: 'Urbanist, sans-serif',
+              fontFamily: 'var(--font-body)',
               fontWeight: 400,
               lineHeight: '1.9',
               textAlign: 'center',
@@ -702,7 +705,8 @@ export function About() {
       </section>
 
       {/* The Stewards Section */}
-      <section className="relative py-16 pb-24 overflow-hidden">
+      <section className="relative py-6
+       pb-24 overflow-hidden">
         {/* Teal flow - left side */}
         <div className="absolute pointer-events-none" style={{ left: '-380px', top: '50%', zIndex: 1, transform: 'translateY(-50%) rotate(20deg)' }}>
           <motion.img 
@@ -775,7 +779,7 @@ export function About() {
               style={{
                 fontSize: 'clamp(14px, 1.6vw, 16px)',
                 color: '#A0A0A0',
-                fontFamily: 'Montserrat, sans-serif',
+                fontFamily: 'var(--font-subtext)',
               fontWeight: 400,
                 letterSpacing: '0.5px',
                 paddingLeft: 'clamp(16px, 4vw, 0px)',
@@ -862,7 +866,7 @@ export function About() {
                   style={{
                     fontSize: 'clamp(12px, 1.3vw, 13px)',
                     color: '#808080',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
               fontWeight: 400,
                   }}
                 >

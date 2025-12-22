@@ -3,7 +3,7 @@ import { useRef, useState, useEffect, useMemo } from 'react';
 import Lottie from 'lottie-react';
 import arcImage from 'figma:asset/76dc61042518dfc0d7cf9464d788e73f27058498.png';
 import backgroundAnimationData from '../assets/Background looping animation.json';
-
+import '../index.css';
 export function FloatingUISection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1920);
@@ -103,7 +103,7 @@ export function FloatingUISection() {
         background: 'linear-gradient(to bottom, #000000 0%, #0B0B11 50%, #000000 100%)',
         overflow: 'hidden',
         paddingTop: 'clamp(16px, 1vw, 16px)',
-        paddingBottom: 'clamp(16px, 1vw, 16px)',
+        paddingBottom: 'clamp(16px, 5vw, 64px)',
         paddingLeft: 'clamp(16px, 4vw, 64px)',
         paddingRight: 'clamp(16px, 4vw, 64px)',
       }}
@@ -144,7 +144,7 @@ export function FloatingUISection() {
         <motion.h2
           className="mb-4"
           style={{
-            fontSize: 'clamp(28px, 5vw, 48px)',
+            fontSize: 'var(--font-size-heading-sm)',
             fontFamily: 'Poppins, sans-serif',
             fontWeight: 500,
             letterSpacing: '1px',
@@ -164,7 +164,7 @@ export function FloatingUISection() {
         <motion.p
           style={{
             fontSize: 'clamp(14px, 1.8vw, 18px)',
-            fontFamily: 'Urbanist, sans-serif',
+            fontFamily: 'var(--font-size-body)',
             fontWeight: 400,
             color: '#999999',
             lineHeight: '1.6',
@@ -264,7 +264,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(12px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   You haven't eaten.
@@ -274,7 +274,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#999999',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                     lineHeight: '1.4',
                   }}
                 >
@@ -298,7 +298,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(12px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily:'var(--font-body)',
                   }}
                 >
                   12:00 AM
@@ -308,7 +308,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#999999',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   Today matters to someone.
@@ -331,7 +331,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(12px, 1.6vw, 16px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                   }}
                 >
                   Tomorrow starts early.
@@ -341,7 +341,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#999999',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily:'var(--font-body)',
                     lineHeight: '1.3',
                   }}
                 >
@@ -389,7 +389,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(10px, 1.2vw, 12px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                     lineHeight: '1.5',
                     paddingLeft: 'clamp(16px, 1.25vw, 20px)',
                     margin: 0,
@@ -439,7 +439,7 @@ export function FloatingUISection() {
                   style={{
                     fontSize: 'clamp(9px, 1.1vw, 11px)',
                     color: '#FFFFFF',
-                    fontFamily: 'Urbanist, sans-serif',
+                    fontFamily: 'var(--font-body)',
                     lineHeight: '1.4',
                     paddingLeft: 'clamp(16px, 1.25vw, 20px)',
                     margin: 0,
