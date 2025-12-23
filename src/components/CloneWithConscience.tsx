@@ -133,7 +133,7 @@ export function CloneWithConscience() {
     color: '#FFFFFF',                            // accent color to stand out
     lineHeight: '1.5',
     letterSpacing: '0.5px',
-    marginBottom: 'clamp(10px, 1vw, 16px)',
+    marginBottom: 'clamp(4px, 0.5vw, 8px)',
     paddingLeft: 'clamp(16px, 4vw, 0px)',
     paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
@@ -154,7 +154,7 @@ export function CloneWithConscience() {
           fontFamily: 'var(--font-subtext)',
           fontWeight: 500,
           lineHeight: '1.45',
-          // marginBottom: 'clamp(16px, 1vw, 16px)',
+          marginBottom: 'clamp(8px, 1vw, 12px)',
           paddingLeft: 'clamp(16px, 4vw, 0px)',
           paddingRight: 'clamp(16px, 4vw, 0px)',
         }}
@@ -167,7 +167,7 @@ export function CloneWithConscience() {
       </motion.p>
 
       {/* Central Orbital System and Cards Container */}
-      <div ref={containerRef} className="relative" style={{ height: 'clamp(500px, 50vh, 700px)', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: '0 auto', overflow: 'hidden' }}>
+      <div ref={containerRef} className="relative" style={{ height: 'clamp(500px, 50vh, 700px)', maxWidth: 'clamp(320px, 90vw, 1200px)', margin: '0 auto', marginTop: 'clamp(-20px, -2vw, -10px)', overflow: 'hidden' }}>
         <div className="relative flex items-center justify-center" style={{ height: '100%', overflow: 'hidden' }}>
           {/* Left Side Cards: start centered on the circle and animate outward on scroll */}
           <div className="absolute inset-0" style={{ zIndex: 20, overflow: 'hidden' }}>
@@ -197,7 +197,7 @@ export function CloneWithConscience() {
                 ? containerDimensions.width < 640
                   ? Math.min(
                       containerDimensions.width / 2 - cardWidth / 2 - padding,
-                      containerDimensions.width * 0.26 // Reduced from 0.28
+                      containerDimensions.width * 0.40 // Increased from 0.26 to allow cards to move further out on mobile
                     )
                   : Math.min(
                       containerDimensions.width / 2 - cardWidth / 2 - padding,
@@ -206,7 +206,7 @@ export function CloneWithConscience() {
                 : 200;
               
               // Calculate minimum offset based on circle size + card half-width + larger gap to prevent overlap
-              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Increased gap from 18 to 25
+              const gap = measured && containerDimensions.width < 640 ? 45 : 30; // Increased gap for mobile to move cards further out
               const minOffset = circleRadius + (cardWidth / 2) + gap;
               
               // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
@@ -534,7 +534,7 @@ export function CloneWithConscience() {
                 ? containerDimensions.width < 640
                   ? Math.min(
                       containerDimensions.width / 2 - cardWidth / 2 - padding,
-                      containerDimensions.width * 0.26 // Reduced from 0.28
+                      containerDimensions.width * 0.30 // Increased from 0.26 to allow cards to move further out on mobile
                     )
                   : Math.min(
                       containerDimensions.width / 2 - cardWidth / 2 - padding,
@@ -543,7 +543,7 @@ export function CloneWithConscience() {
                 : 200;
               
               // Calculate minimum offset based on circle size + card half-width + larger gap to prevent overlap
-              const gap = measured && containerDimensions.width < 640 ? 25 : 30; // Increased gap from 18 to 25
+              const gap = measured && containerDimensions.width < 640 ? 45 : 30; // Increased gap for mobile to move cards further out
               const minOffset = circleRadius + (cardWidth / 2) + gap;
               
               // Use the smaller of minOffset or maxOffset to ensure cards stay in frame
@@ -712,15 +712,22 @@ export function CloneWithConscience() {
               const cardX = centerX + finalX; // Actual card center X position
               const cardY = centerY + finalY; // Actual card center Y position
 
-              // Calculate midpoint for smooth curve
-              const midX = (centerX + cardX) / 2;
-              const midY = (centerY + cardY) / 2;
+              // Calculate angle from center to card
+              const angle = Math.atan2(cardY - centerY, cardX - centerX);
+              
+              // Start point on the circle edge (touching outer circle)
+              const startX = centerX + Math.cos(angle) * circleRadius;
+              const startY = centerY + Math.sin(angle) * circleRadius;
+
+              // Calculate midpoint for smooth curve (between circle edge and card)
+              const midX = (startX + cardX) / 2;
+              const midY = (startY + cardY) / 2;
               
               // Responsive wave amplitude
               const waveAmplitude = Math.min(40, containerDimensions.width * 0.08);
 
-              // Create smooth wave path using quadratic bezier
-              const wavePath = `M ${centerX} ${centerY} Q ${midX - waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${midY} T ${cardX} ${cardY}`;
+              // Create smooth wave path starting from circle edge
+              const wavePath = `M ${startX} ${startY} Q ${midX - waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? 1 : -1)} ${midX} ${midY} T ${cardX} ${cardY}`;
 
               return (
                 <g key={`left-wave-${i}`}>
@@ -819,15 +826,22 @@ export function CloneWithConscience() {
               const cardX = centerX + finalX; // Actual card center X position
               const cardY = centerY + finalY; // Actual card center Y position
 
-              // Calculate midpoint for smooth curve
-              const midX = (centerX + cardX) / 2;
-              const midY = (centerY + cardY) / 2;
+              // Calculate angle from center to card
+              const angle = Math.atan2(cardY - centerY, cardX - centerX);
+              
+              // Start point on the circle edge (touching outer circle)
+              const startX = centerX + Math.cos(angle) * circleRadius;
+              const startY = centerY + Math.sin(angle) * circleRadius;
+
+              // Calculate midpoint for smooth curve (between circle edge and card)
+              const midX = (startX + cardX) / 2;
+              const midY = (startY + cardY) / 2;
               
               // Responsive wave amplitude
               const waveAmplitude = Math.min(40, containerDimensions.width * 0.08);
 
-              // Create smooth wave path
-              const wavePath = `M ${centerX} ${centerY} Q ${midX + waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${midY} T ${cardX} ${cardY}`;
+              // Create smooth wave path starting from circle edge
+              const wavePath = `M ${startX} ${startY} Q ${midX + waveAmplitude} ${midY + waveAmplitude * (i % 2 === 0 ? -1 : 1)} ${midX} ${midY} T ${cardX} ${cardY}`;
 
               return (
                 <g key={`right-wave-${i}`}>

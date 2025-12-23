@@ -36,7 +36,7 @@ export function FragmentedReality() {
   }, []);
 
   return (
-    <section className="relative px-16" style={{ background: '#000000', paddingBottom: '0', overflow: 'hidden', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', minHeight: '80vh' }}>
+    <section className="relative px-16" style={{ background: '#000000', paddingBottom: '0', overflow: 'visible', paddingLeft: 'clamp(16px, 4vw, 64px)', paddingRight: 'clamp(16px, 4vw, 64px)', minHeight: '80vh' }}>
       {/* Wave Loop Background Animation with Teal Theme - Section Only */}
       <div 
         className="absolute pointer-events-none"
@@ -45,12 +45,15 @@ export function FragmentedReality() {
           opacity: 0.3,
           filter: 'hue-rotate(160deg) saturate(1.2) brightness(0.7) contrast(1.1)',
           mixBlendMode: 'screen',
+          position: 'absolute',
           left: '50%',
           top: 0,
           bottom: 0,
           width: '100vw',
           height: '100%',
           transform: 'translateX(-50%)',
+          margin: 0,
+          padding: 0,
         }}
       >
         <Lottie
@@ -58,9 +61,14 @@ export function FragmentedReality() {
           loop={true}
           autoplay={true}
           style={{
-            width: '100%',
+            width: '100vw',
             height: '100%',
+            minWidth: '100vw',
+            maxWidth: 'none',
+            margin: 0,
+            padding: 0,
             objectFit: 'cover',
+            display: 'block',
           }}
         />
       </div>
